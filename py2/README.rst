@@ -34,12 +34,12 @@ Installation
 
 ::
 
-    sudo pip install bisos.lcnt
+   sudo pip install bisos.lcnt
 
 Usage
 =====
 
 ::
 
-    /usr/local/bin/beamerExternalExtensions.py
-    /usr/local/bin/screenstudioWebClientIcm.py
+   /usr/local/bin/beamerExternalExtensions.py
+   /usr/local/bin/screenstudioWebClientIcm.py
