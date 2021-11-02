@@ -68,7 +68,7 @@ import io
 
 import collections
 
-from pyPdf import PdfFileReader
+from PyPDF4.pdf import PdfFileReader
 import re
 
 from unisos import ucf
@@ -912,7 +912,8 @@ class latexSrcToDispositionUpdate(icm.Cmnd):
 
         pdfFileName = effectiveArgsList[0]
     
-        document = PdfFileReader(file(pdfFileName, "rb"))
+        # document = PdfFileReader(file(pdfFileName, "rb"))
+        document = PdfFileReader(open(pdfFileName, "rb"))
         pages = document.getNumPages()    
 
         dispositionBaseSetup().cmnd(

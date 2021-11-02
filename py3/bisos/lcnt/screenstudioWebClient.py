@@ -632,13 +632,18 @@ class screenstudioRcStdout(icm.Cmnd):
         else:
             icm.EH_usageError("Bad sessionType -- {}".format(sessionType))
 
-        resStr = screenstudioRcTemplate(
+        displaysStr = screenstudioRcTemplate(
             nuOfDisplays,
-        ).format(
-            audiosystemStr=audiosystemStr,
-            microphoneStr=microphoneStr,
-            outputvideofolderStr=cwd,
         )
+
+        if displaysStr:
+            resStr = displayStr.format(
+                audiosystemStr=audiosystemStr,
+                microphoneStr=microphoneStr,
+                outputvideofolderStr=cwd,
+            )
+        else:
+            resStr = ""   # NOTYET, Is This An Error?
 
         if interactive:
             print(resStr)
