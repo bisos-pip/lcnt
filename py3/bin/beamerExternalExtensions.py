@@ -1018,7 +1018,7 @@ class frameNamesList(icm.Cmnd):
 
         pdfFileName = effectiveArgsList[0]
 
-        thisFile=file(pdfFileName, "rb")
+        thisFile=open(pdfFileName, "rb")
 
         document = PdfFileReader(thisFile)
         pages = document.getNumPages()    
@@ -1347,7 +1347,8 @@ class dispositionFrameNamesList(icm.Cmnd):
         thisParamBaseState = thisParamBase.baseValidityPredicate()
 
         if thisParamBaseState != 'InPlace':
-            return icm.EH_critical_oops('thisParamBaseState=' + thisParamBaseState)
+            #return icm.EH_critical_oops('thisParamBaseState=' + thisParamBaseState)
+            return icm.EH_critical_oops(f"thisParamBaseState={thisParamBaseState}")
 
 
         filesList = os.listdir(dispositionBase)  # This is instead of sorting
@@ -1815,7 +1816,7 @@ class dispositionToPresenterStdout(icm.Cmnd):
 
         filename = effectiveArgsList[0]
 
-        document = PdfFileReader(file(filename, "rb"))
+        document = PdfFileReader(open(filename, "rb"))
         pages = document.getNumPages()
         icm.TM_here()
 
