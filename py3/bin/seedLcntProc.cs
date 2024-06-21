@@ -124,7 +124,7 @@ def commonParamsSpecify(
 | bisos.b.cs.ro | blee.icmPlayer.bleep |
 #+end_org """
 
-####+BEGINNOT: b:py3:cs:framework/csuListProc :pyImports t :csuImports t :csuParams t
+####+BEGIN: b:py3:cs:framework/csuListProc :pyImports t :csuImports t :csuParams t :csmuParams t
 """ #+begin_org
 *  _[[elisp:(blee:menu-sel:outline:popupMenu)][±]]_ _[[elisp:(blee:menu-sel:navigation:popupMenu)][Ξ]]_ [[elisp:(outline-show-branches+toggle)][|=]] [[elisp:(bx:orgm:indirectBufOther)][|>]] *[[elisp:(blee:ppmm:org-mode-toggle)][|N]]*  CsFrmWrk   [[elisp:(outline-show-subtree+toggle)][||]] =Process CSU List= with /2/ in csuList pyImports=t csuImports=t csuParams=t
 #+end_org """
