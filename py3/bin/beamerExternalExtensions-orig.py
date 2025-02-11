@@ -73,7 +73,7 @@ import re
 from unisos import ucf
 from unisos import icm
 
-from blee.icmPlayer import bleep
+from bisos.csPlayer import bleep
 
 g_importedCmnds = {        # Enumerate modules from which CMNDs become invokable
     'bleep': bleep.__file__,
@@ -360,7 +360,7 @@ class examples(icm.Cmnd):
         
         icm.G_commonBriefExamples()
 
-        bleep.examples_icmBasic()
+        bleep.examples_csBasic()
 
         mainPdfFile="""./presentationEnFa.pdf"""
         mainTtytexFile="""./presentationEnFa.ttytex"""

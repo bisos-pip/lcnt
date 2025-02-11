@@ -72,7 +72,7 @@ import requests
 from unisos import ucf
 from unisos import icm
 
-from blee.icmPlayer import bleep
+from bisos.csPlayer import bleep
 from bisos.lcnt import screenstudioWebClient
 
 g_importedCmnds = {        # Enumerate modules from which CMNDs become invokable
@@ -271,7 +271,7 @@ class examples(icm.Cmnd):
         
         icm.G_commonBriefExamples()
 
-        bleep.examples_icmBasic()
+        bleep.examples_csBasic()
         
 ####+BEGIN: bx:icm:python:cmnd:subSection :title "Dev And Testing"
         """
