@@ -43,22 +43,21 @@ def longDescription():
 # b:py3:pypi:setup/version Arguments  :forSys t :forPyPi t :constant "666"
 ####+BEGIN: b:py3:pypi:setup/version :comment "Auto Detected"
 
-# ./pypiUploadVer DID NOT exist -- forPypiVersion=0.11 -- forSysVersion=0.11 -- constant=NA
+# ./pypiUploadVer DID NOT exist -- forPypiVersion=0.12 -- forLocalVersion=0.11 -- constant=NA
 def pkgVersion():
         return '0.11'
 
 ####+END:
 
 # b:py3:pypi:setup/requires :extras ; :requirements "requirements.txt" (bring here requirements.txt)
-####+BEGIN: b:py3:pypi:setup/requires :extras ()
+####+BEGIN: b:py3:pypi:setup/requires :extras ("checkdigit")
 
 requires = [
-"blee",
-"bisos.csPlayer",
 "bisos",
 "bisos.b",
 "bisos.common",
 "bisos.csPlayer",
+"checkdigit",
 ]
 ####+END:
 
@@ -66,9 +65,9 @@ requires = [
 ####+BEGIN: b:py3:pypi:setup/scripts :comment ""
 
 scripts = [
-'bin/beamerExternalExtensions-orig.py',
 'bin/beamerExternalExtensions.py',
-'bin/beamerExternalExtensionsWorks.py',
+'bin/beamerPdfPages.cs',
+'bin/bookUtils.cs',
 'bin/exmpl-lcntProc.cs',
 'bin/screenstudioWebClientIcm.py',
 'bin/seedLcntProc.cs',

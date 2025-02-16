@@ -1,126 +1,55 @@
-#! /usr/bin/env python
+#!/bin/env python
 # -*- coding: utf-8 -*-
-"""\
-*    *[Summary]* :: An =ICM=: a beginning template for development of new ICMs.
-"""
 
-####+BEGIN: bx:icm:python:top-of-file :partof "bystar" :copyleft "halaal+minimal"
-"""
-*  This file:/de/bx/nne/dev-py/pypi/pkgs/bisos/lcnt/dev/bin/beamerExternalExtensions.py :: [[elisp:(org-cycle)][| ]]
- is part of The Libre-Halaal ByStar Digital Ecosystem. http://www.by-star.net
- *CopyLeft*  This Software is a Libre-Halaal Poly-Existential. See http://www.freeprotocols.org
- A Python Interactively Command Module (PyICM). Part Of ByStar.
- Best Developed With COMEEGA-Emacs And Best Used With Blee-ICM-Players.
- Warning: All edits wityhin Dynamic Blocks may be lost.
-"""
+""" #+begin_org
+* ~[Summary]~ :: A =CmndSvc= for
+#+end_org """
+
+####+BEGIN: b:py3:cs:file/dblockControls :classification "cs-u"
+""" #+begin_org
+* [[elisp:(org-cycle)][| /Control Parameters Of This File/ |]] :: dblk ctrls classifications=cs-u
+#+BEGIN_SRC emacs-lisp
+(setq-local b:dblockControls t) ; (setq-local b:dblockControls nil)
+(put 'b:dblockControls 'py3:cs:Classification "cs-u") ; one of cs-mu, cs-u, cs-lib, bpf-lib, pyLibPure
+#+END_SRC
+#+RESULTS:
+: cs-u
+#+end_org """
 ####+END:
 
-"""
-*  [[elisp:(org-cycle)][| *ICM-INFO:* |]] :: Author, Copyleft and Version Information
-"""
-####+BEGIN: bx:icm:python:name :style "fileName"
-__icmName__ = "beamerExternalExtensions"
+####+BEGIN: b:prog:file/proclamations :outLevel 1
+""" #+begin_org
+* *[[elisp:(org-cycle)][| Proclamations |]]* :: Libre-Halaal Software --- Part Of BISOS ---  Poly-COMEEGA Format.
+** This is Libre-Halaal Software. © Neda Communications, Inc. Subject to AGPL.
+** It is part of BISOS (ByStar Internet Services OS)
+** Best read and edited  with Blee in Poly-COMEEGA (Polymode Colaborative Org-Mode Enhance Emacs Generalized Authorship)
+#+end_org """
 ####+END:
 
-####+BEGIN: bx:global:timestamp:version-py :style "date"
-__version__ = "201801175435"
+####+BEGIN: b:prog:file/particulars :authors ("./inserts/authors-mb.org")
+""" #+begin_org
+* *[[elisp:(org-cycle)][| Particulars |]]* :: Authors, version
+** This File: /bisos/git/bxRepos/bisos-pip/lcnt/py3/bin/beamerExternalExtensions.py
+** Authors: Mohsen BANAN, http://mohsen.banan.1.byname.net/contact
+#+end_org """
 ####+END:
 
-####+BEGIN: bx:global:icm:status-py :status "Production"
-__status__ = "Production"
+####+BEGIN: b:py3:file/particulars-csInfo :status "inUse"
+""" #+begin_org
+* *[[elisp:(org-cycle)][| Particulars-csInfo |]]*
+#+end_org """
+import typing
+csInfo: typing.Dict[str, typing.Any] = { 'moduleName': ['beamerExternalExtensions'], }
+csInfo['version'] = '202502114510'
+csInfo['status']  = 'inUse'
+csInfo['panel'] = 'beamerExternalExtensions-Panel.org'
+csInfo['groupingType'] = 'IcmGroupingType-pkged'
+csInfo['cmndParts'] = 'IcmCmndParts[common] IcmCmndParts[param]'
 ####+END:
 
-__credits__ = [""]
-
-####+BEGIN: bx:dblock:global:file-insert-cond :cond "./blee.el" :file "/libre/ByStar/InitialTemplates/update/sw/icm/py/icmInfo-mbNedaGpl.py"
-icmInfo = {
-    'authors':         ["[[http://mohsen.1.banan.byname.net][Mohsen Banan]]"],
-    'copyright':       "Copyright 2017, [[http://www.neda.com][Neda Communications, Inc.]]",
-    'licenses':        ["[[https://www.gnu.org/licenses/agpl-3.0.en.html][Affero GPL]]", "Libre-Halaal Services License", "Neda Commercial License"],
-    'maintainers':     ["[[http://mohsen.1.banan.byname.net][Mohsen Banan]]",],
-    'contacts':        ["[[http://mohsen.1.banan.byname.net/contact]]",],
-    'partOf':          ["[[http://www.by-star.net][Libre-Halaal ByStar Digital Ecosystem]]",]
-}
-####+END:
-
-####+BEGIN: bx:icm:python:topControls :partof "bystar" :copyleft "halaal+minimal"
-"""
-*  [[elisp:(org-cycle)][|/Controls/| ]] :: [[elisp:(org-show-subtree)][|=]]  [[elisp:(show-all)][Show-All]]  [[elisp:(org-shifttab)][Overview]]  [[elisp:(progn (org-shifttab) (org-content))][Content]] | [[file:Panel.org][Panel]] | [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] | [[elisp:(bx:org:run-me)][Run]] | [[elisp:(bx:org:run-me-eml)][RunEml]] | [[elisp:(delete-other-windows)][(1)]] | [[elisp:(progn (save-buffer) (kill-buffer))][S&Q]]  [[elisp:(save-buffer)][Save]]  [[elisp:(kill-buffer)][Quit]] [[elisp:(org-cycle)][| ]]
-** /Version Control/ ::  [[elisp:(call-interactively (quote cvs-update))][cvs-update]]  [[elisp:(vc-update)][vc-update]] | [[elisp:(bx:org:agenda:this-file-otherWin)][Agenda-List]]  [[elisp:(bx:org:todo:this-file-otherWin)][ToDo-List]]
-"""
-####+END:
-
-####+BEGIN: bx:icm:python:section :title "ContentsList"
-"""
-*  [[elisp:(beginning-of-buffer)][Top]] ################ [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(delete-other-windows)][(1)]]    *ContentsList*  [[elisp:(org-cycle)][| ]]  [[elisp:(org-show-subtree)][|=]] 
-"""
-####+END:
-
-####+BEGIN: bx:icm:python:icmItem :itemType "=Imports=" :itemTitle "*IMPORTS*"
-"""
-*  [[elisp:(org-cycle)][| ]]  [[elisp:(org-show-subtree)][|=]] [[elisp:(show-children)][|V]] [[elisp:(org-tree-to-indirect-buffer)][|>]] [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(beginning-of-buffer)][Top]] [[elisp:(delete-other-windows)][(1)]] || =Imports=      :: *IMPORTS*  [[elisp:(org-cycle)][| ]]
-"""
-####+END:
-
-import sys
-import os
-import io
-
-import collections
-
-from PyPDF4.pdf import PdfFileReader
-import re
-
-from unisos import ucf
-from unisos import icm
-
-from bisos.csPlayer import bleep
-from bisos.lcnt import latexSup
-
-g_importedCmnds = {        # Enumerate modules from which CMNDs become invokable
-    'bleep': bleep.__file__,
-    'latexSup': latexSup.__file__,    
-}
-
-
-        
-
-####+BEGIN: bx:icm:python:section :title "= =Framework::= ICM  Description (Overview) ="
-"""
-*  [[elisp:(beginning-of-buffer)][Top]] ################ [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(delete-other-windows)][(1)]]    *= =Framework::= ICM  Description (Overview) =*  [[elisp:(org-cycle)][| ]]  [[elisp:(org-show-subtree)][|=]] 
-"""
-####+END:
-
-
-####+BEGIN: bx:icm:python:cmnd:classHead :cmndName "icmOverview" :parsMand "" :parsOpt "" :argsMin "0" :argsMax "3" :asFunc "" :interactiveP ""
-"""
-*  [[elisp:(org-cycle)][| ]]  [[elisp:(org-show-subtree)][|=]] [[elisp:(show-children)][|V]] [[elisp:(org-tree-to-indirect-buffer)][|>]] [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(beginning-of-buffer)][Top]] [[elisp:(delete-other-windows)][(1)]] || ICM-Cmnd       :: /icmOverview/ parsMand= parsOpt= argsMin=0 argsMax=3 asFunc= interactive=  [[elisp:(org-cycle)][| ]]
-"""
-class icmOverview(icm.Cmnd):
-    cmndParamsMandatory = [ ]
-    cmndParamsOptional = [ ]
-    cmndArgsLen = {'Min': 0, 'Max': 3,}
-
-    @icm.subjectToTracking(fnLoc=True, fnEntry=True, fnExit=True)
-    def cmnd(self,
-        interactive=False,        # Can also be called non-interactively
-        argsList=None,         # or Args-Input
-    ):
-        cmndOutcome = self.getOpOutcome()
-        if interactive:
-            if not self.cmndLineValidate(outcome=cmndOutcome):
-                return cmndOutcome
-            effectiveArgsList = G.icmRunArgsGet().cmndArgs
-        else:
-            effectiveArgsList = argsList
-
-        callParamsDict = {}
-        if not icm.cmndCallParamsValidate(callParamsDict, interactive, outcome=cmndOutcome):
-            return cmndOutcome
-####+END:
-
-        moduleDescription="""
-*       [[elisp:(org-show-subtree)][|=]]  [[elisp:(org-cycle)][| *Description:* | ]]
+""" #+begin_org
+* [[elisp:(org-cycle)][| ~Description~ |]] :: [[file:/bisos/git/auth/bxRepos/blee-binders/bisos-core/COMEEGA/_nodeBase_/fullUsagePanel-en.org][BISOS COMEEGA Panel]]
+*       [[elisp:(org-show-subtree)][|=]]  [[elisp:(org-cycle)][| *Module Description:* | ]]
 **  [[elisp:(org-cycle)][| ]]  [Xref]          :: *[Related/Xrefs:]*  <<Xref-Here->>  -- External Documents  [[elisp:(org-cycle)][| ]]
 
 **  [[elisp:(org-cycle)][| ]]   Model and Terminology                                      :Overview:
@@ -175,7 +104,7 @@ This script provides full integration between Impressive and Beamer based on the
        I have packaged this and it does work. It does not have a feature to get notes from BeamerInput.
        Its model is flexible and the same model can be adopted for Emacs-Impressive-Presenter-Console.
 
-****   =[[elisp:(org-cycle)][Fold]]= Emacs-Impressive-Presenter-Console 
+****   =[[elisp:(org-cycle)][Fold]]= Emacs-Impressive-Presenter-Console
        Mimic the javascript model of presenter-for-impressive with elisp.
        Extract notes from Beamer-input similar to pdfpc Presenter Notes.
        Send a particular slideNumber Selection to impressive -- May need updates to impressive to listen on a socket (similar to vlc's remote control).
@@ -195,161 +124,258 @@ This script provides full integration between Impressive and Beamer based on the
 ****   =[[elisp:(org-cycle)][Fold]]=  The tags are identified in beamer source, and then acted upon with this script.
 
 **      [End-Of-Description]
-"""
-        
-        moduleUsage="""
-*       [[elisp:(org-show-subtree)][|=]]  [[elisp:(org-cycle)][| *Usage:* | ]]
-**      How-Tos: Typical Usage involves
-***     -i updateDispositionBase ./presentationEnFa.pdf   ## Creates ./disposistion.gened
-***     -i dispositionToImpressivePurposed  voiceOver     ## No Video Recording -- Creates ./tmp/impressive.info and suggests cmndLineTo 
-***     -i -p slidesRange 1 dispositionToImpressivePurposed voiceOver recorderEach  ## Record ONLY specified slide and its transition to next
-***     -i dispositionToImpressivePurposed voiceOver recorderEach  ## Record ALL displayed one after another
-***     -i dispositionToImpressivePurposed voiceOver recorderOnce  ## Record the FIRST displayed slide (runOnce -- IS NOT WORKING)
-**      [End-Of-Usage]
-"""
-        
-        moduleStatus="""
-*       [[elisp:(org-show-subtree)][|=]]  [[elisp:(org-cycle)][| *Status:* | ]]
-**  [[elisp:(org-cycle)][| ]]  [Info]          :: *[Current-Info:]* Status/Maintenance -- General TODO List [[elisp:(org-cycle)][| ]]
-** TODO [[elisp:(org-cycle)][| ]]  Current         :: Just getting started [[elisp:(org-cycle)][| ]]
-** TODO ==[[elisp:(org-cycle)][Fold]]== Add Tagging Extraction
-** TODO ==[[elisp:(org-cycle)][Fold]]== Look Into makebeamerinfo
-** TODO ==[[elisp:(org-cycle)][Fold]]== Extract and Cross Link this against BxScreenCast Panel
-**      [End-Of-Status]
-"""
-        
-####+BEGIN: bx:dblock:global:file-insert-cond :cond "./blee.el" :file "/libre/ByStar/InitialTemplates/update/sw/icm/py/moduleOverview.py"
-        cmndArgsSpec = {"0&-1": ['moduleDescription', 'moduleUsage', 'moduleStatus']}
-        cmndArgsValid = cmndArgsSpec["0&-1"]
-        icm.unusedSuppressForEval(moduleDescription, moduleUsage, moduleStatus)
-        for each in effectiveArgsList:
-            if each in cmndArgsValid:
-                if interactive:
-                    exec("""print({})""".format(each))
-                
-        return(format(str(__doc__)+moduleDescription))
+#+end_org """
+
+####+BEGIN: b:prog:file/orgTopControls :outLevel 1
+""" #+begin_org
+* [[elisp:(org-cycle)][| Controls |]] :: [[elisp:(delete-other-windows)][(1)]] | [[elisp:(show-all)][Show-All]]  [[elisp:(org-shifttab)][Overview]]  [[elisp:(progn (org-shifttab) (org-content))][Content]] | [[file:Panel.org][Panel]] | [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] | [[elisp:(bx:org:run-me)][Run]] | [[elisp:(bx:org:run-me-eml)][RunEml]] | [[elisp:(progn (save-buffer) (kill-buffer))][S&Q]]  [[elisp:(save-buffer)][Save]]  [[elisp:(kill-buffer)][Quit]] [[elisp:(org-cycle)][| ]]
+** /Version Control/ ::  [[elisp:(call-interactively (quote cvs-update))][cvs-update]]  [[elisp:(vc-update)][vc-update]] | [[elisp:(bx:org:agenda:this-file-otherWin)][Agenda-List]]  [[elisp:(bx:org:todo:this-file-otherWin)][ToDo-List]]
+
+#+end_org """
+####+END:
+
+####+BEGIN: b:py3:file/workbench :outLevel 1
+""" #+begin_org
+* [[elisp:(org-cycle)][| Workbench |]] :: [[elisp:(python-check (format "/bisos/venv/py3/bisos3/bin/python -m pyclbr %s" (bx:buf-fname))))][pyclbr]] || [[elisp:(python-check (format "/bisos/venv/py3/bisos3/bin/python -m pydoc ./%s" (bx:buf-fname))))][pydoc]] || [[elisp:(python-check (format "/bisos/pipx/bin/pyflakes %s" (bx:buf-fname)))][pyflakes]] | [[elisp:(python-check (format "/bisos/pipx/bin/pychecker %s" (bx:buf-fname))))][pychecker (executes)]] | [[elisp:(python-check (format "/bisos/pipx/bin/pycodestyle %s" (bx:buf-fname))))][pycodestyle]] | [[elisp:(python-check (format "/bisos/pipx/bin/flake8 %s" (bx:buf-fname))))][flake8]] | [[elisp:(python-check (format "/bisos/pipx/bin/pylint %s" (bx:buf-fname))))][pylint]]  [[elisp:(org-cycle)][| ]]
+#+end_org """
+####+END:
+
+####+BEGIN: b:py3:cs:framework/imports :basedOn "classification"
+""" #+begin_org
+*  _[[elisp:(blee:menu-sel:outline:popupMenu)][±]]_ _[[elisp:(blee:menu-sel:navigation:popupMenu)][Ξ]]_ [[elisp:(outline-show-branches+toggle)][|=]] [[elisp:(bx:orgm:indirectBufOther)][|>]] *[[elisp:(blee:ppmm:org-mode-toggle)][|N]]*  CsFrmWrk   [[elisp:(outline-show-subtree+toggle)][||]] *Imports* =Based on Classification=cs-u=
+#+end_org """
+from bisos import b
+from bisos.b import cs
+from bisos.b import b_io
+from bisos.common import csParam
+
+import collections
+####+END:
+
+import sys
+import os
+import io
+
+from PyPDF4.pdf import PdfFileReader
+import re
+
+
+""" #+begin_org
+*  _[[elisp:(blee:menu-sel:outline:popupMenu)][±]]_ _[[elisp:(blee:menu-sel:navigation:popupMenu)][Ξ]]_ [[elisp:(outline-show-branches+toggle)][|=]] [[elisp:(bx:orgm:indirectBufOther)][|>]] *[[elisp:(blee:ppmm:org-mode-toggle)][|N]]*  CsFrmWrk   [[elisp:(outline-show-subtree+toggle)][||]] ~csuList emacs-list Specifications~  [[elisp:(blee:org:code-block/above-run)][ /Eval Below/ ]] [[elisp:(org-cycle)][| ]]
+#+BEGIN_SRC emacs-lisp
+(setq  b:py:cs:csuList
+  (list
+   "bisos.b.cs.ro"
+   "bisos.csPlayer.bleep"
+   "bisos.lcnt.latexSup"
+ ))
+#+END_SRC
+#+RESULTS:
+| bisos.b.cs.ro | bisos.csPlayer.bleep | bisos.lcnt.latexSup |
+#+end_org """
+
+####+BEGIN: b:py3:cs:framework/csuListProc :pyImports t :csuImports t :csuParams t
+""" #+begin_org
+*  _[[elisp:(blee:menu-sel:outline:popupMenu)][±]]_ _[[elisp:(blee:menu-sel:navigation:popupMenu)][Ξ]]_ [[elisp:(outline-show-branches+toggle)][|=]] [[elisp:(bx:orgm:indirectBufOther)][|>]] *[[elisp:(blee:ppmm:org-mode-toggle)][|N]]*  CsFrmWrk   [[elisp:(outline-show-subtree+toggle)][||]] =Process CSU List= with /3/ in csuList pyImports=t csuImports=t csuParams=t
+#+end_org """
+
+from bisos.b.cs import ro
+from bisos.csPlayer import bleep
+from bisos.lcnt import latexSup
+
+
+csuList = [ 'bisos.b.cs.ro', 'bisos.csPlayer.bleep', 'bisos.lcnt.latexSup', ]
+
+g_importedCmndsModules = cs.csuList_importedModules(csuList)
+
+def g_extraParams():
+    csParams = cs.param.CmndParamDict()
+    cs.csuList_commonParamsSpecify(csuList, csParams)
+    cs.argsparseBasedOnCsParams(csParams)
+
+####+END:
+
+####+BEGIN: b:py3:cs:main/exposedSymbols :classes ()
+""" #+begin_org
+*  _[[elisp:(blee:menu-sel:outline:popupMenu)][±]]_ _[[elisp:(blee:menu-sel:navigation:popupMenu)][Ξ]]_ [[elisp:(outline-show-branches+toggle)][|=]] [[elisp:(bx:orgm:indirectBufOther)][|>]] *[[elisp:(blee:ppmm:org-mode-toggle)][|N]]*  CsFrmWrk   [[elisp:(outline-show-subtree+toggle)][||]] ~CS Controls and Exposed Symbols List Specification~ with /0/ in Classes List
+#+end_org """
+####+END:
+
+####+BEGIN: blee:bxPanel:foldingSection :outLevel 0 :sep nil :title "CmndSvcs" :anchor ""  :extraInfo "Command Services Section"
+""" #+begin_org
+*  _[[elisp:(blee:menu-sel:outline:popupMenu)][±]]_ _[[elisp:(blee:menu-sel:navigation:popupMenu)][Ξ]]_ [[elisp:(outline-show-branches+toggle)][|=]] [[elisp:(bx:orgm:indirectBufOther)][|>]] *[[elisp:(blee:ppmm:org-mode-toggle)][|N]]*     [[elisp:(outline-show-subtree+toggle)][| _CmndSvcs_: |]]  Command Services Section  [[elisp:(org-shifttab)][<)]] E|
+#+end_org """
+####+END:
+
+####+BEGIN: b:py3:cs:cmnd/classHead :cmndName "examples" :extent "verify" :ro "noCli" :comment "FrameWrk: CS-Main-Examples" :parsMand "" :parsOpt "" :argsMin "0" :argsMax "0" :asFunc "" :interactiveP ""
+""" #+begin_org
+*  _[[elisp:(blee:menu-sel:outline:popupMenu)][±]]_ _[[elisp:(blee:menu-sel:navigation:popupMenu)][Ξ]]_ [[elisp:(outline-show-branches+toggle)][|=]] [[elisp:(bx:orgm:indirectBufOther)][|>]] *[[elisp:(blee:ppmm:org-mode-toggle)][|N]]*  CmndSvc-   [[elisp:(outline-show-subtree+toggle)][||]] <<examples>>  *FrameWrk: CS-Main-Examples*  =verify= argsMin=0 argsMax=0 ro=noCli   [[elisp:(org-cycle)][| ]]
+#+end_org """
+class examples(cs.Cmnd):
+    cmndParamsMandatory = [ ]
+    cmndParamsOptional = [ ]
+    cmndArgsLen = {'Min': 0, 'Max': 0,}
+    rtInvConstraints = cs.rtInvoker.RtInvoker.new_noRo() # NO RO From CLI
+
+    @cs.track(fnLoc=True, fnEntry=True, fnExit=True)
+    def cmnd(self,
+             rtInv: cs.RtInvoker,
+             cmndOutcome: b.op.Outcome,
+             argsList: typing.Optional[list[str]]=None,  # CsArgs
+    ) -> b.op.Outcome:
+        """FrameWrk: CS-Main-Examples"""
+        failed = b_io.eh.badOutcome
+        callParamsDict = {}
+        if self.invocationValidate(rtInv, cmndOutcome, callParamsDict, argsList).isProblematic():
+            return failed(cmndOutcome)
+        cmndArgsSpecDict = self.cmndArgsSpec()
+####+END:
+        self.cmndDocStr(f""" #+begin_org
+***** [[elisp:(org-cycle)][| *CmndDesc:* | ]]  Conventional top level example.
+        #+end_org """)
+
+        od = collections.OrderedDict
+        cmnd = cs.examples.cmndEnter
+        literal = cs.examples.execInsert
+
+        cs.examples.myName(cs.G.icmMyName(), cs.G.icmMyFullName())
+
+        cs.examples.commonBrief(roMenu=False,)
+        bleep.examples_csBasic()
+
+        mainPdfFile="""./presentationEnFa.pdf"""
+        mainTtytexFile="""./presentationEnFa.ttytex"""
+        mainSnmFile="""./presentationEnFa.snm"""
+
+        selectedFramesRange = "1"
+
+        cs.examples.menuChapter('*Disposition Setup/Set/Update  -- ./disposition.gened*')
+
+        cmnd('dispositionBaseSetup', pars=od([('dispositionBase', '/tmp/t3/DISP'),]), args="", comment="# Just creates dispositionBaseDir.")
+
+        cmnd('dispositionParamSet', pars=od([]), args="globalTimeout 2000", comment="")
+
+        cmnd('frameParSet', pars=od([('dispositionBase', '/tmp/t3/DISP'),]), args="frameName transition up", comment="")
+
+        cs.examples.menuChapter('*Extract Frames Parameters From Pdf/snm files -- into DispositionBase*')
+
+        cmnd('latexSrcToDispositionUpdate', args=mainPdfFile, comment="# Sets up dispositionBase based on pdf and snm info.")
+        cmnd('latexSrcToDispositionUpdate', pars=od([('dispositionBase', './disposition.gened'),]), args=mainPdfFile, comment="")
+
+        cmnd('frameNamesList', pars=od([]), args=mainPdfFile, comment="# Gets frame names from pdf file.")
+
+        cs.examples.menuSection('Extract Frames Parameters From TeX files -- into DispositionBase')
+
+        cmnd('beamerExternalTagsUpdateAsFPs', pars=od([]), args=mainTtytexFile, comment="")
+
+        cs.examples.menuSection('DispositionBase Full Update')
+
+        cmnd('updateDispositionBase', pars=od([('dispositionBase', './disposition.gened'),]), args=mainPdfFile, comment="# Primary Preparations")
+        cmnd('dispositionFrameNamesList', pars=od([]), args="", comment="# List FrameNames from dispositionBase")
+
+        cs.examples.menuSection('Common Capabilities')
+
+        cmnd('latexInputFilesList', args=mainTtytexFile, )
+        cmnd('latexInputFilesList', args=f"{mainTtytexFile} ./articleEnFa.ttytex" , )
+
+        cs.examples.menuChapter('*Construct Configuration Files From Disposition Base For Impressive -- stdout*')
+
+        cmnd('frameParSet', pars=od([('dispositionBase', '/tmp/t3/DISP'),]), args="frameName transition up", comment="")
+        cmnd('dispositionToImpressiveInfoPurposedStdout',  args="voiceOver presenter", comment="# Args specify purpose")
+        cmnd('dispositionToImpressiveInfoPurposedStdout',  args="voiceOver", comment="")
+        cmnd('dispositionToImpressiveInfoPurposedStdout', pars=od([('framesRange', selectedFramesRange),]), args="voiceOver recorderEach", comment="")
+
+        cs.examples.menuChapter('*Construct Configuration Files And Run Impressive*')
+
+        cmnd('updateDispositionBase', args=mainPdfFile, comment="# Primary Preparations")
+        cmnd('frameNamesList', args=mainPdfFile, comment="# Gets frame names from pdf file")
+
+        cmnd('dispositionToImpressivePurposed', pars=od([('inPdf', './presentationEnFa.pdf'),]), args="voiceOver", comment="# Applies To ALL -- Args specify purpose")
+        cmnd('dispositionToImpressivePurposed', pars=od([('inPdf', './presentationEnFa.pdf'),]), args="voiceOver recorderEach", comment="# Applies To ALL -- Args specify purpose")
+
+        cmnd('dispositionToImpressivePurposed', pars=od([('inPdf', './presentationEnFa.pdf'),]), args="voiceOver", comment="# Applies To framesRange -- Args specify purpose")
+        cmnd('dispositionToImpressivePurposed', pars=od([('inPdf', './presentationEnFa.pdf'), ('framesRange', selectedFramesRange)]), args="voiceOver recorderEach", comment="# Applies To framesRange -- Args specify purpose")
+
+        cmnd('dispositionToImpressivePurposed', args="voiceOver", comment="# Applies To Any -- Args specify purpose")
+        cmnd('dispositionToImpressivePurposed', args="voiceOver recorderEach", comment="# Applies To Any -- Args specify purpose")
+
+
+        b.ignore(ro.__doc__,  cmndArgsSpecDict)  # We are not using these modules, but they are auto imported.
+
+        return(cmndOutcome)
+
+####+BEGIN: bx:icm:py3:section :title "CS-Commands"
+""" #+begin_org
+*  _[[elisp:(blee:menu-sel:outline:popupMenu)][±]]_ _[[elisp:(blee:menu-sel:navigation:popupMenu)][Ξ]]_ [[elisp:(outline-show-branches+toggle)][|=]] [[elisp:(bx:orgm:indirectBufOther)][|>]] *[[elisp:(blee:ppmm:org-mode-toggle)][|N]]*  /Section/    [[elisp:(outline-show-subtree+toggle)][||]] *CS-Commands*  [[elisp:(org-cycle)][| ]]
+#+end_org """
 ####+END:
 
 
-####+BEGIN: bx:icm:python:section :title "= =Framework::= ICM Hooks ="
+####+BEGIN: bx:cs:python:section :title "= =Framework::= Options, Arguments and Examples Specifications ="
 """
-*  [[elisp:(beginning-of-buffer)][Top]] ################ [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(delete-other-windows)][(1)]]    *= =Framework::= ICM Hooks =*  [[elisp:(org-cycle)][| ]]  [[elisp:(org-show-subtree)][|=]] 
-"""
-####+END:
-
-####+BEGIN: bx:icm:python:func :funcName "g_icmChars" :comment "ICM Characteristics Spec" :funcType "FrameWrk" :retType "Void" :deco "" :argsList ""
-"""
-*  [[elisp:(org-cycle)][| ]]  [[elisp:(org-show-subtree)][|=]] [[elisp:(show-children)][|V]] [[elisp:(org-tree-to-indirect-buffer)][|>]] [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(beginning-of-buffer)][Top]] [[elisp:(delete-other-windows)][(1)]] || Func-FrameWrk  :: /g_icmChars/ =ICM Characteristics Spec= retType=Void argsList=nil  [[elisp:(org-cycle)][| ]]
-"""
-def g_icmChars():
-####+END:
-    icmInfo['panel'] = "{}-Panel.org".format(__icmName__)
-    icmInfo['groupingType'] = "IcmGroupingType-pkged"
-    icmInfo['cmndParts'] = "IcmCmndParts[common] IcmCmndParts[param]"
-    
-g_icmChars()
-
-
-####+BEGIN: bx:icm:python:func :funcName "g_icmPreCmnds" :funcType "FrameWrk" :retType "Void" :deco "default" :argsList ""
-"""
-*  [[elisp:(org-cycle)][| ]]  [[elisp:(org-show-subtree)][|=]] [[elisp:(show-children)][|V]] [[elisp:(org-tree-to-indirect-buffer)][|>]] [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(beginning-of-buffer)][Top]] [[elisp:(delete-other-windows)][(1)]] || Func-FrameWrk  :: /g_icmPreCmnds/ retType=Void argsList=nil deco=default  [[elisp:(org-cycle)][| ]]
-"""
-@icm.subjectToTracking(fnLoc=True, fnEntry=True, fnExit=True)
-def g_icmPreCmnds():
-####+END:
-    """ PreHook """
-    pass
-
-
-####+BEGIN: bx:icm:python:func :funcName "g_icmPostCmnds" :funcType "FrameWrk" :retType "Void" :deco "default" :argsList ""
-"""
-*  [[elisp:(org-cycle)][| ]]  [[elisp:(org-show-subtree)][|=]] [[elisp:(show-children)][|V]] [[elisp:(org-tree-to-indirect-buffer)][|>]] [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(beginning-of-buffer)][Top]] [[elisp:(delete-other-windows)][(1)]] || Func-FrameWrk  :: /g_icmPostCmnds/ retType=Void argsList=nil deco=default  [[elisp:(org-cycle)][| ]]
-"""
-@icm.subjectToTracking(fnLoc=True, fnEntry=True, fnExit=True)
-def g_icmPostCmnds():
-####+END:
-    """ PostHook """
-    pass
-
-
-####+BEGIN: bx:icm:python:section :title "= =Framework::= Options, Arguments and Examples Specifications ="
-"""
-*  [[elisp:(beginning-of-buffer)][Top]] ################ [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(delete-other-windows)][(1)]]    *= =Framework::= Options, Arguments and Examples Specifications =*  [[elisp:(org-cycle)][| ]]  [[elisp:(org-show-subtree)][|=]] 
+*  [[elisp:(beginning-of-buffer)][Top]] ############## [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(delete-other-windows)][(1)]]    *= =Framework::= Options, Arguments and Examples Specifications =*  [[elisp:(org-cycle)][| ]]  [[elisp:(org-show-subtree)][|=]]
 """
 ####+END:
 
-
-####+BEGIN: bx:icm:python:func :funcName "g_argsExtraSpecify" :comment "FrameWrk: ArgsSpec" :funcType "FrameWrk" :retType "Void" :deco "" :argsList "parser"
-"""
-*  [[elisp:(org-cycle)][| ]]  [[elisp:(org-show-subtree)][|=]] [[elisp:(show-children)][|V]] [[elisp:(org-tree-to-indirect-buffer)][|>]] [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(beginning-of-buffer)][Top]] [[elisp:(delete-other-windows)][(1)]] || Func-FrameWrk  :: /g_argsExtraSpecify/ =FrameWrk: ArgsSpec= retType=Void argsList=(parser)  [[elisp:(org-cycle)][| ]]
-"""
-def g_argsExtraSpecify(
-    parser,
-):
+####+BEGIN: b:py3:cs:func/typing :funcName "commonParamsSpecify" :comment "~CSU Specification~" :funcType "ParSpc" :deco ""
+""" #+begin_org
+*  _[[elisp:(blee:menu-sel:outline:popupMenu)][±]]_ _[[elisp:(blee:menu-sel:navigation:popupMenu)][Ξ]]_ [[elisp:(outline-show-branches+toggle)][|=]] [[elisp:(bx:orgm:indirectBufOther)][|>]] *[[elisp:(blee:ppmm:org-mode-toggle)][|N]]*  F-T-ParSpc [[elisp:(outline-show-subtree+toggle)][||]] /commonParamsSpecify/  ~CSU Specification~  [[elisp:(org-cycle)][| ]]
+#+end_org """
+def commonParamsSpecify(
 ####+END:
-    """Module Specific Command Line Parameters.
-    g_argsExtraSpecify is passed to G_main and is executed before argsSetup (can not be decorated)
-    """
-    G = icm.IcmGlobalContext()
-    icmParams = icm.ICM_ParamDict()
+        csParams: cs.param.CmndParamDict,
+) -> None:
 
-    icmParams.parDictAdd(
+    csParams.parDictAdd(
         parName='moduleVersion',
         parDescription="Module Version",
         parDataType=None,
         parDefault=None,
         parChoices=list(),
-        parScope=icm.ICM_ParamScope.TargetParam,
+        parScope=cs.CmndParamScope.TargetParam,
         argparseShortOpt=None,
         argparseLongOpt='--version',
     )
 
-    icmParams.parDictAdd(
+    csParams.parDictAdd(
         parName='dispositionBase',
         parDescription="Disposition Base Directory",
         parDataType=None,
         parDefault=None,
         parChoices=list(),
-        parScope=icm.ICM_ParamScope.TargetParam,
+        parScope=cs.CmndParamScope.TargetParam,
         argparseShortOpt=None,
         argparseLongOpt='--dispositionBase',
         )
 
-    icmParams.parDictAdd(
+    csParams.parDictAdd(
         parName='inPdf',
         parDescription="Input Pdf file with ttytex etc implied",
         parDataType=None,
         parDefault=None,
         parChoices=list(),
-        parScope=icm.ICM_ParamScope.TargetParam,
+        parScope=cs.CmndParamScope.TargetParam,
         argparseShortOpt=None,
         argparseLongOpt='--inPdf',
     )
 
-    icmParams.parDictAdd(
+    csParams.parDictAdd(
         parName='framesRange',
         parDescription="Frames Range -- For Now Just Initial Number",
         parDataType=None,
         parDefault=None,
         parChoices=list(),
-        parScope=icm.ICM_ParamScope.TargetParam,
+        parScope=cs.CmndParamScope.TargetParam,
         argparseShortOpt=None,
         argparseLongOpt='--framesRange',
     )
-    
-    bleep.commonParamsSpecify(icmParams)    
-       
-    icm.argsparseBasedOnIcmParams(parser, icmParams)
 
-    # So that it can be processed later as well.
-    G.icmParamDictSet(icmParams)
-    
     return
 
-####+BEGIN: bx:icm:python:func :funcName "dispositionBaseDefault" :funcType "defaultVerify" :retType "echo" :deco "" :argsList "dispositionBase"
-"""
-*  [[elisp:(org-cycle)][| ]]  [[elisp:(org-show-subtree)][|=]] [[elisp:(show-children)][|V]] [[elisp:(org-tree-to-indirect-buffer)][|>]] [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(beginning-of-buffer)][Top]] [[elisp:(delete-other-windows)][(1)]] || Func-defaultVerify :: /dispositionBaseDefault/ retType=echo argsList=(dispositionBase)  [[elisp:(org-cycle)][| ]]
-"""
+####+BEGIN: bx:cs:python:func :funcName "dispositionBaseDefault" :funcType "defaultVerify" :retType "echo" :deco "" :argsList "dispositionBase"
+""" #+begin_org
+*  _[[elisp:(blee:menu-sel:outline:popupMenu)][±]]_ _[[elisp:(blee:menu-sel:navigation:popupMenu)][Ξ]]_ [[elisp:(outline-show-branches+toggle)][|=]] [[elisp:(bx:orgm:indirectBufOther)][|>]] *[[elisp:(blee:ppmm:org-mode-toggle)][|N]]*  F-defaultVerify [[elisp:(outline-show-subtree+toggle)][||]] /dispositionBaseDefault/ retType=echo argsList=(dispositionBase)  [[elisp:(org-cycle)][| ]]
+#+end_org """
 def dispositionBaseDefault(
     dispositionBase,
 ):
@@ -360,40 +386,38 @@ def dispositionBaseDefault(
         return dispositionBase
 
 
-####+BEGIN: bx:icm:python:cmnd:classHead :cmndName "examples" :cmndType "ICM-Cmnd-FWrk" :comment "FrameWrk: ICM Examples" :parsMand "" :parsOpt "" :argsMin "0" :argsMax "0" :asFunc "" :interactiveP ""
-"""
-*  [[elisp:(org-cycle)][| ]]  [[elisp:(org-show-subtree)][|=]] [[elisp:(show-children)][|V]] [[elisp:(org-tree-to-indirect-buffer)][|>]] [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(beginning-of-buffer)][Top]] [[elisp:(delete-other-windows)][(1)]] || ICM-Cmnd-FWrk  :: /examples/ =FrameWrk: ICM Examples= parsMand= parsOpt= argsMin=0 argsMax=0 asFunc= interactive=  [[elisp:(org-cycle)][| ]]
-"""
-class examples(icm.Cmnd):
+####+BEGIN: b:py3:cs:cmnd/classHead :cmndName "examplesOrig" :cmndType "ICM-Cmnd-FWrk" :comment "FrameWrk: ICM Examples" :parsMand "" :parsOpt "" :argsMin 0 :argsMax 0 :pyInv ""
+""" #+begin_org
+*  _[[elisp:(blee:menu-sel:outline:popupMenu)][±]]_ _[[elisp:(blee:menu-sel:navigation:popupMenu)][Ξ]]_ [[elisp:(outline-show-branches+toggle)][|=]] [[elisp:(bx:orgm:indirectBufOther)][|>]] *[[elisp:(blee:ppmm:org-mode-toggle)][|N]]*  CmndSvc-ICM-Cmnd-FWrk [[elisp:(outline-show-subtree+toggle)][||]] <<examplesOrig>>  *FrameWrk: ICM Examples*  =verify= ro=cli   [[elisp:(org-cycle)][| ]]
+#+end_org """
+class examplesOrig(cs.Cmnd):
     cmndParamsMandatory = [ ]
     cmndParamsOptional = [ ]
     cmndArgsLen = {'Min': 0, 'Max': 0,}
 
-    @icm.subjectToTracking(fnLoc=True, fnEntry=True, fnExit=True)
+    @cs.track(fnLoc=True, fnEntry=True, fnExit=True)
     def cmnd(self,
-        interactive=False,        # Can also be called non-interactively
-    ):
-        cmndOutcome = self.getOpOutcome()
-        if interactive:
-            if not self.cmndLineValidate(outcome=cmndOutcome):
-                return cmndOutcome
-
+             rtInv: cs.RtInvoker,
+             cmndOutcome: b.op.Outcome,
+    ) -> b.op.Outcome:
+        """FrameWrk: ICM Examples"""
+        failed = b_io.eh.badOutcome
         callParamsDict = {}
-        if not icm.cmndCallParamsValidate(callParamsDict, interactive, outcome=cmndOutcome):
-            return cmndOutcome
+        if self.invocationValidate(rtInv, cmndOutcome, callParamsDict, None).isProblematic():
+            return failed(cmndOutcome)
 ####+END:
         comment='none'
         def cpsInit(): global comment; comment='none'; return collections.OrderedDict()
-        def menuItem(): icm.ex_gCmndMenuItem(cmndName, cps, cmndArgs, comment=comment, verbosity='little')
-        def menuItemUnverbose(): icm.ex_gCmndMenuItem(cmndName, cps, cmndArgs, comment=comment, verbosity='none')        
-        def execLineEx(cmndStr): icm.ex_gExecMenuItem(execLine=cmndStr)
+        def menuItem(): cs.examples.cmndInsert(cmndName, cps, cmndArgs, comment=comment, verbosity='little')
+        def menuItemUnverbose(): cs.examples.cmndInsert(cmndName, cps, cmndArgs, comment=comment, verbosity='none')
+        def execLineEx(cmndStr): cs.examples.execInsert(execLine=cmndStr)
 
-        logControler = icm.LOG_Control()
+        logControler = b_io.log.Control()
         logControler.loggerSetLevel(20)
-        
-        icm.icmExampleMyName(G.icmMyName(), G.icmMyFullName())
-        
-        icm.G_commonBriefExamples()
+
+        cs.examples.myName(cs.G.icmMyName(), cs.G.icmMyFullName())
+
+        cs.examples.commonBrief()
 
         bleep.examples_csBasic()
 
@@ -402,27 +426,23 @@ class examples(icm.Cmnd):
         mainSnmFile="""./presentationEnFa.snm"""
 
         selectedFramesRange = "1"
-        
-####+BEGIN: bx:icm:python:cmnd:subSection :title "Dev And Testing"
-        """
-**  [[elisp:(beginning-of-buffer)][Top]] ================ [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(delete-other-windows)][(1)]]          *Dev And Testing*  [[elisp:(org-cycle)][| ]]  [[elisp:(org-show-subtree)][|=]] 
-"""
+
+####+BEGIN: bx:cs:python:cmnd:subSection :title "Dev And Testing"
+
 ####+END:
 
-        icm.cmndExampleMenuChapter('*General Dev and Testing IIFs*')
+        cs.examples.menuChapter('*General Dev and Testing IIFs*')
 
         cmndName = "unitTest"
-        cmndArgs = ""; cps = cpsInit(); # cps['icmsPkgName'] = icmsPkgName 
+        cmndArgs = ""; cps = cpsInit(); # cps['icmsPkgName'] = icmsPkgName
         menuItem()
-        icm.ex_gCmndMenuItem(cmndName, cps, cmndArgs, verbosity='full')
+        cs.examples.cmndInsert(cmndName, cps, cmndArgs, verbosity='full')
 
 
-####+BEGIN: bx:icm:python:cmnd:subSection :title "Disposition Setup/Set/Update -- ./disposition.gened"
-        """
-**  [[elisp:(beginning-of-buffer)][Top]] ================ [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(delete-other-windows)][(1)]]          *Disposition Setup/Set/Update -- ./disposition.gened*  [[elisp:(org-cycle)][| ]]  [[elisp:(org-show-subtree)][|=]] 
-"""
+####+BEGIN: bx:cs:python:cmnd:subSection :title "Disposition Setup/Set/Update -- ./disposition.gened"
+
 ####+END:
-        icm.cmndExampleMenuChapter('*Disposition Setup/Set/Update  -- ./disposition.gened*')
+        cs.examples.menuChapter('*Disposition Setup/Set/Update  -- ./disposition.gened*')
 
         cmndName = "dispositionBaseSetup";  comment="""# Just creates dispositionBaseDir."""
         menuItem()
@@ -437,47 +457,41 @@ class examples(icm.Cmnd):
         cmndArgs = "frameName transition up"; cps = cpsInit();   cps['dispositionBase'] = '/tmp/t3/DISP'
         menuItem()
 
-####+BEGIN: bx:icm:python:cmnd:subSection :title "Extract Frames Parameters From Pdf/snm files -- into DispositionBase"
-        """
-**  [[elisp:(beginning-of-buffer)][Top]] ================ [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(delete-other-windows)][(1)]]          **Extract into DispositionBase Frames Parameters Info From Pdf/snm/tex files**  [[elisp:(org-cycle)][| ]]  [[elisp:(org-show-subtree)][|=]] 
-"""
+####+BEGIN: bx:cs:python:cmnd:subSection :title "Extract Frames Parameters From Pdf/snm files -- into DispositionBase"
+
 ####+END:
-        icm.cmndExampleMenuChapter('*Extract Frames Parameters From Pdf/snm files -- into DispositionBase*')
+        cs.examples.menuChapter('*Extract Frames Parameters From Pdf/snm files -- into DispositionBase*')
 
         cmndName = "latexSrcToDispositionUpdate" ; comment = """# Sets up dispositionBase based on pdf and snm info."""
-        cmndArgs = mainPdfFile; cps = cpsInit(); 
+        cmndArgs = mainPdfFile; cps = cpsInit();
         menuItem()
         cmndArgs = mainPdfFile; cps = cpsInit();  cps['dispositionBase'] = "./disposition.gened"
         menuItem()
-        
+
         cmndName = "frameNamesList"; comment="""# Gets frame names from pdf file."""
-        cmndArgs = mainPdfFile; cps = cpsInit(); # cps['icmsPkgName'] = icmsPkgName 
+        cmndArgs = mainPdfFile; cps = cpsInit(); # cps['icmsPkgName'] = icmsPkgName
         menuItemUnverbose()
-        
+
         #cmndName = "frameNamesGet" ; comment="""# Gets from latex snm file."""
-        #cmndArgs = mainSnmFile + " 25"; cps = cpsInit(); # cps['icmsPkgName'] = icmsPkgName 
+        #cmndArgs = mainSnmFile + " 25"; cps = cpsInit(); # cps['icmsPkgName'] = icmsPkgName
         #menuItem()
 
-        
-####+BEGIN: bx:icm:python:cmnd:subSection :title "Extract Frames Parameters From Pdf/snm files -- into DispositionBase"
-        """
-**  [[elisp:(beginning-of-buffer)][Top]] ================ [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(delete-other-windows)][(1)]]          *pdfToDisposition*  [[elisp:(org-cycle)][| ]]  [[elisp:(org-show-subtree)][|=]] 
-"""
+
+####+BEGIN: bx:cs:python:cmnd:subSection :title "Extract Frames Parameters From Pdf/snm files -- into DispositionBase"
+
 ####+END:
-        icm.cmndExampleMenuSection('Extract Frames Parameters From TeX files -- into DispositionBase')
-        
+        cs.examples.menuSection('Extract Frames Parameters From TeX files -- into DispositionBase')
+
         cmndName = "beamerExternalTagsUpdateAsFPs"  ; comment = ""
         cmndArgs = mainTtytexFile;  cps = cpsInit(); #  cps['load'] = ''
         menuItem()
 
-        
-####+BEGIN: bx:icm:python:cmnd:subSection :title "DispositionBase Full Update"
-        """
-**  [[elisp:(beginning-of-buffer)][Top]] ================ [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(delete-other-windows)][(1)]]          *DispositionBase Full Update*  [[elisp:(org-cycle)][| ]]  [[elisp:(org-show-subtree)][|=]] 
-"""
+
+####+BEGIN: bx:cs:python:cmnd:subSection :title "DispositionBase Full Update"
+
 ####+END:
-        icm.cmndExampleMenuSection('DispositionBase Full Update')
-        
+        cs.examples.menuSection('DispositionBase Full Update')
+
         cmndName = "updateDispositionBase"  ; comment = "# Primary Preparations"
         cmndArgs = mainPdfFile;  cps = cpsInit();  cps['dispositionBase'] = "./disposition.gened"
         menuItem()
@@ -487,28 +501,24 @@ class examples(icm.Cmnd):
         cmndName = "dispositionFrameNamesList"  ; comment = "# List FrameNames from dispositionBase"
         cmndArgs = "";
         cps = cpsInit();  menuItemUnverbose()
-        
 
-        
-####+BEGIN: bx:icm:python:cmnd:subSection :title "Common Capabilities"
-        """
-**  [[elisp:(beginning-of-buffer)][Top]] ================ [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(delete-other-windows)][(1)]]          *Common Capabilities*  [[elisp:(org-cycle)][| ]]  [[elisp:(org-show-subtree)][|=]] 
-"""
+
+
+####+BEGIN: bx:cs:python:cmnd:subSection :title "Common Capabilities"
+
 ####+END:
-        icm.cmndExampleMenuSection('Common Capabilities')
+        cs.examples.menuSection('Common Capabilities')
 
         cmndName = "latexInputFilesList"  ; comment = ""
         cmndArgs =  mainTtytexFile; cps = cpsInit(); #  cps['load'] = './presentationEnFa-itags.py'
         menuItem()
-        
+
         cmndArgs =  mainTtytexFile + " ./articleEnFa.ttytex" ; menuItem()
 
-####+BEGIN: bx:icm:python:cmnd:subSection :title "Construct Configuration Files From Disposition Base For Impressive -- stdout"
-        """
-**  [[elisp:(beginning-of-buffer)][Top]] ================ [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(delete-other-windows)][(1)]]          *Construct Configuration Files From Disposition Base For Impressive -- stdout*  [[elisp:(org-cycle)][| ]]  [[elisp:(org-show-subtree)][|=]] 
-"""
+####+BEGIN: bx:cs:python:cmnd:subSection :title "Construct Configuration Files From Disposition Base For Impressive -- stdout"
+
 ####+END:
-        icm.cmndExampleMenuChapter('*Construct Configuration Files From Disposition Base For Impressive -- stdout*')
+        cs.examples.menuChapter('*Construct Configuration Files From Disposition Base For Impressive -- stdout*')
 
         cmndName = "frameParSet"  ; comment = ""
         cmndArgs = "frameName transition up"; cps = cpsInit();  cps['dispositionBase'] = '/tmp/t3/DISP'
@@ -519,35 +529,31 @@ class examples(icm.Cmnd):
         menuItem()
 
         cmndArgs = "voiceOver";  menuItem()
-        cmndArgs = "voiceOver recorderEach"; cps = cpsInit(); cps['framesRange'] = selectedFramesRange ;  menuItem()                 
+        cmndArgs = "voiceOver recorderEach"; cps = cpsInit(); cps['framesRange'] = selectedFramesRange ;  menuItem()
 
-####+BEGIN: bx:icm:python:cmnd:subSection :title "Update DispositionBase and Construct Configuration Files"
-        """
-**  [[elisp:(beginning-of-buffer)][Top]] ================ [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(delete-other-windows)][(1)]]          *Update DispositionBase and Construct Configuration Files*  [[elisp:(org-cycle)][| ]]  [[elisp:(org-show-subtree)][|=]] 
-"""
+####+BEGIN: bx:cs:python:cmnd:subSection :title "Update DispositionBase and Construct Configuration Files"
+
 ####+END:
-        icm.cmndExampleMenuChapter('*Construct Configuration Files From Disposition Base*')
+        cs.examples.menuChapter('*Construct Configuration Files From Disposition Base*')
 
         cmndName = "updateThenImpressiveInfoStdout" ; comment="""# Args specify purpose"""
         cps = cpsInit(); cps['inPdf'] = "./presentationEnFa.pdf"
 
         cmndArgs = "voiceOver";  menuItem()
-        cmndArgs = "voiceOver recorderEach";  cps['framesRange'] = selectedFramesRange ;  menuItem()                         
-        
+        cmndArgs = "voiceOver recorderEach";  cps['framesRange'] = selectedFramesRange ;  menuItem()
 
-####+BEGIN: bx:icm:python:cmnd:subSection :title "Construct Configuration Files And Run Impressive"
-        """
-**  [[elisp:(beginning-of-buffer)][Top]] ================ [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(delete-other-windows)][(1)]]          *Construct Configuration Files And Run Impressive*  [[elisp:(org-cycle)][| ]]  [[elisp:(org-show-subtree)][|=]] 
-"""
+
+####+BEGIN: bx:cs:python:cmnd:subSection :title "Construct Configuration Files And Run Impressive"
+
 ####+END:
-        icm.cmndExampleMenuChapter('*Construct Configuration Files And Run Impressive*')
+        cs.examples.menuChapter('*Construct Configuration Files And Run Impressive*')
 
         cmndName = "updateDispositionBase"  ; comment = "# Primary Preparations"
         cmndArgs = mainPdfFile; cps = cpsInit();  menuItemUnverbose()
 
         cmndName = "frameNamesList"; comment="""# Gets frame names from pdf file."""
         cmndArgs = mainPdfFile; cps = cpsInit();  menuItemUnverbose()
-     
+
 
         cmndName = "dispositionToImpressivePurposed" ; comment="""# Applies To ALL -- Args specify purpose"""
         cps = cpsInit(); cps['inPdf'] = "./presentationEnFa.pdf"
@@ -558,122 +564,46 @@ class examples(icm.Cmnd):
         cps = cpsInit(); cps['inPdf'] = "./presentationEnFa.pdf"
         cmndArgs = "voiceOver";  menuItemUnverbose()
         cmndArgs = "voiceOver recorderEach"; cps['framesRange'] = selectedFramesRange ; menuItemUnverbose()
-        
+
         cmndName = "dispositionToImpressivePurposed" ; comment="""# Applies To Any -- Args specify purpose"""
         cps = cpsInit(); cps['inPdf'] = "./presentationEnFa.pdf"
         cmndArgs = "voiceOver";  menuItemUnverbose()
         cmndArgs = "voiceOver recorderOnce" ; menuItemUnverbose()
-        
-        
-####+BEGIN: bx:icm:python:cmnd:subSection :title "Direct Invoke Commands"
-        """
-**  [[elisp:(beginning-of-buffer)][Top]] ================ [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(delete-other-windows)][(1)]]          *Direct Invoke Commands*  [[elisp:(org-cycle)][| ]]  [[elisp:(org-show-subtree)][|=]] 
-"""
-####+END:
-        
-        icm.cmndExampleMenuChapter('*Direct Invoke Commands*')
+
+
+        cs.examples.menuChapter('*Direct Invoke Commands*')
 
         execLineEx("""impressive""".format())
 
         return(cmndOutcome)
 
-    def cmndDocStr(self): return """
-** ICM Examples -- List of commonly used lines for this ICM [[elisp:(org-cycle)][| ]]
+####+BEGIN: bx:cs:python:section :title "Disposition Base Setup"
 """
-    
-####+BEGIN: bx:icm:python:section :title "ICM Commands"
-"""
-*  [[elisp:(beginning-of-buffer)][Top]] ################ [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(delete-other-windows)][(1)]]    *ICM Commands*  [[elisp:(org-cycle)][| ]]  [[elisp:(org-show-subtree)][|=]] 
-"""
-####+END:
-
-####+BEGIN: bx:icm:python:cmnd:classHead :cmndName "unitTest" :parsMand "" :parsOpt "" :argsMin "0" :argsMax "1" :asFunc "" :interactiveP ""
-"""
-*  [[elisp:(org-cycle)][| ]]  [[elisp:(org-show-subtree)][|=]] [[elisp:(show-children)][|V]] [[elisp:(org-tree-to-indirect-buffer)][|>]] [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(beginning-of-buffer)][Top]] [[elisp:(delete-other-windows)][(1)]] || ICM-Cmnd       :: /unitTest/ parsMand= parsOpt= argsMin=0 argsMax=1 asFunc= interactive=  [[elisp:(org-cycle)][| ]]
-"""
-class unitTest(icm.Cmnd):
-    cmndParamsMandatory = [ ]
-    cmndParamsOptional = [ ]
-    cmndArgsLen = {'Min': 0, 'Max': 1,}
-
-    @icm.subjectToTracking(fnLoc=True, fnEntry=True, fnExit=True)
-    def cmnd(self,
-        interactive=False,        # Can also be called non-interactively
-        argsList=None,         # or Args-Input
-    ):
-        cmndOutcome = self.getOpOutcome()
-        if interactive:
-            if not self.cmndLineValidate(outcome=cmndOutcome):
-                return cmndOutcome
-            effectiveArgsList = G.icmRunArgsGet().cmndArgs
-        else:
-            effectiveArgsList = argsList
-
-        callParamsDict = {}
-        if not icm.cmndCallParamsValidate(callParamsDict, interactive, outcome=cmndOutcome):
-            return cmndOutcome
-####+END:
-
-        myName=self.myName()
-        thisOutcome = icm.OpOutcome(invokerName=myName)
-
-        print(G.icmInfo)
-
-        for eachArg in effectiveArgsList:
-            icm.ANN_here("{}".format(eachArg))
-
-        print((icm.__file__))
-        print(sys.path)
-
-        import imp
-        print((imp.find_module('unisos/icm')))
-
-        @ucf.runOnceOnly
-        def echo(str):
-            print(str)
-            
-        echo("first")
-        echo("second")  # Should not run
-    
-        return thisOutcome
-    
-    def cmndDocStr(self): return """
-** Place holder for ICM's experimental or test code.  [[elisp:(org-cycle)][| ]]
- You can use this Cmnd for rapid prototyping and testing of newly developed functions.
-"""
-
-    
-####+BEGIN: bx:icm:python:section :title "Disposition Base Setup"
-"""
-*  [[elisp:(beginning-of-buffer)][Top]] ################ [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(delete-other-windows)][(1)]]    *Disposition Base Setup*  [[elisp:(org-cycle)][| ]]  [[elisp:(org-show-subtree)][|=]] 
+*  [[elisp:(beginning-of-buffer)][Top]] ############## [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(delete-other-windows)][(1)]]    *Disposition Base Setup*  [[elisp:(org-cycle)][| ]]  [[elisp:(org-show-subtree)][|=]]
 """
 ####+END:
     
-
-
-####+BEGIN: bx:icm:python:cmnd:classHead :cmndName "dispositionBaseSetup" :comment "Creates dispositionBase" :parsMand "" :parsOpt "dispositionBase" :argsMin "0" :argsMax "0" :asFunc "" :interactiveP ""
-"""
-*  [[elisp:(org-cycle)][| ]]  [[elisp:(org-show-subtree)][|=]] [[elisp:(show-children)][|V]] [[elisp:(org-tree-to-indirect-buffer)][|>]] [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(beginning-of-buffer)][Top]] [[elisp:(delete-other-windows)][(1)]] || ICM-Cmnd       :: /dispositionBaseSetup/ =Creates dispositionBase= parsMand= parsOpt=dispositionBase argsMin=0 argsMax=0 asFunc= interactive=  [[elisp:(org-cycle)][| ]]
-"""
-class dispositionBaseSetup(icm.Cmnd):
+####+BEGIN: b:py3:cs:cmnd/classHead :cmndName "dispositionBaseSetup" :comment "Creates dispositionBase" :parsMand "" :parsOpt "dispositionBase" :argsMin 0 :argsMax 0 :pyInv ""
+""" #+begin_org
+*  _[[elisp:(blee:menu-sel:outline:popupMenu)][±]]_ _[[elisp:(blee:menu-sel:navigation:popupMenu)][Ξ]]_ [[elisp:(outline-show-branches+toggle)][|=]] [[elisp:(bx:orgm:indirectBufOther)][|>]] *[[elisp:(blee:ppmm:org-mode-toggle)][|N]]*  CmndSvc-   [[elisp:(outline-show-subtree+toggle)][||]] <<dispositionBaseSetup>>  *Creates dispositionBase*  =verify= parsOpt=dispositionBase ro=cli   [[elisp:(org-cycle)][| ]]
+#+end_org """
+class dispositionBaseSetup(cs.Cmnd):
     cmndParamsMandatory = [ ]
     cmndParamsOptional = [ 'dispositionBase', ]
     cmndArgsLen = {'Min': 0, 'Max': 0,}
 
-    @icm.subjectToTracking(fnLoc=True, fnEntry=True, fnExit=True)
+    @cs.track(fnLoc=True, fnEntry=True, fnExit=True)
     def cmnd(self,
-        interactive=False,        # Can also be called non-interactively
-        dispositionBase=None,         # or Cmnd-Input
-    ):
-        cmndOutcome = self.getOpOutcome()
-        if interactive:
-            if not self.cmndLineValidate(outcome=cmndOutcome):
-                return cmndOutcome
-
+             rtInv: cs.RtInvoker,
+             cmndOutcome: b.op.Outcome,
+             dispositionBase: typing.Optional[str]=None,  # Cs Optional Param
+    ) -> b.op.Outcome:
+        """Creates dispositionBase"""
+        failed = b_io.eh.badOutcome
         callParamsDict = {'dispositionBase': dispositionBase, }
-        if not icm.cmndCallParamsValidate(callParamsDict, interactive, outcome=cmndOutcome):
-            return cmndOutcome
-        dispositionBase = callParamsDict['dispositionBase']
+        if self.invocationValidate(rtInv, cmndOutcome, callParamsDict, None).isProblematic():
+            return failed(cmndOutcome)
+        dispositionBase = csParam.mappedValue('dispositionBase', dispositionBase)
 ####+END:
 
         dispositionBase = dispositionBaseDefault(dispositionBase)
@@ -691,33 +621,34 @@ class dispositionBaseSetup(icm.Cmnd):
 """
 
 
-####+BEGIN: bx:icm:python:cmnd:classHead :cmndName "dispositionParamBaseSetup" :comment "Creates the given FP base" :parsMand "" :parsOpt "dispositionBase dispositionParBase" :argsMin "0" :argsMax "0" :asFunc "" :interactiveP ""
-"""
-*  [[elisp:(org-cycle)][| ]]  [[elisp:(org-show-subtree)][|=]] [[elisp:(show-children)][|V]] [[elisp:(org-tree-to-indirect-buffer)][|>]] [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(beginning-of-buffer)][Top]] [[elisp:(delete-other-windows)][(1)]] || ICM-Cmnd       :: /dispositionParamBaseSetup/ =Creates the given FP base= parsMand= parsOpt=dispositionBase dispositionParBase argsMin=0 argsMax=0 asFunc= interactive=  [[elisp:(org-cycle)][| ]]
-"""
-class dispositionParamBaseSetup(icm.Cmnd):
+####+BEGIN: b:py3:cs:cmnd/classHead :cmndName "dispositionParamBaseSetup" :comment "Creates the given FP base" :parsMand "" :parsOpt "dispositionBase dispositionParBase" :argsMin 0 :argsMax 0 :pyInv ""
+""" #+begin_org
+*  _[[elisp:(blee:menu-sel:outline:popupMenu)][±]]_ _[[elisp:(blee:menu-sel:navigation:popupMenu)][Ξ]]_ [[elisp:(outline-show-branches+toggle)][|=]] [[elisp:(bx:orgm:indirectBufOther)][|>]] *[[elisp:(blee:ppmm:org-mode-toggle)][|N]]*  CmndSvc-   [[elisp:(outline-show-subtree+toggle)][||]] <<dispositionParamBaseSetup>>  *Creates the given FP base*  =verify= parsOpt=dispositionBase dispositionParBase ro=cli   [[elisp:(org-cycle)][| ]]
+#+end_org """
+class dispositionParamBaseSetup(cs.Cmnd):
     cmndParamsMandatory = [ ]
     cmndParamsOptional = [ 'dispositionBase', 'dispositionParBase', ]
     cmndArgsLen = {'Min': 0, 'Max': 0,}
 
-    @icm.subjectToTracking(fnLoc=True, fnEntry=True, fnExit=True)
+    @cs.track(fnLoc=True, fnEntry=True, fnExit=True)
     def cmnd(self,
-        interactive=False,        # Can also be called non-interactively
-        dispositionBase=None,         # or Cmnd-Input
-        dispositionParBase=None,         # or Cmnd-Input
-    ):
-        cmndOutcome = self.getOpOutcome()
-        if interactive:
-            if not self.cmndLineValidate(outcome=cmndOutcome):
-                return cmndOutcome
-
+             rtInv: cs.RtInvoker,
+             cmndOutcome: b.op.Outcome,
+             dispositionBase: typing.Optional[str]=None,  # Cs Optional Param
+             dispositionParBase: typing.Optional[str]=None,  # Cs Optional Param
+    ) -> b.op.Outcome:
+        """Creates the given FP base"""
+        failed = b_io.eh.badOutcome
         callParamsDict = {'dispositionBase': dispositionBase, 'dispositionParBase': dispositionParBase, }
-        if not icm.cmndCallParamsValidate(callParamsDict, interactive, outcome=cmndOutcome):
-            return cmndOutcome
-        dispositionBase = callParamsDict['dispositionBase']
-        dispositionParBase = callParamsDict['dispositionParBase']
+        if self.invocationValidate(rtInv, cmndOutcome, callParamsDict, None).isProblematic():
+            return failed(cmndOutcome)
+        dispositionBase = csParam.mappedValue('dispositionBase', dispositionBase)
+        dispositionParBase = csParam.mappedValue('dispositionParBase', dispositionParBase)
 ####+END:
-        
+        self.cmndDocStr(f""" #+begin_org
+** [[elisp:(org-cycle)][| *CmndDesc:* | ]]  Sets up ParBase -- For example for slideNumber and frameName.
+        #+end_org """)
+
         dispositionBase = dispositionBaseDefault(dispositionBase)
 
         parRoot = os.path.join(dispositionBase, dispositionParBase)    
@@ -727,51 +658,47 @@ class dispositionParamBaseSetup(icm.Cmnd):
         thisParamBaseState = thisParamBase.baseValidityPredicate()
     
         if  thisParamBaseState == 'BadlyFormed':
-            return icm.EH_critical_usageError('')
+            return b_io.eh.critical_usageError('')
         elif thisParamBaseState == 'NonExistent':
             thisParamBase.baseCreate()
         elif thisParamBaseState == 'InPlace':
-            icm.TM_here('InPlace')
+            b_io.tm.here('InPlace')
         else:
-            return icm.EH_critical_oops('thisParamBaseState=' + thisParamBaseState)
+            return b_io.eh.critical_oops('thisParamBaseState=' + thisParamBaseState)
 
         return
 
 
-        def cmndDesc(): """
-** Sets up ParBase -- For example for slideNumber and frameName.
-"""
 
-####+BEGIN: bx:icm:python:cmnd:classHead  :cmndName "dispositionParamSet" :comment "For Global disposition FPs" :parsMand "" :parsOpt "dispositionBase dispositionParBase" :argsMin "2" :argsMax "2" :asFunc "" :interactiveP ""
-"""
-*  [[elisp:(org-cycle)][| ]]  [[elisp:(org-show-subtree)][|=]] [[elisp:(show-children)][|V]] [[elisp:(org-tree-to-indirect-buffer)][|>]] [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(beginning-of-buffer)][Top]] [[elisp:(delete-other-windows)][(1)]] || ICM-Cmnd       :: /dispositionParamSet/ =For Global disposition FPs= parsMand= parsOpt=dispositionBase dispositionParBase argsMin=2 argsMax=2 asFunc= interactive=  [[elisp:(org-cycle)][| ]]
-"""
-class dispositionParamSet(icm.Cmnd):
+####+BEGIN: b:py3:cs:cmnd/classHead  :cmndName "dispositionParamSet" :comment "For Global disposition FPs" :parsMand "" :parsOpt "dispositionBase dispositionParBase" :argsMin 2 :argsMax 2 :pyInv ""
+""" #+begin_org
+*  _[[elisp:(blee:menu-sel:outline:popupMenu)][±]]_ _[[elisp:(blee:menu-sel:navigation:popupMenu)][Ξ]]_ [[elisp:(outline-show-branches+toggle)][|=]] [[elisp:(bx:orgm:indirectBufOther)][|>]] *[[elisp:(blee:ppmm:org-mode-toggle)][|N]]*  CmndSvc-   [[elisp:(outline-show-subtree+toggle)][||]] <<dispositionParamSet>>  *For Global disposition FPs*  =verify= parsOpt=dispositionBase dispositionParBase argsMin=2 argsMax=2 ro=cli   [[elisp:(org-cycle)][| ]]
+#+end_org """
+class dispositionParamSet(cs.Cmnd):
     cmndParamsMandatory = [ ]
     cmndParamsOptional = [ 'dispositionBase', 'dispositionParBase', ]
     cmndArgsLen = {'Min': 2, 'Max': 2,}
 
-    @icm.subjectToTracking(fnLoc=True, fnEntry=True, fnExit=True)
+    @cs.track(fnLoc=True, fnEntry=True, fnExit=True)
     def cmnd(self,
-        interactive=False,        # Can also be called non-interactively
-        dispositionBase=None,         # or Cmnd-Input
-        dispositionParBase=None,         # or Cmnd-Input
-        argsList=None,         # or Args-Input
-    ):
-        cmndOutcome = self.getOpOutcome()
-        if interactive:
-            if not self.cmndLineValidate(outcome=cmndOutcome):
-                return cmndOutcome
-            effectiveArgsList = G.icmRunArgsGet().cmndArgs
-        else:
-            effectiveArgsList = argsList
-
+             rtInv: cs.RtInvoker,
+             cmndOutcome: b.op.Outcome,
+             dispositionBase: typing.Optional[str]=None,  # Cs Optional Param
+             dispositionParBase: typing.Optional[str]=None,  # Cs Optional Param
+             argsList: typing.Optional[list[str]]=None,  # CsArgs
+    ) -> b.op.Outcome:
+        """For Global disposition FPs"""
+        failed = b_io.eh.badOutcome
         callParamsDict = {'dispositionBase': dispositionBase, 'dispositionParBase': dispositionParBase, }
-        if not icm.cmndCallParamsValidate(callParamsDict, interactive, outcome=cmndOutcome):
-            return cmndOutcome
-        dispositionBase = callParamsDict['dispositionBase']
-        dispositionParBase = callParamsDict['dispositionParBase']
+        if self.invocationValidate(rtInv, cmndOutcome, callParamsDict, argsList).isProblematic():
+            return failed(cmndOutcome)
+        cmndArgsSpecDict = self.cmndArgsSpec()
+        dispositionBase = csParam.mappedValue('dispositionBase', dispositionBase)
+        dispositionParBase = csParam.mappedValue('dispositionParBase', dispositionParBase)
 ####+END:
+        self.cmndDocStr(f""" #+begin_org
+** [[elisp:(org-cycle)][| *CmndDesc:* | ]]  Thin layer on top of icm.FILE_Param()
+        #+end_org """)
 
         dispositionBase = dispositionBaseDefault(dispositionBase)
 
@@ -783,23 +710,16 @@ class dispositionParamSet(icm.Cmnd):
 
         parRoot = os.path.join(dispositionBase, dispositionParBase)
 
-        thisFileParam = icm.FILE_Param()
+        thisFileParam = b.fp.FILE_Param()
         return  thisFileParam.writeTo(storeBase=parRoot,
                                       parName=dispositionParName,
                                       parValue=dispositionParValue)
 
 
-        def cmndDesc(): """
-** Thin layer on top of icm.FILE_Param()
-"""
-
-    
-
-####+BEGIN: bx:icm:python:func :funcName "impressiveFrameParSet" :comment "Func to set FPs based on ^%BxPy" :funcType "void" :retType "none" :deco "default" :argsList "frameName parName parValue"
-"""
-*  [[elisp:(org-cycle)][| ]]  [[elisp:(org-show-subtree)][|=]] [[elisp:(show-children)][|V]] [[elisp:(org-tree-to-indirect-buffer)][|>]] [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(beginning-of-buffer)][Top]] [[elisp:(delete-other-windows)][(1)]] || Func-void      :: /impressiveFrameParSet/ =Func to set FPs based on ^%BxPy= retType=none argsList=(frameName parName parValue) deco=default  [[elisp:(org-cycle)][| ]]
-"""
-@icm.subjectToTracking(fnLoc=True, fnEntry=True, fnExit=True)
+####+BEGIN: bx:cs:python:func :funcName "impressiveFrameParSet" :comment "Func to set FPs based on ^%BxPy" :funcType "void" :retType "none" :deco "" :argsList "frameName parName parValue"
+""" #+begin_org
+*  _[[elisp:(blee:menu-sel:outline:popupMenu)][±]]_ _[[elisp:(blee:menu-sel:navigation:popupMenu)][Ξ]]_ [[elisp:(outline-show-branches+toggle)][|=]] [[elisp:(bx:orgm:indirectBufOther)][|>]] *[[elisp:(blee:ppmm:org-mode-toggle)][|N]]*  F-void     [[elisp:(outline-show-subtree+toggle)][||]] /impressiveFrameParSet/ =Func to set FPs based on ^%BxPy= retType=none argsList=(frameName parName parValue)  [[elisp:(org-cycle)][| ]]
+#+end_org """
 def impressiveFrameParSet(
     frameName,
     parName,
@@ -816,33 +736,29 @@ def impressiveFrameParSet(
     )
 
     
-####+BEGIN: bx:icm:python:cmnd:classHead  :cmndName "frameParSet" :comment "Sets FP in dispositionBase" :parsMand "" :parsOpt "dispositionBase" :argsMin "3" :argsMax "3" :asFunc "" :interactiveP ""
-"""
-*  [[elisp:(org-cycle)][| ]]  [[elisp:(org-show-subtree)][|=]] [[elisp:(show-children)][|V]] [[elisp:(org-tree-to-indirect-buffer)][|>]] [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(beginning-of-buffer)][Top]] [[elisp:(delete-other-windows)][(1)]] || ICM-Cmnd       :: /frameParSet/ =Sets FP in dispositionBase= parsMand= parsOpt=dispositionBase argsMin=3 argsMax=3 asFunc= interactive=  [[elisp:(org-cycle)][| ]]
-"""
-class frameParSet(icm.Cmnd):
+####+BEGIN: b:py3:cs:cmnd/classHead  :cmndName "frameParSet" :comment "Sets FP in dispositionBase" :parsMand "" :parsOpt "dispositionBase" :argsMin 3 :argsMax 3 :pyInv ""
+""" #+begin_org
+*  _[[elisp:(blee:menu-sel:outline:popupMenu)][±]]_ _[[elisp:(blee:menu-sel:navigation:popupMenu)][Ξ]]_ [[elisp:(outline-show-branches+toggle)][|=]] [[elisp:(bx:orgm:indirectBufOther)][|>]] *[[elisp:(blee:ppmm:org-mode-toggle)][|N]]*  CmndSvc-   [[elisp:(outline-show-subtree+toggle)][||]] <<frameParSet>>  *Sets FP in dispositionBase*  =verify= parsOpt=dispositionBase argsMin=3 argsMax=3 ro=cli   [[elisp:(org-cycle)][| ]]
+#+end_org """
+class frameParSet(cs.Cmnd):
     cmndParamsMandatory = [ ]
     cmndParamsOptional = [ 'dispositionBase', ]
     cmndArgsLen = {'Min': 3, 'Max': 3,}
 
-    @icm.subjectToTracking(fnLoc=True, fnEntry=True, fnExit=True)
+    @cs.track(fnLoc=True, fnEntry=True, fnExit=True)
     def cmnd(self,
-        interactive=False,        # Can also be called non-interactively
-        dispositionBase=None,         # or Cmnd-Input
-        argsList=None,         # or Args-Input
-    ):
-        cmndOutcome = self.getOpOutcome()
-        if interactive:
-            if not self.cmndLineValidate(outcome=cmndOutcome):
-                return cmndOutcome
-            effectiveArgsList = G.icmRunArgsGet().cmndArgs
-        else:
-            effectiveArgsList = argsList
-
+             rtInv: cs.RtInvoker,
+             cmndOutcome: b.op.Outcome,
+             dispositionBase: typing.Optional[str]=None,  # Cs Optional Param
+             argsList: typing.Optional[list[str]]=None,  # CsArgs
+    ) -> b.op.Outcome:
+        """Sets FP in dispositionBase"""
+        failed = b_io.eh.badOutcome
         callParamsDict = {'dispositionBase': dispositionBase, }
-        if not icm.cmndCallParamsValidate(callParamsDict, interactive, outcome=cmndOutcome):
-            return cmndOutcome
-        dispositionBase = callParamsDict['dispositionBase']
+        if self.invocationValidate(rtInv, cmndOutcome, callParamsDict, argsList).isProblematic():
+            return failed(cmndOutcome)
+        cmndArgsSpecDict = self.cmndArgsSpec()
+        dispositionBase = csParam.mappedValue('dispositionBase', dispositionBase)
 ####+END:
 
         dispositionBase = dispositionBaseDefault(dispositionBase)
@@ -866,7 +782,7 @@ class frameParSet(icm.Cmnd):
     
         dispositionParValue = parValue
     
-        icm.TM_here("frameName={frameName} parName={parName} parValue={parValue}"
+        b_io.tm.here("frameName={frameName} parName={parName} parValue={parValue}"
                      .format(frameName=frameName, parName=dispositionParName, parValue=dispositionParValue))
     
         return  thisFileParam.writeTo(storeBase=parRoot,
@@ -874,39 +790,39 @@ class frameParSet(icm.Cmnd):
                                       parValue=dispositionParValue)
     
         
-        def cmndDesc(): """
-** Thin layer on top of icm.FILE_Param()
-"""
 
-
-####+BEGIN: bx:icm:python:cmnd:classHead :cmndName "latexSrcToDispositionUpdate" :comment "$1=pdfFile" :parsMand "" :parsOpt "dispositionBase" :argsMin "1" :argsMax "1" :asFunc "" :interactiveP ""
-"""
-*  [[elisp:(org-cycle)][| ]]  [[elisp:(org-show-subtree)][|=]] [[elisp:(show-children)][|V]] [[elisp:(org-tree-to-indirect-buffer)][|>]] [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(beginning-of-buffer)][Top]] [[elisp:(delete-other-windows)][(1)]] || ICM-Cmnd       :: /latexSrcToDispositionUpdate/ =$1=pdfFile= parsMand= parsOpt=dispositionBase argsMin=1 argsMax=1 asFunc= interactive=  [[elisp:(org-cycle)][| ]]
-"""
-class latexSrcToDispositionUpdate(icm.Cmnd):
+####+BEGIN: b:py3:cs:cmnd/classHead :cmndName "latexSrcToDispositionUpdate" :comment "$1=pdfFile" :parsMand "" :parsOpt "dispositionBase" :argsMin 1 :argsMax 1 :pyInv ""
+""" #+begin_org
+*  _[[elisp:(blee:menu-sel:outline:popupMenu)][±]]_ _[[elisp:(blee:menu-sel:navigation:popupMenu)][Ξ]]_ [[elisp:(outline-show-branches+toggle)][|=]] [[elisp:(bx:orgm:indirectBufOther)][|>]] *[[elisp:(blee:ppmm:org-mode-toggle)][|N]]*  CmndSvc-   [[elisp:(outline-show-subtree+toggle)][||]] <<latexSrcToDispositionUpdate>>  *$1=pdfFile*  =verify= parsOpt=dispositionBase argsMin=1 argsMax=1 ro=cli   [[elisp:(org-cycle)][| ]]
+#+end_org """
+class latexSrcToDispositionUpdate(cs.Cmnd):
     cmndParamsMandatory = [ ]
     cmndParamsOptional = [ 'dispositionBase', ]
     cmndArgsLen = {'Min': 1, 'Max': 1,}
 
-    @icm.subjectToTracking(fnLoc=True, fnEntry=True, fnExit=True)
+    @cs.track(fnLoc=True, fnEntry=True, fnExit=True)
     def cmnd(self,
-        interactive=False,        # Can also be called non-interactively
-        dispositionBase=None,         # or Cmnd-Input
-        argsList=None,         # or Args-Input
-    ):
-        cmndOutcome = self.getOpOutcome()
-        if interactive:
-            if not self.cmndLineValidate(outcome=cmndOutcome):
-                return cmndOutcome
-            effectiveArgsList = G.icmRunArgsGet().cmndArgs
-        else:
-            effectiveArgsList = argsList
-
+             rtInv: cs.RtInvoker,
+             cmndOutcome: b.op.Outcome,
+             dispositionBase: typing.Optional[str]=None,  # Cs Optional Param
+             argsList: typing.Optional[list[str]]=None,  # CsArgs
+    ) -> b.op.Outcome:
+        """$1=pdfFile"""
+        failed = b_io.eh.badOutcome
         callParamsDict = {'dispositionBase': dispositionBase, }
-        if not icm.cmndCallParamsValidate(callParamsDict, interactive, outcome=cmndOutcome):
-            return cmndOutcome
-        dispositionBase = callParamsDict['dispositionBase']
+        if self.invocationValidate(rtInv, cmndOutcome, callParamsDict, argsList).isProblematic():
+            return failed(cmndOutcome)
+        cmndArgsSpecDict = self.cmndArgsSpec()
+        dispositionBase = csParam.mappedValue('dispositionBase', dispositionBase)
 ####+END:
+        self.cmndDocStr(f""" #+begin_org
+** [[elisp:(org-cycle)][| *CmndDesc:* | ]]  Given the pdfFileName,  determine total number of slides, then for each slide determine frameName.
+
+    For each slideNumber associate frameName. For each frameName create baseParam directory.
+    If ./audio create the 'sound': attribute.
+    Makes sure basePdf.snm and basePdf.nav are available.
+        #+end_org """)
+
 
         dispositionBase = dispositionBaseDefault(dispositionBase)
 
@@ -965,7 +881,7 @@ class latexSrcToDispositionUpdate(icm.Cmnd):
                     )
                     # NOTYET, Compute duration and add that here.
             else:
-                icm.TM_here("Missing ./audio -- Skipped")
+                b_io.tm.here("Missing ./audio -- Skipped")
 
             # The first two slides (0 and 1)
             if i < 2:
@@ -975,43 +891,31 @@ class latexSrcToDispositionUpdate(icm.Cmnd):
                     dispositionParBase=frameName,
                     argsList=['transition', 'PagePeel'],
                 )
-        
-        def cmndDesc(): """
-** Given the pdfFileName,  determine total number of slides, then for each slide determine frameName.
-
-    For each slideNumber associate frameName. For each frameName create baseParam directory.
-    If ./audio create the 'sound': attribute.
-    Makes sure basePdf.snm and basePdf.nav are available.
-"""
 
 
-####+BEGIN: bx:icm:python:cmnd:classHead :cmndName "frameNamesList" :comment "$1 is pdfFile (interactiveOnly)" :parsMand "" :parsOpt "dispositionBase" :argsMin "1" :argsMax "1" :asFunc "" :interactiveP ""
-"""
-*  [[elisp:(org-cycle)][| ]]  [[elisp:(org-show-subtree)][|=]] [[elisp:(show-children)][|V]] [[elisp:(org-tree-to-indirect-buffer)][|>]] [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(beginning-of-buffer)][Top]] [[elisp:(delete-other-windows)][(1)]] || ICM-Cmnd       :: /frameNamesList/ =$1 is pdfFile (interactiveOnly)= parsMand= parsOpt=dispositionBase argsMin=1 argsMax=1 asFunc= interactive=  [[elisp:(org-cycle)][| ]]
-"""
-class frameNamesList(icm.Cmnd):
+####+BEGIN: b:py3:cs:cmnd/classHead :cmndName "frameNamesList" :comment "$1 is pdfFile (interactiveOnly)" :parsMand "" :parsOpt "dispositionBase" :argsMin 1 :argsMax 1 :pyInv ""
+""" #+begin_org
+*  _[[elisp:(blee:menu-sel:outline:popupMenu)][±]]_ _[[elisp:(blee:menu-sel:navigation:popupMenu)][Ξ]]_ [[elisp:(outline-show-branches+toggle)][|=]] [[elisp:(bx:orgm:indirectBufOther)][|>]] *[[elisp:(blee:ppmm:org-mode-toggle)][|N]]*  CmndSvc-   [[elisp:(outline-show-subtree+toggle)][||]] <<frameNamesList>>  *$1 is pdfFile (interactiveOnly)*  =verify= parsOpt=dispositionBase argsMin=1 argsMax=1 ro=cli   [[elisp:(org-cycle)][| ]]
+#+end_org """
+class frameNamesList(cs.Cmnd):
     cmndParamsMandatory = [ ]
     cmndParamsOptional = [ 'dispositionBase', ]
     cmndArgsLen = {'Min': 1, 'Max': 1,}
 
-    @icm.subjectToTracking(fnLoc=True, fnEntry=True, fnExit=True)
+    @cs.track(fnLoc=True, fnEntry=True, fnExit=True)
     def cmnd(self,
-        interactive=False,        # Can also be called non-interactively
-        dispositionBase=None,         # or Cmnd-Input
-        argsList=None,         # or Args-Input
-    ):
-        cmndOutcome = self.getOpOutcome()
-        if interactive:
-            if not self.cmndLineValidate(outcome=cmndOutcome):
-                return cmndOutcome
-            effectiveArgsList = G.icmRunArgsGet().cmndArgs
-        else:
-            effectiveArgsList = argsList
-
+             rtInv: cs.RtInvoker,
+             cmndOutcome: b.op.Outcome,
+             dispositionBase: typing.Optional[str]=None,  # Cs Optional Param
+             argsList: typing.Optional[list[str]]=None,  # CsArgs
+    ) -> b.op.Outcome:
+        """$1 is pdfFile (interactiveOnly)"""
+        failed = b_io.eh.badOutcome
         callParamsDict = {'dispositionBase': dispositionBase, }
-        if not icm.cmndCallParamsValidate(callParamsDict, interactive, outcome=cmndOutcome):
-            return cmndOutcome
-        dispositionBase = callParamsDict['dispositionBase']
+        if self.invocationValidate(rtInv, cmndOutcome, callParamsDict, argsList).isProblematic():
+            return failed(cmndOutcome)
+        cmndArgsSpecDict = self.cmndArgsSpec()
+        dispositionBase = csParam.mappedValue('dispositionBase', dispositionBase)
 ####+END:
 
         dispositionBase = dispositionBaseDefault(dispositionBase)
@@ -1040,54 +944,42 @@ class frameNamesList(icm.Cmnd):
             #slideNumberName=format("slide" + str(i))                
             frameName = slideNumbersNames[i]
 
-            if interactive:
-                icm.ANN_write("{slideNumber} {frameName}".format(
+            if rtInv.outs:
+                b_io.ann.write("{slideNumber} {frameName}".format(
                     slideNumber=i+1, frameName=frameName,)
                 )
 
         if not interactive:
-            icm.EH_critical_usageErro("Not expected to be used non-interactivly. Use frameNamesGet directly.")
+            b_io.eh.critical_usageErro("Not expected to be used non-interactivly. Use frameNamesGet directly.")
             
-        
-    def cmndDesc(): """
-**  Given the pdfFileName,  determine total number of slides, then for each slide determine frameName.
 
-    For each slideNumber associate frameName. For each frameName create baseParam directory.
-    If ./audio create the 'sound': attribute.
-    Makes sure basePdf.snm and basePdf.nav are available.
-    """
-
-####+BEGIN: bx:icm:python:cmnd:classHead :cmndName "frameNameQuote" :comment "$1 is frameName" :parsMand "" :parsOpt "" :argsMin "1" :argsMax "1" :asFunc "" :interactiveP ""
-"""
-*  [[elisp:(org-cycle)][| ]]  [[elisp:(org-show-subtree)][|=]] [[elisp:(show-children)][|V]] [[elisp:(org-tree-to-indirect-buffer)][|>]] [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(beginning-of-buffer)][Top]] [[elisp:(delete-other-windows)][(1)]] || ICM-Cmnd       :: /frameNameQuote/ =$1 is frameName= parsMand= parsOpt= argsMin=1 argsMax=1 asFunc= interactive=  [[elisp:(org-cycle)][| ]]
-"""
-class frameNameQuote(icm.Cmnd):
+####+BEGIN: b:py3:cs:cmnd/classHead :cmndName "frameNameQuote" :comment "$1 is frameName" :parsMand "" :parsOpt "" :argsMin 1 :argsMax 1 :pyInv ""
+""" #+begin_org
+*  _[[elisp:(blee:menu-sel:outline:popupMenu)][±]]_ _[[elisp:(blee:menu-sel:navigation:popupMenu)][Ξ]]_ [[elisp:(outline-show-branches+toggle)][|=]] [[elisp:(bx:orgm:indirectBufOther)][|>]] *[[elisp:(blee:ppmm:org-mode-toggle)][|N]]*  CmndSvc-   [[elisp:(outline-show-subtree+toggle)][||]] <<frameNameQuote>>  *$1 is frameName*  =verify= argsMin=1 argsMax=1 ro=cli   [[elisp:(org-cycle)][| ]]
+#+end_org """
+class frameNameQuote(cs.Cmnd):
     cmndParamsMandatory = [ ]
     cmndParamsOptional = [ ]
     cmndArgsLen = {'Min': 1, 'Max': 1,}
 
-    @icm.subjectToTracking(fnLoc=True, fnEntry=True, fnExit=True)
+    @cs.track(fnLoc=True, fnEntry=True, fnExit=True)
     def cmnd(self,
-        interactive=False,        # Can also be called non-interactively
-        argsList=None,         # or Args-Input
-    ):
-        cmndOutcome = self.getOpOutcome()
-        if interactive:
-            if not self.cmndLineValidate(outcome=cmndOutcome):
-                return cmndOutcome
-            effectiveArgsList = G.icmRunArgsGet().cmndArgs
-        else:
-            effectiveArgsList = argsList
-
+             rtInv: cs.RtInvoker,
+             cmndOutcome: b.op.Outcome,
+             argsList: typing.Optional[list[str]]=None,  # CsArgs
+    ) -> b.op.Outcome:
+        """$1 is frameName"""
+        failed = b_io.eh.badOutcome
         callParamsDict = {}
-        if not icm.cmndCallParamsValidate(callParamsDict, interactive, outcome=cmndOutcome):
-            return cmndOutcome
+        if self.invocationValidate(rtInv, cmndOutcome, callParamsDict, argsList).isProblematic():
+            return failed(cmndOutcome)
+        cmndArgsSpecDict = self.cmndArgsSpec()
 ####+END:
 
         frameName = effectiveArgsList[0]
         frameNameQuoted=""
 
-        thisOutcome = icm.OpOutcome(invokerName=G.icmMyFullName())
+        thisOutcome = b.op.Outcome(invokerName=G.icmMyFullName())
 
         #
         thisOutcome = icm.subProc_bash(
@@ -1097,11 +989,11 @@ class frameNameQuote(icm.Cmnd):
         )#.out()
         
         if thisOutcome.isProblematic():
-            return(icm.EH_badOutcome(thisOutcome))
+            return(io.eh.badOutcome(thisOutcome))
 
         frameNameQuoted = thisOutcome.stdout.splitlines()[0]
 
-        if interactive:
+        if rtInv.outs:
             icm.ANN_note(frameNameQuoted)
 
         return frameNameQuoted
@@ -1111,31 +1003,27 @@ class frameNameQuote(icm.Cmnd):
 """
     
 
-####+BEGIN: bx:icm:python:cmnd:classHead :cmndName "frameNamesGet" :comment "$1 is tex's snm file - $2=nuOfPages" :parsMand "" :parsOpt "" :argsMin "2" :argsMax "2" :asFunc "" :interactiveP ""
-"""
-*  [[elisp:(org-cycle)][| ]]  [[elisp:(org-show-subtree)][|=]] [[elisp:(show-children)][|V]] [[elisp:(org-tree-to-indirect-buffer)][|>]] [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(beginning-of-buffer)][Top]] [[elisp:(delete-other-windows)][(1)]] || ICM-Cmnd       :: /frameNamesGet/ =$1 is tex's snm file - $2=nuOfPages= parsMand= parsOpt= argsMin=2 argsMax=2 asFunc= interactive=  [[elisp:(org-cycle)][| ]]
-"""
-class frameNamesGet(icm.Cmnd):
+####+BEGIN: b:py3:cs:cmnd/classHead :cmndName "frameNamesGet" :comment "$1 is tex's snm file - $2=nuOfPages" :parsMand "" :parsOpt "" :argsMin 2 :argsMax 2 :pyInv ""
+""" #+begin_org
+*  _[[elisp:(blee:menu-sel:outline:popupMenu)][±]]_ _[[elisp:(blee:menu-sel:navigation:popupMenu)][Ξ]]_ [[elisp:(outline-show-branches+toggle)][|=]] [[elisp:(bx:orgm:indirectBufOther)][|>]] *[[elisp:(blee:ppmm:org-mode-toggle)][|N]]*  CmndSvc-   [[elisp:(outline-show-subtree+toggle)][||]] <<frameNamesGet>>  *$1 is tex's snm file - $2=nuOfPages*  =verify= argsMin=2 argsMax=2 ro=cli   [[elisp:(org-cycle)][| ]]
+#+end_org """
+class frameNamesGet(cs.Cmnd):
     cmndParamsMandatory = [ ]
     cmndParamsOptional = [ ]
     cmndArgsLen = {'Min': 2, 'Max': 2,}
 
-    @icm.subjectToTracking(fnLoc=True, fnEntry=True, fnExit=True)
+    @cs.track(fnLoc=True, fnEntry=True, fnExit=True)
     def cmnd(self,
-        interactive=False,        # Can also be called non-interactively
-        argsList=None,         # or Args-Input
-    ):
-        cmndOutcome = self.getOpOutcome()
-        if interactive:
-            if not self.cmndLineValidate(outcome=cmndOutcome):
-                return cmndOutcome
-            effectiveArgsList = G.icmRunArgsGet().cmndArgs
-        else:
-            effectiveArgsList = argsList
-
+             rtInv: cs.RtInvoker,
+             cmndOutcome: b.op.Outcome,
+             argsList: typing.Optional[list[str]]=None,  # CsArgs
+    ) -> b.op.Outcome:
+        """$1 is tex's snm file - $2=nuOfPages"""
+        failed = b_io.eh.badOutcome
         callParamsDict = {}
-        if not icm.cmndCallParamsValidate(callParamsDict, interactive, outcome=cmndOutcome):
-            return cmndOutcome
+        if self.invocationValidate(rtInv, cmndOutcome, callParamsDict, argsList).isProblematic():
+            return failed(cmndOutcome)
+        cmndArgsSpecDict = self.cmndArgsSpec()
 ####+END:
 
         snmFileName = effectiveArgsList[0]
@@ -1149,7 +1037,7 @@ class frameNamesGet(icm.Cmnd):
         # Open FileName and walkthrough it.
         with open(snmFileName, 'r') as fp:
             for line in fp:
-                icm.TM_here(line)
+                b_io.tm.here(line)
                 #\beamer@slide {summary.problem<1>}{2}
                 #matchObj = re.search( r'(.beamer.slide .) (.*) (}) ({) (.*) (})', line, re.M|re.I)
                 matchObj = re.search( r'(\\beamer@slide {)(.*)(<.>)(}{)(.*)(})', line, re.M|re.I)            
@@ -1167,48 +1055,40 @@ class frameNamesGet(icm.Cmnd):
                         argsList=[matchObj.group(2)]
                     )
                 else:
-                    icm.TM_here("No match!!")
+                    b_io.tm.here("No match!!")
 
-        if interactive:
+        if rtInv.outs:
             icm.ANN_note(slideNumbersNames)
 
         return slideNumbersNames
 
-    def cmndDesc(): """
-** Given the pdfFileName,  determine total number of slides, then for each slide determine frameName.
-
-    Returns slideNumbersNames -- where index of slideNumber points to frameName.
-    Make sure basePdf.snm and basePdf.nav are available.
-"""
-
-####+BEGIN: bx:icm:python:cmnd:classHead :cmndName "beamerExternalTagsUpdateAsFPs" :comment "$1 is .ttytex -- extractes from tex and uses impressiveFrameParSet()" :parsMand "" :parsOpt "dispositionBase" :argsMin "1" :argsMax "1" :asFunc "" :interactiveP ""
-"""
-*  [[elisp:(org-cycle)][| ]]  [[elisp:(org-show-subtree)][|=]] [[elisp:(show-children)][|V]] [[elisp:(org-tree-to-indirect-buffer)][|>]] [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(beginning-of-buffer)][Top]] [[elisp:(delete-other-windows)][(1)]] || ICM-Cmnd       :: /beamerExternalTagsUpdateAsFPs/ =$1 is .ttytex -- extractes from tex and uses impressiveFrameParSet()= parsMand= parsOpt=dispositionBase argsMin=1 argsMax=1 asFunc= interactive=  [[elisp:(org-cycle)][| ]]
-"""
-class beamerExternalTagsUpdateAsFPs(icm.Cmnd):
+####+BEGIN: b:py3:cs:cmnd/classHead :cmndName "beamerExternalTagsUpdateAsFPs" :comment "$1 is .ttytex -- extractes from tex and uses impressiveFrameParSet()" :parsMand "" :parsOpt "dispositionBase" :argsMin 1 :argsMax 1 :pyInv ""
+""" #+begin_org
+*  _[[elisp:(blee:menu-sel:outline:popupMenu)][±]]_ _[[elisp:(blee:menu-sel:navigation:popupMenu)][Ξ]]_ [[elisp:(outline-show-branches+toggle)][|=]] [[elisp:(bx:orgm:indirectBufOther)][|>]] *[[elisp:(blee:ppmm:org-mode-toggle)][|N]]*  CmndSvc-   [[elisp:(outline-show-subtree+toggle)][||]] <<beamerExternalTagsUpdateAsFPs>>  *$1 is .ttytex -- extractes from tex and uses impressiveFrameParSet()*  =verify= parsOpt=dispositionBase argsMin=1 argsMax=1 ro=cli   [[elisp:(org-cycle)][| ]]
+#+end_org """
+class beamerExternalTagsUpdateAsFPs(cs.Cmnd):
     cmndParamsMandatory = [ ]
     cmndParamsOptional = [ 'dispositionBase', ]
     cmndArgsLen = {'Min': 1, 'Max': 1,}
 
-    @icm.subjectToTracking(fnLoc=True, fnEntry=True, fnExit=True)
+    @cs.track(fnLoc=True, fnEntry=True, fnExit=True)
     def cmnd(self,
-        interactive=False,        # Can also be called non-interactively
-        dispositionBase=None,         # or Cmnd-Input
-        argsList=None,         # or Args-Input
-    ):
-        cmndOutcome = self.getOpOutcome()
-        if interactive:
-            if not self.cmndLineValidate(outcome=cmndOutcome):
-                return cmndOutcome
-            effectiveArgsList = G.icmRunArgsGet().cmndArgs
-        else:
-            effectiveArgsList = argsList
-
+             rtInv: cs.RtInvoker,
+             cmndOutcome: b.op.Outcome,
+             dispositionBase: typing.Optional[str]=None,  # Cs Optional Param
+             argsList: typing.Optional[list[str]]=None,  # CsArgs
+    ) -> b.op.Outcome:
+        """$1 is .ttytex -- extractes from tex and uses impressiveFrameParSet()"""
+        failed = b_io.eh.badOutcome
         callParamsDict = {'dispositionBase': dispositionBase, }
-        if not icm.cmndCallParamsValidate(callParamsDict, interactive, outcome=cmndOutcome):
-            return cmndOutcome
-        dispositionBase = callParamsDict['dispositionBase']
+        if self.invocationValidate(rtInv, cmndOutcome, callParamsDict, argsList).isProblematic():
+            return failed(cmndOutcome)
+        cmndArgsSpecDict = self.cmndArgsSpec()
+        dispositionBase = csParam.mappedValue('dispositionBase', dispositionBase)
 ####+END:
+        self.cmndDocStr(f""" #+begin_org
+** [[elisp:(org-cycle)][| *CmndDesc:* | ]] Look in input files for ExternalTags as '^%BxPy:' and update them in the disposition.gened
+        #+end_org """)
 
         dispositionBase = dispositionBaseDefault(dispositionBase)
 
@@ -1218,11 +1098,11 @@ class beamerExternalTagsUpdateAsFPs(icm.Cmnd):
         )
 
         if opOutcome.isProblematic():
-            return(icm.EH_badOutcome(opOutcome))
+            return(io.eh.badOutcome(opOutcome))
 
         filesList = opOutcome.results
 
-        thisOutcome = icm.OpOutcome(invokerName=G.icmMyFullName())
+        thisOutcome = b.op.Outcome(invokerName=G.icmMyFullName())
 
         #
         # Example Lines:
@@ -1236,7 +1116,7 @@ class beamerExternalTagsUpdateAsFPs(icm.Cmnd):
         )#.out()
         
         if thisOutcome.isProblematic():
-            return(icm.EH_badOutcome(thisOutcome))
+            return(io.eh.badOutcome(thisOutcome))
 
         for each in thisOutcome.stdout.splitlines():
             # Evals lines like this, resulting into ./disposition.gened/xx updates
@@ -1246,46 +1126,41 @@ class beamerExternalTagsUpdateAsFPs(icm.Cmnd):
 
         return thisOutcome
 
-    def cmndDocStr(self): return """
-** Look in input files for ExternalTags as '^%BxPy:' and update them in the disposition.gened  [[elisp:(org-cycle)][| ]]
-"""
-
     
-####+BEGIN: bx:icm:python:section :title "Disposition Base Setup -- Main Usage Cmnds"
+####+BEGIN: bx:cs:python:section :title "Disposition Base Setup -- Main Usage Cmnds"
 """
-*  [[elisp:(beginning-of-buffer)][Top]] ################ [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(delete-other-windows)][(1)]]    *Disposition Base Setup -- Main Usage Cmnds*  [[elisp:(org-cycle)][| ]]  [[elisp:(org-show-subtree)][|=]] 
+*  [[elisp:(beginning-of-buffer)][Top]] ############## [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(delete-other-windows)][(1)]]    *Disposition Base Setup -- Main Usage Cmnds*  [[elisp:(org-cycle)][| ]]  [[elisp:(org-show-subtree)][|=]]
 """
 ####+END:
     
 
-####+BEGIN: bx:icm:python:cmnd:classHead :cmndName "updateDispositionBase" :comment "Full update dispositionBase" :parsMand "" :parsOpt "dispositionBase" :argsMin "1" :argsMax "1" :asFunc "" :interactiveP ""
-"""
-*  [[elisp:(org-cycle)][| ]]  [[elisp:(org-show-subtree)][|=]] [[elisp:(show-children)][|V]] [[elisp:(org-tree-to-indirect-buffer)][|>]] [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(beginning-of-buffer)][Top]] [[elisp:(delete-other-windows)][(1)]] || ICM-Cmnd       :: /updateDispositionBase/ =Full update dispositionBase= parsMand= parsOpt=dispositionBase argsMin=1 argsMax=1 asFunc= interactive=  [[elisp:(org-cycle)][| ]]
-"""
-class updateDispositionBase(icm.Cmnd):
+####+BEGIN: b:py3:cs:cmnd/classHead :cmndName "updateDispositionBase" :comment "Full update dispositionBase" :parsMand "" :parsOpt "dispositionBase" :argsMin 1 :argsMax 1 :pyInv ""
+""" #+begin_org
+*  _[[elisp:(blee:menu-sel:outline:popupMenu)][±]]_ _[[elisp:(blee:menu-sel:navigation:popupMenu)][Ξ]]_ [[elisp:(outline-show-branches+toggle)][|=]] [[elisp:(bx:orgm:indirectBufOther)][|>]] *[[elisp:(blee:ppmm:org-mode-toggle)][|N]]*  CmndSvc-   [[elisp:(outline-show-subtree+toggle)][||]] <<updateDispositionBase>>  *Full update dispositionBase*  =verify= parsOpt=dispositionBase argsMin=1 argsMax=1 ro=cli   [[elisp:(org-cycle)][| ]]
+#+end_org """
+class updateDispositionBase(cs.Cmnd):
     cmndParamsMandatory = [ ]
     cmndParamsOptional = [ 'dispositionBase', ]
     cmndArgsLen = {'Min': 1, 'Max': 1,}
 
-    @icm.subjectToTracking(fnLoc=True, fnEntry=True, fnExit=True)
+    @cs.track(fnLoc=True, fnEntry=True, fnExit=True)
     def cmnd(self,
-        interactive=False,        # Can also be called non-interactively
-        dispositionBase=None,         # or Cmnd-Input
-        argsList=None,         # or Args-Input
-    ):
-        cmndOutcome = self.getOpOutcome()
-        if interactive:
-            if not self.cmndLineValidate(outcome=cmndOutcome):
-                return cmndOutcome
-            effectiveArgsList = G.icmRunArgsGet().cmndArgs
-        else:
-            effectiveArgsList = argsList
-
+             rtInv: cs.RtInvoker,
+             cmndOutcome: b.op.Outcome,
+             dispositionBase: typing.Optional[str]=None,  # Cs Optional Param
+             argsList: typing.Optional[list[str]]=None,  # CsArgs
+    ) -> b.op.Outcome:
+        """Full update dispositionBase"""
+        failed = b_io.eh.badOutcome
         callParamsDict = {'dispositionBase': dispositionBase, }
-        if not icm.cmndCallParamsValidate(callParamsDict, interactive, outcome=cmndOutcome):
-            return cmndOutcome
-        dispositionBase = callParamsDict['dispositionBase']
+        if self.invocationValidate(rtInv, cmndOutcome, callParamsDict, argsList).isProblematic():
+            return failed(cmndOutcome)
+        cmndArgsSpecDict = self.cmndArgsSpec()
+        dispositionBase = csParam.mappedValue('dispositionBase', dispositionBase)
 ####+END:
+        self.cmndDocStr(f""" #+begin_org
+** [[elisp:(org-cycle)][| *CmndDesc:* | ]]  Given a purpose (voiceOver, presentation, etc) create an info file based on purposesList.
+        #+end_org """)
 
         dispositionBase = dispositionBaseDefault(dispositionBase)
 
@@ -1308,47 +1183,48 @@ class updateDispositionBase(icm.Cmnd):
 
         return
 
-    def cmndDesc(): """
-** Given a purpose (voiceOver, presentation, etc) create an info file based on purposesList.
-"""
 
-
-####+BEGIN: bx:icm:python:cmnd:classHead :cmndName "dispositionFrameNamesList" :comment "" :parsMand "" :parsOpt "framesRange dispositionBase" :argsMin "0" :argsMax "0" :asFunc "" :interactiveP ""
-"""
-*  [[elisp:(org-cycle)][| ]]  [[elisp:(org-show-subtree)][|=]] [[elisp:(show-children)][|V]] [[elisp:(org-tree-to-indirect-buffer)][|>]] [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(beginning-of-buffer)][Top]] [[elisp:(delete-other-windows)][(1)]] || ICM-Cmnd       :: /dispositionFrameNamesList/ parsMand= parsOpt=framesRange dispositionBase argsMin=0 argsMax=0 asFunc= interactive=  [[elisp:(org-cycle)][| ]]
-"""
-class dispositionFrameNamesList(icm.Cmnd):
+####+BEGIN: b:py3:cs:cmnd/classHead :cmndName "dispositionFrameNamesList" :comment "" :parsMand "" :parsOpt "framesRange dispositionBase" :argsMin 0 :argsMax 0 :pyInv ""
+""" #+begin_org
+*  _[[elisp:(blee:menu-sel:outline:popupMenu)][±]]_ _[[elisp:(blee:menu-sel:navigation:popupMenu)][Ξ]]_ [[elisp:(outline-show-branches+toggle)][|=]] [[elisp:(bx:orgm:indirectBufOther)][|>]] *[[elisp:(blee:ppmm:org-mode-toggle)][|N]]*  CmndSvc-   [[elisp:(outline-show-subtree+toggle)][||]] <<dispositionFrameNamesList>>  =verify= parsOpt=framesRange dispositionBase ro=cli   [[elisp:(org-cycle)][| ]]
+#+end_org """
+class dispositionFrameNamesList(cs.Cmnd):
     cmndParamsMandatory = [ ]
     cmndParamsOptional = [ 'framesRange', 'dispositionBase', ]
     cmndArgsLen = {'Min': 0, 'Max': 0,}
 
-    @icm.subjectToTracking(fnLoc=True, fnEntry=True, fnExit=True)
+    @cs.track(fnLoc=True, fnEntry=True, fnExit=True)
     def cmnd(self,
-        interactive=False,        # Can also be called non-interactively
-        framesRange=None,         # or Cmnd-Input
-        dispositionBase=None,         # or Cmnd-Input
-    ):
-        cmndOutcome = self.getOpOutcome()
-        if interactive:
-            if not self.cmndLineValidate(outcome=cmndOutcome):
-                return cmndOutcome
+             rtInv: cs.RtInvoker,
+             cmndOutcome: b.op.Outcome,
+             framesRange: typing.Optional[str]=None,  # Cs Optional Param
+             dispositionBase: typing.Optional[str]=None,  # Cs Optional Param
+    ) -> b.op.Outcome:
 
+        failed = b_io.eh.badOutcome
         callParamsDict = {'framesRange': framesRange, 'dispositionBase': dispositionBase, }
-        if not icm.cmndCallParamsValidate(callParamsDict, interactive, outcome=cmndOutcome):
-            return cmndOutcome
-        framesRange = callParamsDict['framesRange']
-        dispositionBase = callParamsDict['dispositionBase']
+        if self.invocationValidate(rtInv, cmndOutcome, callParamsDict, None).isProblematic():
+            return failed(cmndOutcome)
+        framesRange = csParam.mappedValue('framesRange', framesRange)
+        dispositionBase = csParam.mappedValue('dispositionBase', dispositionBase)
 ####+END:
+        self.cmndDocStr(f""" #+begin_org
+** [[elisp:(org-cycle)][| *CmndDesc:* | ]]  Given a purpose (voiceOver, presentation, recorderEach) or a combination, create an info file based on purposesList.
+
+For each slide impressiveInfoItemXX(purposesList), is called.
+In each, based on puposesList and content of dispositionBase corresponing to that slide,
+translate  dispositionBase info into impressive parameters and write them to stdout.
+        #+end_org """)
 
         dispositionBase = dispositionBaseDefault(dispositionBase)
 
-        thisParamBase = icm.FILE_ParamBase(fileSysPath=dispositionBase)
+        thisParamBase = b.fp.FILE_ParamBase(fileSysPath=dispositionBase)
 
         thisParamBaseState = thisParamBase.baseValidityPredicate()
 
         if thisParamBaseState != 'InPlace':
-            #return icm.EH_critical_oops('thisParamBaseState=' + thisParamBaseState)
-            return icm.EH_critical_oops(f"thisParamBaseState={thisParamBaseState}")
+            #return b_io.eh.critical_oops('thisParamBaseState=' + thisParamBaseState)
+            return b_io.eh.critical_oops(f"thisParamBaseState={thisParamBaseState}")
 
 
         filesList = os.listdir(dispositionBase)  # This is instead of sorting
@@ -1363,54 +1239,45 @@ class dispositionFrameNamesList(icm.Cmnd):
             i = i + 1
             this = format("slide" + str(i))       
             if this not in filesList:
-                icm.TM_here('Missing' + this)
+                b_io.tm.here('Missing' + this)
                 break           
 
             frameFileParam = icm.FILE_Param()
             frameFileParam = frameFileParam.readFrom(storeBase=dispositionBase, parName=this)
 
             if frameFileParam == None:
-                return icm.EH_critical_usageError('frameFileParam')
+                return b_io.eh.critical_usageError('frameFileParam')
 
             thisLabeled = frameFileParam.parValueGet()
             # thisLabeledBase = os.path.join(dispositionBase, thisLabeled)
             
-            if interactive:
-                #icm.ANN_write("{slideNumber} {frameName}".format(
+            if rtInv.outs:
+                #b_io.ann.write("{slideNumber} {frameName}".format(
                 #    slideNumber=i, frameName=thisLabeled,)
                 #)
-                icm.ANN_write("{frameName}".format(
+                b_io.ann.write("{frameName}".format(
                     frameName=thisLabeled,)
                 )
 
             if not interactive:
-                icm.EH_critical_usageErro("Not expected to be used non-interactivly. Use frameNamesGet directly.")
+                b_io.eh.critical_usageErro("Not expected to be used non-interactivly. Use frameNamesGet directly.")
 
         return
 
-    def cmndDesc(): """
-**  [[elisp:(org-cycle)][| ]] Given a purpose (voiceOver, presentation, recorderEach) or a combination, create an info file based on purposesList.
-
-For each slide impressiveInfoItemXX(purposesList), is called.
-In each, based on puposesList and content of dispositionBase corresponing to that slide,
-translate  dispositionBase info into impressive parameters and write them to stdout.
-
+    
+    
+####+BEGIN: bx:cs:python:section :title "Impressive Configurations Based On DispositionBase"
 """
-    
-    
-    
-####+BEGIN: bx:icm:python:section :title "Impressive Configurations Based On DispositionBase"
-"""
-*  [[elisp:(beginning-of-buffer)][Top]] ################ [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(delete-other-windows)][(1)]]    *Impressive Configurations Based On DispositionBase*  [[elisp:(org-cycle)][| ]]  [[elisp:(org-show-subtree)][|=]] 
+*  [[elisp:(beginning-of-buffer)][Top]] ############## [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(delete-other-windows)][(1)]]    *Impressive Configurations Based On DispositionBase*  [[elisp:(org-cycle)][| ]]  [[elisp:(org-show-subtree)][|=]]
 """
 ####+END:
     
     
 
-####+BEGIN: bx:icm:python:func :funcName "impressiveTransitionValue" :comment "map disposition to impressive" :funcType "filter" :retType "str" :deco "" :argsList "transitionValue"
-"""
-*  [[elisp:(org-cycle)][| ]]  [[elisp:(org-show-subtree)][|=]] [[elisp:(show-children)][|V]] [[elisp:(org-tree-to-indirect-buffer)][|>]] [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(beginning-of-buffer)][Top]] [[elisp:(delete-other-windows)][(1)]] || Func-filter    :: /impressiveTransitionValue/ =map disposition to impressive= retType=str argsList=(transitionValue)  [[elisp:(org-cycle)][| ]]
-"""
+####+BEGIN: bx:cs:python:func :funcName "impressiveTransitionValue" :comment "map disposition to impressive" :funcType "filter" :retType "str" :deco "" :argsList "transitionValue"
+""" #+begin_org
+*  _[[elisp:(blee:menu-sel:outline:popupMenu)][±]]_ _[[elisp:(blee:menu-sel:navigation:popupMenu)][Ξ]]_ [[elisp:(outline-show-branches+toggle)][|=]] [[elisp:(bx:orgm:indirectBufOther)][|>]] *[[elisp:(blee:ppmm:org-mode-toggle)][|N]]*  F-filter   [[elisp:(outline-show-subtree+toggle)][||]] /impressiveTransitionValue/ =map disposition to impressive= retType=str argsList=(transitionValue)  [[elisp:(org-cycle)][| ]]
+#+end_org """
 def impressiveTransitionValue(
     transitionValue,
 ):
@@ -1426,35 +1293,31 @@ You can get a listof impressiveTransitions from 'impressive -l'
     else:
         return transitionValue
 
-####+BEGIN: bx:icm:python:cmnd:classHead :cmndName "dispositionToImpressiveInfoPurposedStdout" :comment "args are purposes (voiceOver, etc)" :parsMand "" :parsOpt "framesRange dispositionBase" :argsMin "1" :argsMax "1000" :asFunc "" :interactiveP ""
-"""
-*  [[elisp:(org-cycle)][| ]]  [[elisp:(org-show-subtree)][|=]] [[elisp:(show-children)][|V]] [[elisp:(org-tree-to-indirect-buffer)][|>]] [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(beginning-of-buffer)][Top]] [[elisp:(delete-other-windows)][(1)]] || ICM-Cmnd       :: /dispositionToImpressiveInfoPurposedStdout/ =args are purposes (voiceOver, etc)= parsMand= parsOpt=framesRange dispositionBase argsMin=1 argsMax=1000 asFunc= interactive=  [[elisp:(org-cycle)][| ]]
-"""
-class dispositionToImpressiveInfoPurposedStdout(icm.Cmnd):
+####+BEGIN: b:py3:cs:cmnd/classHead :cmndName "dispositionToImpressiveInfoPurposedStdout" :comment "args are purposes (voiceOver, etc)" :parsMand "" :parsOpt "framesRange dispositionBase" :argsMin 1 :argsMax 1000 :pyInv ""
+""" #+begin_org
+*  _[[elisp:(blee:menu-sel:outline:popupMenu)][±]]_ _[[elisp:(blee:menu-sel:navigation:popupMenu)][Ξ]]_ [[elisp:(outline-show-branches+toggle)][|=]] [[elisp:(bx:orgm:indirectBufOther)][|>]] *[[elisp:(blee:ppmm:org-mode-toggle)][|N]]*  CmndSvc-   [[elisp:(outline-show-subtree+toggle)][||]] <<dispositionToImpressiveInfoPurposedStdout>>  *args are purposes (voiceOver, etc)*  =verify= parsOpt=framesRange dispositionBase argsMin=1 argsMax=1000 ro=cli   [[elisp:(org-cycle)][| ]]
+#+end_org """
+class dispositionToImpressiveInfoPurposedStdout(cs.Cmnd):
     cmndParamsMandatory = [ ]
     cmndParamsOptional = [ 'framesRange', 'dispositionBase', ]
     cmndArgsLen = {'Min': 1, 'Max': 1000,}
 
-    @icm.subjectToTracking(fnLoc=True, fnEntry=True, fnExit=True)
+    @cs.track(fnLoc=True, fnEntry=True, fnExit=True)
     def cmnd(self,
-        interactive=False,        # Can also be called non-interactively
-        framesRange=None,         # or Cmnd-Input
-        dispositionBase=None,         # or Cmnd-Input
-        argsList=None,         # or Args-Input
-    ):
-        cmndOutcome = self.getOpOutcome()
-        if interactive:
-            if not self.cmndLineValidate(outcome=cmndOutcome):
-                return cmndOutcome
-            effectiveArgsList = G.icmRunArgsGet().cmndArgs
-        else:
-            effectiveArgsList = argsList
-
+             rtInv: cs.RtInvoker,
+             cmndOutcome: b.op.Outcome,
+             framesRange: typing.Optional[str]=None,  # Cs Optional Param
+             dispositionBase: typing.Optional[str]=None,  # Cs Optional Param
+             argsList: typing.Optional[list[str]]=None,  # CsArgs
+    ) -> b.op.Outcome:
+        """args are purposes (voiceOver, etc)"""
+        failed = b_io.eh.badOutcome
         callParamsDict = {'framesRange': framesRange, 'dispositionBase': dispositionBase, }
-        if not icm.cmndCallParamsValidate(callParamsDict, interactive, outcome=cmndOutcome):
-            return cmndOutcome
-        framesRange = callParamsDict['framesRange']
-        dispositionBase = callParamsDict['dispositionBase']
+        if self.invocationValidate(rtInv, cmndOutcome, callParamsDict, argsList).isProblematic():
+            return failed(cmndOutcome)
+        cmndArgsSpecDict = self.cmndArgsSpec()
+        framesRange = csParam.mappedValue('framesRange', framesRange)
+        dispositionBase = csParam.mappedValue('dispositionBase', dispositionBase)
 ####+END:
 
         dispositionBase = dispositionBaseDefault(dispositionBase)
@@ -1463,12 +1326,12 @@ class dispositionToImpressiveInfoPurposedStdout(icm.Cmnd):
         for thisArg in effectiveArgsList:
             purposesList.append(thisArg)
 
-        thisParamBase = icm.FILE_ParamBase(fileSysPath=dispositionBase)
+        thisParamBase = b.fp.FILE_ParamBase(fileSysPath=dispositionBase)
 
         thisParamBaseState = thisParamBase.baseValidityPredicate()
 
         if thisParamBaseState != 'InPlace':
-            return icm.EH_critical_oops('thisParamBaseState=' + thisParamBaseState)
+            return b_io.eh.critical_oops('thisParamBaseState=' + thisParamBaseState)
 
         def impressiveInfoHeadStdout(purposesList):
             """ Considering  purposesList, output the head part of impressiveInfo """
@@ -1518,14 +1381,14 @@ PageProps = {
             i = i + 1
             this = format("slide" + str(i))       
             if this not in filesList:
-                icm.TM_here('Missing' + this)
+                b_io.tm.here('Missing' + this)
                 break           
 
             frameFileParam = icm.FILE_Param()
             frameFileParam = frameFileParam.readFrom(storeBase=dispositionBase, parName=this)
 
             if frameFileParam == None:
-                return icm.EH_critical_usageError('frameFileParam')
+                return b_io.eh.critical_usageError('frameFileParam')
 
             thisLabeled = frameFileParam.parValueGet()
             thisLabeledBase = os.path.join(dispositionBase, thisLabeled)
@@ -1539,7 +1402,7 @@ PageProps = {
                         filePar = icm.FILE_Param()
                         filePar = filePar.readFrom(storeBase=thisLabeledBase, parName='audio')
                         if filePar == None:
-                            return #icm.EH_critical_usageError('')
+                            return #io.eh.critical_usageError('')
 
                         else:
                             audioValue = filePar.parValueGet()
@@ -1569,7 +1432,7 @@ PageProps = {
                 filePar = icm.FILE_Param()
                 filePar = filePar.readFrom(storeBase=thisLabeledBase, parName='audio')
                 if filePar == None:
-                    return #icm.EH_critical_usageError('')
+                    return #io.eh.critical_usageError('')
 
                 else:
                     audioValue = filePar.parValueGet()
@@ -1607,7 +1470,7 @@ PageProps = {
                 filePar = icm.FILE_Param()
                 filePar = filePar.readFrom(storeBase=thisLabeledBase, parName='audio')
                 if filePar == None:
-                    return #icm.EH_critical_usageError('')
+                    return #io.eh.critical_usageError('')
                 audioValue = filePar.parValueGet()
 
                 audioSansSuffix = os.path.splitext(audioValue)[0]
@@ -1617,7 +1480,7 @@ PageProps = {
                 try:
                     fileParam = icm.FILE_ParamReadFromPath(parRoot=audioLengthFP)
                 except IOError:
-                    icm.TM_here("Missing:  " + audioLengthFP)
+                    b_io.tm.here("Missing:  " + audioLengthFP)
                     return(None)
 
                 audioLen=fileParam.parValueGet()
@@ -1629,7 +1492,7 @@ PageProps = {
                 filePar = icm.FILE_Param()
                 filePar = filePar.readFrom(storeBase=thisLabeledBase, parName='always')
                 if filePar == None:
-                    return #icm.EH_critical_usageError('')
+                    return #io.eh.critical_usageError('')
                 thisValue = filePar.parValueGet()
                 sys.stdout.write("""
               'always': """ + thisValue + """,""")
@@ -1638,7 +1501,7 @@ PageProps = {
                 filePar = icm.FILE_Param()
                 filePar = filePar.readFrom(storeBase=thisLabeledBase, parName='transition')
                 if filePar == None:
-                    return #icm.EH_critical_usageError('')
+                    return #io.eh.critical_usageError('')
                 transitionValue = filePar.parValueGet()
                 transitionValue = impressiveTransitionValue(transitionValue)
                 sys.stdout.write("""
@@ -1648,7 +1511,7 @@ PageProps = {
                 filePar = icm.FILE_Param()
                 filePar = filePar.readFrom(storeBase=thisLabeledBase, parName='overview')
                 if filePar == None:
-                    return icm.EH_critical_usageError('')
+                    return b_io.eh.critical_usageError('')
                 overviewValue = filePar.parValueGet()
                 sys.stdout.write("""
               'overview': """+overviewValue+""",""")
@@ -1657,7 +1520,7 @@ PageProps = {
                 filePar = icm.FILE_Param()
                 filePar = filePar.readFrom(storeBase=thisLabeledBase, parName='notes')
                 if filePar == None:
-                    return icm.EH_critical_usageError('')
+                    return b_io.eh.critical_usageError('')
                 notesValue = filePar.parValueGet()
                 sys.stdout.write("""
               'notes': """+notesValue+""",""")
@@ -1729,7 +1592,7 @@ PageProps = {
                 filePar = icm.FILE_Param()
                 filePar = filePar.readFrom(storeBase=thisLabeledBase, parName='OnLeave')
                 if filePar == None:
-                    return #icm.EH_critical_usageError('')
+                    return #io.eh.critical_usageError('')
                 thisValue = filePar.parValueGet()
                 sys.stdout.write("""
               'OnLeave': """ + thisValue + """,""")
@@ -1773,43 +1636,30 @@ PageProps = {
 
         return
 
-    def cmndDesc(): """
-**  [[elisp:(org-cycle)][| ]] Given a purpose (voiceOver, presentation, recorderEach) or a combination, create an info file based on purposesList.
 
-For each slide impressiveInfoItemXX(purposesList), is called.
-In each, based on puposesList and content of dispositionBase corresponing to that slide,
-translate  dispositionBase info into impressive parameters and write them to stdout.
-
-"""
-
-
-####+BEGIN: bx:icm:python:cmnd:classHead :cmndName "dispositionToPresenterStdout" :comment "No longer used" :parsMand "" :parsOpt "dispositionBase" :argsMin "1" :argsMax "1" :asFunc "" :interactiveP ""
-"""
-*  [[elisp:(org-cycle)][| ]]  [[elisp:(org-show-subtree)][|=]] [[elisp:(show-children)][|V]] [[elisp:(org-tree-to-indirect-buffer)][|>]] [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(beginning-of-buffer)][Top]] [[elisp:(delete-other-windows)][(1)]] || ICM-Cmnd       :: /dispositionToPresenterStdout/ =No longer used= parsMand= parsOpt=dispositionBase argsMin=1 argsMax=1 asFunc= interactive=  [[elisp:(org-cycle)][| ]]
-"""
-class dispositionToPresenterStdout(icm.Cmnd):
+####+BEGIN: b:py3:cs:cmnd/classHead :cmndName "dispositionToPresenterStdout" :comment "No longer used" :parsMand "" :parsOpt "dispositionBase" :argsMin 1 :argsMax 1 :pyInv ""
+""" #+begin_org
+*  _[[elisp:(blee:menu-sel:outline:popupMenu)][±]]_ _[[elisp:(blee:menu-sel:navigation:popupMenu)][Ξ]]_ [[elisp:(outline-show-branches+toggle)][|=]] [[elisp:(bx:orgm:indirectBufOther)][|>]] *[[elisp:(blee:ppmm:org-mode-toggle)][|N]]*  CmndSvc-   [[elisp:(outline-show-subtree+toggle)][||]] <<dispositionToPresenterStdout>>  *No longer used*  =verify= parsOpt=dispositionBase argsMin=1 argsMax=1 ro=cli   [[elisp:(org-cycle)][| ]]
+#+end_org """
+class dispositionToPresenterStdout(cs.Cmnd):
     cmndParamsMandatory = [ ]
     cmndParamsOptional = [ 'dispositionBase', ]
     cmndArgsLen = {'Min': 1, 'Max': 1,}
 
-    @icm.subjectToTracking(fnLoc=True, fnEntry=True, fnExit=True)
+    @cs.track(fnLoc=True, fnEntry=True, fnExit=True)
     def cmnd(self,
-        interactive=False,        # Can also be called non-interactively
-        dispositionBase=None,         # or Cmnd-Input
-        argsList=None,         # or Args-Input
-    ):
-        cmndOutcome = self.getOpOutcome()
-        if interactive:
-            if not self.cmndLineValidate(outcome=cmndOutcome):
-                return cmndOutcome
-            effectiveArgsList = G.icmRunArgsGet().cmndArgs
-        else:
-            effectiveArgsList = argsList
-
+             rtInv: cs.RtInvoker,
+             cmndOutcome: b.op.Outcome,
+             dispositionBase: typing.Optional[str]=None,  # Cs Optional Param
+             argsList: typing.Optional[list[str]]=None,  # CsArgs
+    ) -> b.op.Outcome:
+        """No longer used"""
+        failed = b_io.eh.badOutcome
         callParamsDict = {'dispositionBase': dispositionBase, }
-        if not icm.cmndCallParamsValidate(callParamsDict, interactive, outcome=cmndOutcome):
-            return cmndOutcome
-        dispositionBase = callParamsDict['dispositionBase']
+        if self.invocationValidate(rtInv, cmndOutcome, callParamsDict, argsList).isProblematic():
+            return failed(cmndOutcome)
+        cmndArgsSpecDict = self.cmndArgsSpec()
+        dispositionBase = csParam.mappedValue('dispositionBase', dispositionBase)
 ####+END:
 
         dispositionBase = dispositionBaseDefault(dispositionBase)
@@ -1818,16 +1668,16 @@ class dispositionToPresenterStdout(icm.Cmnd):
 
         document = PdfFileReader(open(filename, "rb"))
         pages = document.getNumPages()
-        icm.TM_here()
+        b_io.tm.here()
 
         with open(filename+".info", 'w') as out:
             path = os.path.dirname(filename)
-            icm.TM_here(str(path))
+            b_io.tm.here(str(path))
 
             if path == None:
-                return icm.EH_critical_usageError('')
+                return b_io.eh.critical_usageError('')
 
-            icm.TM_here()
+            b_io.tm.here()
             path = path + '/'
 
             out.write(
@@ -1866,29 +1716,27 @@ import json
 ** No longer used -- Creates  meta info for Presenter -- To be tested or deleted.
 """
 
-####+BEGIN: bx:icm:python:cmnd:classHead :cmndName "dispositionToImpressiveStdout_voiceOver_Obsoleted" :comment "" :parsMand "" :parsOpt "dispositionBase" :argsMin "0" :argsMax "0" :asFunc "" :interactiveP ""
-"""
-*  [[elisp:(org-cycle)][| ]]  [[elisp:(org-show-subtree)][|=]] [[elisp:(show-children)][|V]] [[elisp:(org-tree-to-indirect-buffer)][|>]] [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(beginning-of-buffer)][Top]] [[elisp:(delete-other-windows)][(1)]] || ICM-Cmnd       :: /dispositionToImpressiveStdout_voiceOver_Obsoleted/ parsMand= parsOpt=dispositionBase argsMin=0 argsMax=0 asFunc= interactive=  [[elisp:(org-cycle)][| ]]
-"""
-class dispositionToImpressiveStdout_voiceOver_Obsoleted(icm.Cmnd):
+####+BEGIN: b:py3:cs:cmnd/classHead :cmndName "dispositionToImpressiveStdout_voiceOver_Obsoleted" :comment "" :parsMand "" :parsOpt "dispositionBase" :argsMin 0 :argsMax 0 :pyInv ""
+""" #+begin_org
+*  _[[elisp:(blee:menu-sel:outline:popupMenu)][±]]_ _[[elisp:(blee:menu-sel:navigation:popupMenu)][Ξ]]_ [[elisp:(outline-show-branches+toggle)][|=]] [[elisp:(bx:orgm:indirectBufOther)][|>]] *[[elisp:(blee:ppmm:org-mode-toggle)][|N]]*  CmndSvc-   [[elisp:(outline-show-subtree+toggle)][||]] <<dispositionToImpressiveStdout_voiceOver_Obsoleted>>  =verify= parsOpt=dispositionBase ro=cli   [[elisp:(org-cycle)][| ]]
+#+end_org """
+class dispositionToImpressiveStdout_voiceOver_Obsoleted(cs.Cmnd):
     cmndParamsMandatory = [ ]
     cmndParamsOptional = [ 'dispositionBase', ]
     cmndArgsLen = {'Min': 0, 'Max': 0,}
 
-    @icm.subjectToTracking(fnLoc=True, fnEntry=True, fnExit=True)
+    @cs.track(fnLoc=True, fnEntry=True, fnExit=True)
     def cmnd(self,
-        interactive=False,        # Can also be called non-interactively
-        dispositionBase=None,         # or Cmnd-Input
-    ):
-        cmndOutcome = self.getOpOutcome()
-        if interactive:
-            if not self.cmndLineValidate(outcome=cmndOutcome):
-                return cmndOutcome
+             rtInv: cs.RtInvoker,
+             cmndOutcome: b.op.Outcome,
+             dispositionBase: typing.Optional[str]=None,  # Cs Optional Param
+    ) -> b.op.Outcome:
 
+        failed = b_io.eh.badOutcome
         callParamsDict = {'dispositionBase': dispositionBase, }
-        if not icm.cmndCallParamsValidate(callParamsDict, interactive, outcome=cmndOutcome):
-            return cmndOutcome
-        dispositionBase = callParamsDict['dispositionBase']
+        if self.invocationValidate(rtInv, cmndOutcome, callParamsDict, None).isProblematic():
+            return failed(cmndOutcome)
+        dispositionBase = csParam.mappedValue('dispositionBase', dispositionBase)
 ####+END:
 
         if not dispositionBase:
@@ -1899,7 +1747,7 @@ class dispositionToImpressiveStdout_voiceOver_Obsoleted(icm.Cmnd):
         thisParamBaseState = thisParamBase.baseValidityPredicate()
 
         if thisParamBaseState != 'InPlace':
-            return icm.EH_critical_oops('thisParamBaseState=' + thisParamBaseState)
+            return b_io.eh.critical_oops('thisParamBaseState=' + thisParamBaseState)
 
         sys.stdout.write(
             self.impressiveInfoHeadStr()
@@ -1987,29 +1835,27 @@ class dispositionToImpressiveStdout_voiceOver_Obsoleted(icm.Cmnd):
 """
 
 
-####+BEGIN: bx:icm:python:cmnd:classHead :cmndName "dispositionToImpressiveStdout_recorderEach" :comment "" :parsMand "" :parsOpt "dispositionBase" :argsMin "0" :argsMax "0" :asFunc "" :interactiveP ""
-"""
-*  [[elisp:(org-cycle)][| ]]  [[elisp:(org-show-subtree)][|=]] [[elisp:(show-children)][|V]] [[elisp:(org-tree-to-indirect-buffer)][|>]] [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(beginning-of-buffer)][Top]] [[elisp:(delete-other-windows)][(1)]] || ICM-Cmnd       :: /dispositionToImpressiveStdout_recorderEach/ parsMand= parsOpt=dispositionBase argsMin=0 argsMax=0 asFunc= interactive=  [[elisp:(org-cycle)][| ]]
-"""
-class dispositionToImpressiveStdout_recorderEach(icm.Cmnd):
+####+BEGIN: b:py3:cs:cmnd/classHead :cmndName "dispositionToImpressiveStdout_recorderEach" :comment "" :parsMand "" :parsOpt "dispositionBase" :argsMin 0 :argsMax 0 :pyInv ""
+""" #+begin_org
+*  _[[elisp:(blee:menu-sel:outline:popupMenu)][±]]_ _[[elisp:(blee:menu-sel:navigation:popupMenu)][Ξ]]_ [[elisp:(outline-show-branches+toggle)][|=]] [[elisp:(bx:orgm:indirectBufOther)][|>]] *[[elisp:(blee:ppmm:org-mode-toggle)][|N]]*  CmndSvc-   [[elisp:(outline-show-subtree+toggle)][||]] <<dispositionToImpressiveStdout_recorderEach>>  =verify= parsOpt=dispositionBase ro=cli   [[elisp:(org-cycle)][| ]]
+#+end_org """
+class dispositionToImpressiveStdout_recorderEach(cs.Cmnd):
     cmndParamsMandatory = [ ]
     cmndParamsOptional = [ 'dispositionBase', ]
     cmndArgsLen = {'Min': 0, 'Max': 0,}
 
-    @icm.subjectToTracking(fnLoc=True, fnEntry=True, fnExit=True)
+    @cs.track(fnLoc=True, fnEntry=True, fnExit=True)
     def cmnd(self,
-        interactive=False,        # Can also be called non-interactively
-        dispositionBase=None,         # or Cmnd-Input
-    ):
-        cmndOutcome = self.getOpOutcome()
-        if interactive:
-            if not self.cmndLineValidate(outcome=cmndOutcome):
-                return cmndOutcome
+             rtInv: cs.RtInvoker,
+             cmndOutcome: b.op.Outcome,
+             dispositionBase: typing.Optional[str]=None,  # Cs Optional Param
+    ) -> b.op.Outcome:
 
+        failed = b_io.eh.badOutcome
         callParamsDict = {'dispositionBase': dispositionBase, }
-        if not icm.cmndCallParamsValidate(callParamsDict, interactive, outcome=cmndOutcome):
-            return cmndOutcome
-        dispositionBase = callParamsDict['dispositionBase']
+        if self.invocationValidate(rtInv, cmndOutcome, callParamsDict, None).isProblematic():
+            return failed(cmndOutcome)
+        dispositionBase = csParam.mappedValue('dispositionBase', dispositionBase)
 ####+END:
 
         if not dispositionBase:
@@ -2020,7 +1866,7 @@ class dispositionToImpressiveStdout_recorderEach(icm.Cmnd):
         thisParamBaseState = thisParamBase.baseValidityPredicate()
 
         if thisParamBaseState != 'InPlace':
-            return icm.EH_critical_oops('thisParamBaseState=' + thisParamBaseState)
+            return b_io.eh.critical_oops('thisParamBaseState=' + thisParamBaseState)
 
         sys.stdout.write(
             self.impressiveInfoHeadStr()
@@ -2038,7 +1884,7 @@ class dispositionToImpressiveStdout_recorderEach(icm.Cmnd):
 """
         return """\
 
-from unisos import icm
+from bisos import icm
 from bisos.lcnt import impressiveSup
 
 icm.libUserInit("-v 20")
@@ -2080,37 +1926,33 @@ def bxVideoRecorderOnceStop():
 """
     
 
-####+BEGIN: bx:icm:python:cmnd:classHead :cmndName "updateThenImpressiveInfoStdout" :comment "Full update then ImpressiveInfoStdout" :parsMand "inPdf" :parsOpt "framesRange dispositionBase" :argsMin "1" :argsMax "1000" :asFunc "" :interactiveP ""
-"""
-*  [[elisp:(org-cycle)][| ]]  [[elisp:(org-show-subtree)][|=]] [[elisp:(show-children)][|V]] [[elisp:(org-tree-to-indirect-buffer)][|>]] [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(beginning-of-buffer)][Top]] [[elisp:(delete-other-windows)][(1)]] || ICM-Cmnd       :: /updateThenImpressiveInfoStdout/ =Full update then ImpressiveInfoStdout= parsMand=inPdf parsOpt=framesRange dispositionBase argsMin=1 argsMax=1000 asFunc= interactive=  [[elisp:(org-cycle)][| ]]
-"""
-class updateThenImpressiveInfoStdout(icm.Cmnd):
+####+BEGIN: b:py3:cs:cmnd/classHead :cmndName "updateThenImpressiveInfoStdout" :comment "Full update then ImpressiveInfoStdout" :parsMand "inPdf" :parsOpt "framesRange dispositionBase" :argsMin 1 :argsMax 1000 :pyInv ""
+""" #+begin_org
+*  _[[elisp:(blee:menu-sel:outline:popupMenu)][±]]_ _[[elisp:(blee:menu-sel:navigation:popupMenu)][Ξ]]_ [[elisp:(outline-show-branches+toggle)][|=]] [[elisp:(bx:orgm:indirectBufOther)][|>]] *[[elisp:(blee:ppmm:org-mode-toggle)][|N]]*  CmndSvc-   [[elisp:(outline-show-subtree+toggle)][||]] <<updateThenImpressiveInfoStdout>>  *Full update then ImpressiveInfoStdout*  =verify= parsMand=inPdf parsOpt=framesRange dispositionBase argsMin=1 argsMax=1000 ro=cli   [[elisp:(org-cycle)][| ]]
+#+end_org """
+class updateThenImpressiveInfoStdout(cs.Cmnd):
     cmndParamsMandatory = [ 'inPdf', ]
     cmndParamsOptional = [ 'framesRange', 'dispositionBase', ]
     cmndArgsLen = {'Min': 1, 'Max': 1000,}
 
-    @icm.subjectToTracking(fnLoc=True, fnEntry=True, fnExit=True)
+    @cs.track(fnLoc=True, fnEntry=True, fnExit=True)
     def cmnd(self,
-        interactive=False,        # Can also be called non-interactively
-        inPdf=None,         # or Cmnd-Input
-        framesRange=None,         # or Cmnd-Input
-        dispositionBase=None,         # or Cmnd-Input
-        argsList=None,         # or Args-Input
-    ):
-        cmndOutcome = self.getOpOutcome()
-        if interactive:
-            if not self.cmndLineValidate(outcome=cmndOutcome):
-                return cmndOutcome
-            effectiveArgsList = G.icmRunArgsGet().cmndArgs
-        else:
-            effectiveArgsList = argsList
-
+             rtInv: cs.RtInvoker,
+             cmndOutcome: b.op.Outcome,
+             inPdf: typing.Optional[str]=None,  # Cs Mandatory Param
+             framesRange: typing.Optional[str]=None,  # Cs Optional Param
+             dispositionBase: typing.Optional[str]=None,  # Cs Optional Param
+             argsList: typing.Optional[list[str]]=None,  # CsArgs
+    ) -> b.op.Outcome:
+        """Full update then ImpressiveInfoStdout"""
+        failed = b_io.eh.badOutcome
         callParamsDict = {'inPdf': inPdf, 'framesRange': framesRange, 'dispositionBase': dispositionBase, }
-        if not icm.cmndCallParamsValidate(callParamsDict, interactive, outcome=cmndOutcome):
-            return cmndOutcome
-        inPdf = callParamsDict['inPdf']
-        framesRange = callParamsDict['framesRange']
-        dispositionBase = callParamsDict['dispositionBase']
+        if self.invocationValidate(rtInv, cmndOutcome, callParamsDict, argsList).isProblematic():
+            return failed(cmndOutcome)
+        cmndArgsSpecDict = self.cmndArgsSpec()
+        inPdf = csParam.mappedValue('inPdf', inPdf)
+        framesRange = csParam.mappedValue('framesRange', framesRange)
+        dispositionBase = csParam.mappedValue('dispositionBase', dispositionBase)
 ####+END:
 
         dispositionBase = dispositionBaseDefault(dispositionBase)
@@ -2135,48 +1977,44 @@ class updateThenImpressiveInfoStdout(icm.Cmnd):
 """
 
     
-####+BEGIN: bx:icm:python:section :title "Impressive Purposed Preparations And Executions -- Main Usage Cmnds"
+####+BEGIN: bx:cs:python:section :title "Impressive Purposed Preparations And Executions -- Main Usage Cmnds"
 """
-*  [[elisp:(beginning-of-buffer)][Top]] ################ [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(delete-other-windows)][(1)]]    *Impressive Purposed Preparations And Executions -- Main Usage Cmnds*  [[elisp:(org-cycle)][| ]]  [[elisp:(org-show-subtree)][|=]] 
+*  [[elisp:(beginning-of-buffer)][Top]] ############## [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(delete-other-windows)][(1)]]    *Impressive Purposed Preparations And Executions -- Main Usage Cmnds*  [[elisp:(org-cycle)][| ]]  [[elisp:(org-show-subtree)][|=]]
 """
 ####+END:
 
 
-####+BEGIN: bx:icm:python:cmnd:classHead :cmndName "dispositionToImpressivePurposed" :comment "Create Info and run impressive for each" :parsMand "inPdf" :parsOpt "framesRange dispositionBase" :argsMin "1" :argsMax "1000" :asFunc "" :interactiveP ""
-"""
-*  [[elisp:(org-cycle)][| ]]  [[elisp:(org-show-subtree)][|=]] [[elisp:(show-children)][|V]] [[elisp:(org-tree-to-indirect-buffer)][|>]] [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(beginning-of-buffer)][Top]] [[elisp:(delete-other-windows)][(1)]] || ICM-Cmnd       :: /dispositionToImpressivePurposed/ =Create Info and run impressive for each= parsMand=inPdf parsOpt=framesRange dispositionBase argsMin=1 argsMax=1000 asFunc= interactive=  [[elisp:(org-cycle)][| ]]
-"""
-class dispositionToImpressivePurposed(icm.Cmnd):
+####+BEGIN: b:py3:cs:cmnd/classHead :cmndName "dispositionToImpressivePurposed" :comment "Create Info and run impressive for each" :parsMand "inPdf" :parsOpt "framesRange dispositionBase" :argsMin 1 :argsMax 1000 :pyInv ""
+""" #+begin_org
+*  _[[elisp:(blee:menu-sel:outline:popupMenu)][±]]_ _[[elisp:(blee:menu-sel:navigation:popupMenu)][Ξ]]_ [[elisp:(outline-show-branches+toggle)][|=]] [[elisp:(bx:orgm:indirectBufOther)][|>]] *[[elisp:(blee:ppmm:org-mode-toggle)][|N]]*  CmndSvc-   [[elisp:(outline-show-subtree+toggle)][||]] <<dispositionToImpressivePurposed>>  *Create Info and run impressive for each*  =verify= parsMand=inPdf parsOpt=framesRange dispositionBase argsMin=1 argsMax=1000 ro=cli   [[elisp:(org-cycle)][| ]]
+#+end_org """
+class dispositionToImpressivePurposed(cs.Cmnd):
     cmndParamsMandatory = [ 'inPdf', ]
     cmndParamsOptional = [ 'framesRange', 'dispositionBase', ]
     cmndArgsLen = {'Min': 1, 'Max': 1000,}
 
-    @icm.subjectToTracking(fnLoc=True, fnEntry=True, fnExit=True)
+    @cs.track(fnLoc=True, fnEntry=True, fnExit=True)
     def cmnd(self,
-        interactive=False,        # Can also be called non-interactively
-        inPdf=None,         # or Cmnd-Input
-        framesRange=None,         # or Cmnd-Input
-        dispositionBase=None,         # or Cmnd-Input
-        argsList=None,         # or Args-Input
-    ):
-        cmndOutcome = self.getOpOutcome()
-        if interactive:
-            if not self.cmndLineValidate(outcome=cmndOutcome):
-                return cmndOutcome
-            effectiveArgsList = G.icmRunArgsGet().cmndArgs
-        else:
-            effectiveArgsList = argsList
-
+             rtInv: cs.RtInvoker,
+             cmndOutcome: b.op.Outcome,
+             inPdf: typing.Optional[str]=None,  # Cs Mandatory Param
+             framesRange: typing.Optional[str]=None,  # Cs Optional Param
+             dispositionBase: typing.Optional[str]=None,  # Cs Optional Param
+             argsList: typing.Optional[list[str]]=None,  # CsArgs
+    ) -> b.op.Outcome:
+        """Create Info and run impressive for each"""
+        failed = b_io.eh.badOutcome
         callParamsDict = {'inPdf': inPdf, 'framesRange': framesRange, 'dispositionBase': dispositionBase, }
-        if not icm.cmndCallParamsValidate(callParamsDict, interactive, outcome=cmndOutcome):
-            return cmndOutcome
-        inPdf = callParamsDict['inPdf']
-        framesRange = callParamsDict['framesRange']
-        dispositionBase = callParamsDict['dispositionBase']
+        if self.invocationValidate(rtInv, cmndOutcome, callParamsDict, argsList).isProblematic():
+            return failed(cmndOutcome)
+        cmndArgsSpecDict = self.cmndArgsSpec()
+        inPdf = csParam.mappedValue('inPdf', inPdf)
+        framesRange = csParam.mappedValue('framesRange', framesRange)
+        dispositionBase = csParam.mappedValue('dispositionBase', dispositionBase)
 ####+END:
         dispositionBase = dispositionBaseDefault(dispositionBase)
 
-        purposesStr="-".join(effectiveArgsList)
+        purposesStr="-".join(argsList)
         impressiveInfoPath=os.path.abspath("./tmp/impressive.{}".format(purposesStr))
 
         ucf.DIR_ensure(impressiveInfoPath)
@@ -2193,14 +2031,14 @@ class dispositionToImpressivePurposed(icm.Cmnd):
                 )
 
         if framesRange:
-            icm.ANN_write("impressive -i {framesRange} --nologo -Q -k -I {impressiveInfoPath} {inPdf}".
+            b_io.ann.write("impressive -i {framesRange} --nologo -Q -k -I {impressiveInfoPath} {inPdf}".
                           format(framesRange=framesRange, impressiveInfoPath=impressiveInfoPath, inPdf=inPdf))
         else:
             if 'recorderOnce' in purposesList:
-                icm.ANN_write("impressive -i 1 --nologo -Q -k -I {impressiveInfoPath} {inPdf}".
+                b_io.ann.write("impressive -i 1 --nologo -Q -k -I {impressiveInfoPath} {inPdf}".
                           format(impressiveInfoPath=impressiveInfoPath, inPdf=inPdf))
             else:
-                icm.ANN_write("impressive --nologo -Q -k -I {impressiveInfoPath} {inPdf}".
+                b_io.ann.write("impressive --nologo -Q -k -I {impressiveInfoPath} {inPdf}".
                           format(impressiveInfoPath=impressiveInfoPath, inPdf=inPdf))
                 
             
@@ -2210,127 +2048,41 @@ class dispositionToImpressivePurposed(icm.Cmnd):
 """
 
 
-
-####+BEGIN: bx:icm:python:section :title "Supporting Classes And Functions"
-"""
-*  [[elisp:(beginning-of-buffer)][Top]] ################ [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(delete-other-windows)][(1)]]    *Supporting Classes And Functions*  [[elisp:(org-cycle)][| ]]  [[elisp:(org-show-subtree)][|=]] 
-"""
-####+END:
-"""
-*       /Empty/  [[elisp:(org-cycle)][| ]]
-"""
-    
-####+BEGIN: bx:icm:python:section :title "Common/Generic Facilities -- Library Candidates"
-"""
-*  [[elisp:(beginning-of-buffer)][Top]] ################ [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(delete-other-windows)][(1)]]    *Common/Generic Facilities -- Library Candidates*  [[elisp:(org-cycle)][| ]]  [[elisp:(org-show-subtree)][|=]] 
-"""
+####+BEGIN: blee:bxPanel:foldingSection :outLevel 0 :title " ~End Of Editable Text~ "
+""" #+begin_org
+*  _[[elisp:(blee:menu-sel:outline:popupMenu)][±]]_ _[[elisp:(blee:menu-sel:navigation:popupMenu)][Ξ]]_ [[elisp:(outline-show-branches+toggle)][|=]] [[elisp:(bx:orgm:indirectBufOther)][|>]] *[[elisp:(blee:ppmm:org-mode-toggle)][|N]]*     [[elisp:(outline-show-subtree+toggle)][| _ ~End Of Editable Text~ _: |]]    [[elisp:(org-shifttab)][<)]] E|
+#+end_org """
 ####+END:
 
-    
-####+BEGIN: bx:icm:python:section :title "= =Framework::=   G_main -- Instead Of ICM Dispatcher ="
-"""
-*  [[elisp:(beginning-of-buffer)][Top]] ################ [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(delete-other-windows)][(1)]]    *= =Framework::=   G_main -- Instead Of ICM Dispatcher =*  [[elisp:(org-cycle)][| ]]  [[elisp:(org-show-subtree)][|=]] 
-"""
+####+BEGIN: blee:bxPanel:foldingSection :outLevel 0 :sep nil :title "Main" :anchor ""  :extraInfo "Framework Dblock"
+""" #+begin_org
+*  _[[elisp:(blee:menu-sel:outline:popupMenu)][±]]_ _[[elisp:(blee:menu-sel:navigation:popupMenu)][Ξ]]_ [[elisp:(outline-show-branches+toggle)][|=]] [[elisp:(bx:orgm:indirectBufOther)][|>]] *[[elisp:(blee:ppmm:org-mode-toggle)][|N]]*     [[elisp:(outline-show-subtree+toggle)][| _Main_: |]]  Framework Dblock  [[elisp:(org-shifttab)][<)]] E|
+#+end_org """
 ####+END:
 
-####+BEGIN: bx:icm:python:func :funcName "G_main" :funcType "FrameWrk" :retType "Void" :deco "" :argsList ""
-"""
-*  [[elisp:(org-cycle)][| ]]  [[elisp:(org-show-subtree)][|=]] [[elisp:(show-children)][|V]] [[elisp:(org-tree-to-indirect-buffer)][|>]] [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(beginning-of-buffer)][Top]] [[elisp:(delete-other-windows)][(1)]] || Func-FrameWrk  :: /G_main/ retType=Void argsList=nil  [[elisp:(org-cycle)][| ]]
-"""
-def G_main():
-####+END:
-    """ 
-** Replaces ICM dispatcher for other command line args parsings.
-"""
-    pass
+####+BEGIN: b:py3:cs:framework/main :csInfo "csInfo" :noCmndEntry "examples" :extraParamsHook "g_extraParams" :importedCmndsModules "g_importedCmndsModules"
+""" #+begin_org
+*  _[[elisp:(blee:menu-sel:outline:popupMenu)][±]]_ _[[elisp:(blee:menu-sel:navigation:popupMenu)][Ξ]]_ [[elisp:(outline-show-branches+toggle)][|=]] [[elisp:(bx:orgm:indirectBufOther)][|>]] *[[elisp:(blee:ppmm:org-mode-toggle)][|N]]*  CsFrmWrk   [[elisp:(outline-show-subtree+toggle)][||]] =g_csMain= (csInfo, _examples_, g_extraParams, g_importedCmndsModules)
+#+end_org """
 
-####+BEGIN: bx:icm:python:icmItem :itemType "Configuration" :itemTitle "= =Framework::= g_ Settings -- ICMs Imports ="
-"""
-*  [[elisp:(org-cycle)][| ]]  [[elisp:(org-show-subtree)][|=]] [[elisp:(show-children)][|V]] [[elisp:(org-tree-to-indirect-buffer)][|>]] [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(beginning-of-buffer)][Top]] [[elisp:(delete-other-windows)][(1)]] || Configuration  :: = =Framework::= g_ Settings -- ICMs Imports =  [[elisp:(org-cycle)][| ]]
-"""
-####+END:
-
-g_examples = examples  # or None
-g_mainEntry = None  # or G_main
-
-####+BEGIN: bx:dblock:global:file-insert :file "/libre/ByStar/InitialTemplates/update/sw/icm/py/icm2.G_main.py"
-"""
-*  [[elisp:(beginning-of-buffer)][Top]] # /Dblk-Begin/ # [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(delete-other-windows)][(1)]]    *= =Framework::= ICM main() =*
-"""
-
-def classedCmndsDict():
-    """
-** Should be done here, can not be done in icm library because of the evals.
-"""
-    callDict = dict()
-    for eachCmnd in icm.cmndList_mainsMethods().cmnd(
-            interactive=False,
-            importedCmnds=g_importedCmnds,
-            mainFileName=__file__,
-    ):
-        try:
-            callDict[eachCmnd] = eval("{}".format(eachCmnd))
-            continue
-        except NameError:
-            pass
-
-        for mod in g_importedCmnds:
-            try:
-                eval("{mod}.{cmnd}".format(mod=mod, cmnd=eachCmnd))
-            except AttributeError:
-                continue
-            try:                
-                callDict[eachCmnd] = eval("{mod}.{cmnd}".format(mod=mod, cmnd=eachCmnd))
-                break
-            except NameError:
-                pass
-    return callDict
-
-icmInfo['icmName'] = __icmName__
-icmInfo['version'] = __version__
-icmInfo['status'] = __status__
-icmInfo['credits'] = __credits__
-
-G = icm.IcmGlobalContext()
-G.icmInfo = icmInfo
-
-def g_icmMain():
-    """This ICM's specific information is passed to G_mainWithClass"""
-    sys.exit(
-        icm.G_mainWithClass(
-            inArgv=sys.argv[1:],                 # Mandatory
-            extraArgs=g_argsExtraSpecify,        # Mandatory
-            G_examples=g_examples,               # Mandatory            
-            classedCmndsDict=classedCmndsDict(),   # Mandatory
-            mainEntry=g_mainEntry,
-            g_icmPreCmnds=g_icmPreCmnds,
-            g_icmPostCmnds=g_icmPostCmnds,
-        )
+if __name__ == '__main__':
+    cs.main.g_csMain(
+        csInfo=csInfo,
+        noCmndEntry=examples,  # specify a Cmnd name
+        extraParamsHook=g_extraParams,
+        importedCmndsModules=g_importedCmndsModules,
     )
 
-g_icmMain()
-
-"""
-*  [[elisp:(beginning-of-buffer)][Top]] ## /Dblk-End/ ## [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(delete-other-windows)][(1)]]    *= =Framework::= ICM main() =*
-"""
-
 ####+END:
 
-####+BEGIN: bx:icm:python:section :title "Unused Facilities -- Temporary Junk Yard"
-"""
-*  [[elisp:(beginning-of-buffer)][Top]] ################ [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(delete-other-windows)][(1)]]    *Unused Facilities -- Temporary Junk Yard*  [[elisp:(org-cycle)][| ]]  [[elisp:(org-show-subtree)][|=]] 
-"""
-####+END:
-"""
-*       /Empty/  [[elisp:(org-cycle)][| ]]
-"""
+####+BEGIN: b:py3:cs:framework/endOfFile :basedOn "classification"
+""" #+begin_org
+* [[elisp:(org-cycle)][| *End-Of-Editable-Text* |]] :: emacs and org variables and control parameters
+#+end_org """
 
-####+BEGIN: bx:icm:python:section :title "End Of Editable Text"
-"""
-*  [[elisp:(beginning-of-buffer)][Top]] ################ [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(delete-other-windows)][(1)]]    *End Of Editable Text*  [[elisp:(org-cycle)][| ]]  [[elisp:(org-show-subtree)][|=]] 
-"""
-####+END:
-
-####+BEGIN: bx:dblock:global:file-insert-cond :cond "./blee.el" :file "/libre/ByStar/InitialTemplates/software/plusOrg/dblock/inserts/endOfFileControls.org"
 #+STARTUP: showall
+
+### local variables:
+### no-byte-compile: t
+### end:
 ####+END:

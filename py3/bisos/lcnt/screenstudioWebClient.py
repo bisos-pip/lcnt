@@ -3,15 +3,15 @@
 * TODO *[Summary]* ::  A /library/ Beginning point for development of new ICM oriented libraries.
 """
 
-####+BEGIN: bx:icm:python:top-of-file :partof "bystar" :copyleft "halaal+minimal"
-"""
-*  This file:/de/bx/nne/dev-py/pypi/pkgs/bisos/examples/dev/bisos/examples/icmLibBegin.py :: [[elisp:(org-cycle)][| ]]
-** is part of The Libre-Halaal ByStar Digital Ecosystem. http://www.by-star.net
-** *CopyLeft*  This Software is a Libre-Halaal Poly-Existential. See http://www.freeprotocols.org
-** A Python Interactively Command Module (PyICM). Part Of ByStar.
-** Best Developed With COMEEGA-Emacs And Best Used With Blee-ICM-Players.
-** Warning: All edits wityhin Dynamic Blocks may be lost.
-"""
+####+BEGIN: bx:cs:python:top-of-file :partof "bystar" :copyleft "halaal+minimal"
+""" #+begin_org
+*  This file:/bisos/git/bxRepos/bisos-pip/lcnt/py3/bisos/lcnt/screenstudioWebClient.py :: [[elisp:(org-cycle)][| ]]
+ is part of The Libre-Halaal ByStar Digital Ecosystem. http://www.by-star.net
+ *CopyLeft*  This Software is a Libre-Halaal Poly-Existential. See http://www.freeprotocols.org
+ A Python Interactively Command Module (PyICM).
+ Best Developed With COMEEGA-Emacs And Best Used With Blee-ICM-Players.
+ *WARNING*: All edits wityhin Dynamic Blocks may be lost.
+#+end_org """
 ####+END:
 
 
@@ -20,11 +20,11 @@
 """
 
 ####+BEGIN: bx:global:lib:name-py :style "fileName"
-__libName__ = "icmLibBegin"
+__libName__ = "screenstudioWebClient"
 ####+END:
 
 ####+BEGIN: bx:global:timestamp:version-py :style "date"
-__version__ = "201712312856"
+__version__ = "202502110108"
 ####+END:
 
 ####+BEGIN: bx:global:icm:status-py :status "Production"
@@ -33,63 +33,38 @@ __status__ = "Production"
 
 __credits__ = [""]
 
-####+BEGIN: bx:dblock:global:file-insert-cond :cond "./blee.el" :file "/libre/ByStar/InitialTemplates/update/sw/icm/py/icmInfo-mbNedaGpl.py"
-icmInfo = {
-    'authors':         ["[[http://mohsen.1.banan.byname.net][Mohsen Banan]]"],
-    'copyright':       "Copyright 2017, [[http://www.neda.com][Neda Communications, Inc.]]",
-    'licenses':        ["[[https://www.gnu.org/licenses/agpl-3.0.en.html][Affero GPL]]", "Libre-Halaal Services License", "Neda Commercial License"],
-    'maintainers':     ["[[http://mohsen.1.banan.byname.net][Mohsen Banan]]",],
-    'contacts':        ["[[http://mohsen.1.banan.byname.net/contact]]",],
-    'partOf':          ["[[http://www.by-star.net][Libre-Halaal ByStar Digital Ecosystem]]",]
-}
-####+END:
-
-####+BEGIN: bx:icm:python:topControls 
-"""
-*  [[elisp:(org-cycle)][|/Controls/| ]] :: [[elisp:(org-show-subtree)][|=]] [[elisp:(show-all)][Show-All]]  [[elisp:(org-shifttab)][Overview]]  [[elisp:(progn (org-shifttab) (org-content))][Content]] | [[file:Panel.org][Panel]] | [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] | [[elisp:(bx:org:run-me)][Run]] | [[elisp:(bx:org:run-me-eml)][RunEml]] | [[elisp:(delete-other-windows)][(1)]] | [[elisp:(progn (save-buffer) (kill-buffer))][S&Q]]  [[elisp:(save-buffer)][Save]]  [[elisp:(kill-buffer)][Quit]] [[elisp:(org-cycle)][| ]]
+####+BEGIN: bx:cs:python:topControls 
+""" #+begin_org
+*  [[elisp:(org-cycle)][|/Controls/| ]] :: [[elisp:(org-show-subtree)][|=]]  [[elisp:(show-all)][Show-All]]  [[elisp:(org-shifttab)][Overview]]  [[elisp:(progn (org-shifttab) (org-content))][Content]] | [[file:Panel.org][Panel]] | [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] | [[elisp:(bx:org:run-me)][Run]] | [[elisp:(bx:org:run-me-eml)][RunEml]] | [[elisp:(delete-other-windows)][(1)]] | [[elisp:(progn (save-buffer) (kill-buffer))][S&Q]]  [[elisp:(save-buffer)][Save]]  [[elisp:(kill-buffer)][Quit]] [[elisp:(org-cycle)][| ]]
 ** /Version Control/ ::  [[elisp:(call-interactively (quote cvs-update))][cvs-update]]  [[elisp:(vc-update)][vc-update]] | [[elisp:(bx:org:agenda:this-file-otherWin)][Agenda-List]]  [[elisp:(bx:org:todo:this-file-otherWin)][ToDo-List]]
-"""
+#+end_org """
 ####+END:
 
-"""
-* 
-####+BEGIN: bx:dblock:global:file-insert-cond :cond "./blee.el" :file "/libre/ByStar/InitialTemplates/software/plusOrg/dblock/inserts/pythonWb.org"
-*  /Python Workbench/ ::  [[elisp:(org-cycle)][| ]]  [[elisp:(python-check (format "pyclbr %s" (bx:buf-fname))))][pyclbr]] || [[elisp:(python-check (format "pyflakes %s" (bx:buf-fname)))][pyflakes]] | [[elisp:(python-check (format "pychecker %s" (bx:buf-fname))))][pychecker (executes)]] | [[elisp:(python-check (format "pep8 %s" (bx:buf-fname))))][pep8]] | [[elisp:(python-check (format "flake8 %s" (bx:buf-fname))))][flake8]] | [[elisp:(python-check (format "pylint %s" (bx:buf-fname))))][pylint]]  [[elisp:(org-cycle)][| ]]
-####+END:
-"""
 
 
-####+BEGIN: bx:icm:python:section :title "ContentsList"
+####+BEGIN: bx:cs:python:section :title "ContentsList"
 """
-*  [[elisp:(beginning-of-buffer)][Top]] ################ [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(delete-other-windows)][(1)]]    *ContentsList*  [[elisp:(org-cycle)][| ]]  [[elisp:(org-show-subtree)][|=]] 
+*  [[elisp:(beginning-of-buffer)][Top]] ############## [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(delete-other-windows)][(1)]]    *ContentsList*  [[elisp:(org-cycle)][| ]]  [[elisp:(org-show-subtree)][|=]]
 """
 ####+END:
-
-####+BEGIN: bx:dblock:python:func :funcName "insertPathForImports" :funcType "FrameWrk" :retType "none" :deco "" :argsList "path"
-"""
-*  [[elisp:(org-cycle)][| ]]  [[elisp:(org-show-subtree)][|=]] [[elisp:(show-children)][|V]] [[elisp:(org-tree-to-indirect-buffer)][|>]] [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(beginning-of-buffer)][Top]] [[elisp:(delete-other-windows)][(1)]] || Func-FrameWrk  :: /insertPathForImports/ retType=none argsList=(path)  [[elisp:(org-cycle)][| ]]
-"""
-def insertPathForImports(
-    path,
-):
-####+END:
-    """
-** Extends Python imports path with  ../lib/python
-"""
-    import os
-    import sys
-    absolutePath = os.path.abspath(path)    
-    if os.path.isdir(absolutePath):
-        sys.path.insert(1, absolutePath)
-
-insertPathForImports("../lib/python/")
-
 
 
 ####+BEGIN: bx:dblock:python:icmItem :itemType "=Imports=" :itemTitle "*IMPORTS*"
-"""
-*  [[elisp:(org-cycle)][| ]]  [[elisp:(org-show-subtree)][|=]] [[elisp:(show-children)][|V]] [[elisp:(org-tree-to-indirect-buffer)][|>]] [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(beginning-of-buffer)][Top]] [[elisp:(delete-other-windows)][(1)]] || =Imports=      :: *IMPORTS*  [[elisp:(org-cycle)][| ]]
-"""
+""" #+begin_org
+*  _[[elisp:(blee:menu-sel:outline:popupMenu)][±]]_ _[[elisp:(blee:menu-sel:navigation:popupMenu)][Ξ]]_ [[elisp:(outline-show-branches+toggle)][|=]] [[elisp:(bx:orgm:indirectBufOther)][|>]] *[[elisp:(blee:ppmm:org-mode-toggle)][|N]]*  =Imports=  [[elisp:(outline-show-subtree+toggle)][||]] *IMPORTS*  [[elisp:(org-cycle)][| ]]
+#+end_org """
+####+END:
+
+####+BEGINNOT: b:py3:cs:framework/imports :basedOn "classification"
+""" #+begin_org
+*  _[[elisp:(blee:menu-sel:outline:popupMenu)][±]]_ _[[elisp:(blee:menu-sel:navigation:popupMenu)][Ξ]]_ [[elisp:(outline-show-branches+toggle)][|=]] [[elisp:(bx:orgm:indirectBufOther)][|>]] *[[elisp:(blee:ppmm:org-mode-toggle)][|N]]*  CsFrmWrk   [[elisp:(outline-show-subtree+toggle)][||]] *Imports* =Based on Classification=cs-u=
+#+end_org """
+from bisos import b
+from bisos.b import cs
+from bisos.b import b_io
+from bisos.common import csParam
+
+import collections
 ####+END:
 
 import os
@@ -98,99 +73,23 @@ import enum
 
 import requests
 
-import pexpect
-# Not using import pxssh -- because we need to custom manipulate the prompt
-
-# NOTYET, should become a dblock with its own subItem
-from unisos import ucf
-from unisos import icm
-
-G = icm.IcmGlobalContext()
-G.icmLibsAppend = __file__
-G.icmCmndsLibsAppend = __file__
-# NOTYET DBLOCK Ends -- Rest of bisos libs follow;
-
-
 ####+BEGIN: bx:dblock:python:section :title "Library Description (Overview)"
 """
-*  [[elisp:(beginning-of-buffer)][Top]] ################ [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(delete-other-windows)][(1)]]    *Library Description (Overview)*  [[elisp:(org-cycle)][| ]]  [[elisp:(org-show-subtree)][|=]] 
+*  [[elisp:(beginning-of-buffer)][Top]] ############## [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(delete-other-windows)][(1)]]    *Library Description (Overview)*  [[elisp:(org-cycle)][| ]]  [[elisp:(org-show-subtree)][|=]]
 """
 ####+END:
 
-####+BEGIN: bx:dblock:python:icm:cmnd:classHead :cmndName "icmBegin_LibOverview" :parsMand "" :parsOpt "" :argsMin "0" :argsMax "3" :asFunc "" :interactiveP ""
+
+####+BEGIN: bx:cs:python:section :title "Supporting Classes And Functions"
 """
-*  [[elisp:(org-cycle)][| ]]  [[elisp:(org-show-subtree)][|=]] [[elisp:(show-children)][|V]] [[elisp:(org-tree-to-indirect-buffer)][|>]] [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(beginning-of-buffer)][Top]] [[elisp:(delete-other-windows)][(1)]] || ICM-Cmnd       :: /icmBegin_LibOverview/ parsMand= parsOpt= argsMin=0 argsMax=3 asFunc= interactive=  [[elisp:(org-cycle)][| ]]
-"""
-class icmBegin_LibOverview(icm.Cmnd):
-    cmndParamsMandatory = [ ]
-    cmndParamsOptional = [ ]
-    cmndArgsLen = {'Min': 0, 'Max': 3,}
-
-    @icm.subjectToTracking(fnLoc=True, fnEntry=True, fnExit=True)
-    def cmnd(self,
-        interactive=False,        # Can also be called non-interactively
-        argsList=None,         # or Args-Input
-    ):
-        G = icm.IcmGlobalContext()
-        cmndOutcome = self.getOpOutcome()
-        if interactive:
-            if not self.cmndLineValidate(outcome=cmndOutcome):
-                return cmndOutcome
-            effectiveArgsList = G.icmRunArgsGet().cmndArgs
-        else:
-            effectiveArgsList = argsList
-
-        callParamsDict = {}
-        if not icm.cmndCallParamsValidate(callParamsDict, interactive, outcome=cmndOutcome):
-            return cmndOutcome
-####+END:
-
-        moduleDescription="""
-*       [[elisp:(org-show-subtree)][|=]]  [[elisp:(org-cycle)][| *Description:* | ]]
-**  [[elisp:(org-cycle)][| ]]  [Xref]          :: *[Related/Xrefs:]*  <<Xref-Here->>  -- External Documents  [[elisp:(org-cycle)][| ]]
-
-**  [[elisp:(org-cycle)][| ]]   Model and Terminology                                      :Overview:
-This module is part of BISOS and its primary documentation is in  http://www.by-star.net/PLPC/180047
-**      [End-Of-Description]
-"""
-        
-        moduleUsage="""
-*       [[elisp:(org-show-subtree)][|=]]  [[elisp:(org-cycle)][| *Usage:* | ]]
-
-**      How-Tos:
-**      [End-Of-Usage]
-"""
-        
-        moduleStatus="""
-*       [[elisp:(org-show-subtree)][|=]]  [[elisp:(org-cycle)][| *Status:* | ]]
-**  [[elisp:(org-cycle)][| ]]  [Info]          :: *[Current-Info:]* Status/Maintenance -- General TODO List [[elisp:(org-cycle)][| ]]
-** TODO [[elisp:(org-cycle)][| ]]  Current         :: Just getting started [[elisp:(org-cycle)][| ]]
-**      [End-Of-Status]
-"""
-
-####+BEGIN: bx:dblock:global:file-insert-cond :cond "./blee.el" :file "/libre/ByStar/InitialTemplates/update/sw/icm/py/moduleOverview.py"
-        cmndArgsSpec = {"0&-1": ['moduleDescription', 'moduleUsage', 'moduleStatus']}
-        cmndArgsValid = cmndArgsSpec["0&-1"]
-        icm.unusedSuppressForEval(moduleDescription, moduleUsage, moduleStatus)
-        for each in effectiveArgsList:
-            if each in cmndArgsValid:
-                if interactive:
-                    exec("""print({})""".format(each))
-                
-        return(format(str(__doc__)+moduleDescription))
-####+END:
-
-
-####+BEGIN: bx:icm:python:section :title "Supporting Classes And Functions"
-"""
-*  [[elisp:(beginning-of-buffer)][Top]] ################ [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(delete-other-windows)][(1)]]    *Supporting Classes And Functions*  [[elisp:(org-cycle)][| ]]  [[elisp:(org-show-subtree)][|=]] 
+*  [[elisp:(beginning-of-buffer)][Top]] ############## [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(delete-other-windows)][(1)]]    *Supporting Classes And Functions*  [[elisp:(org-cycle)][| ]]  [[elisp:(org-show-subtree)][|=]]
 """
 ####+END:
 
-####+BEGIN: bx:icm:python:func :funcName "serviceUrlDefault" :funcType "defaultVerify" :retType "echo" :deco "" :argsList "serviceUrl"
-"""
-*  [[elisp:(org-cycle)][| ]]  [[elisp:(org-show-subtree)][|=]] [[elisp:(show-children)][|V]] [[elisp:(org-tree-to-indirect-buffer)][|>]] [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(beginning-of-buffer)][Top]] [[elisp:(delete-other-windows)][(1)]] || Func-defaultVerify :: /serviceUrlDefault/ retType=echo argsList=(serviceUrl)  [[elisp:(org-cycle)][| ]]
-"""
+####+BEGIN: bx:cs:python:func :funcName "serviceUrlDefault" :funcType "defaultVerify" :retType "echo" :deco "" :argsList "serviceUrl"
+""" #+begin_org
+*  _[[elisp:(blee:menu-sel:outline:popupMenu)][±]]_ _[[elisp:(blee:menu-sel:navigation:popupMenu)][Ξ]]_ [[elisp:(outline-show-branches+toggle)][|=]] [[elisp:(bx:orgm:indirectBufOther)][|>]] *[[elisp:(blee:ppmm:org-mode-toggle)][|N]]*  F-defaultVerify [[elisp:(outline-show-subtree+toggle)][||]] /serviceUrlDefault/ retType=echo argsList=(serviceUrl)  [[elisp:(org-cycle)][| ]]
+#+end_org """
 def serviceUrlDefault(
     serviceUrl,
 ):
@@ -202,10 +101,10 @@ def serviceUrlDefault(
 
 
 
-####+BEGIN: bx:dblock:python:class :className "ScreenstudioWebClient" :superClass "" :comment "" :classType "basic"
-"""
-*  [[elisp:(org-cycle)][| ]]  [[elisp:(org-show-subtree)][|=]] [[elisp:(show-children)][|V]] [[elisp:(org-tree-to-indirect-buffer)][|>]] [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(beginning-of-buffer)][Top]] [[elisp:(delete-other-windows)][(1)]] || Class-basic    :: /ScreenstudioWebClient/ object  [[elisp:(org-cycle)][| ]]
-"""
+####+BEGIN: b:py3:class/decl :className "ScreenstudioWebClient" :superClass "" :comment "" :classType "basic"
+""" #+begin_org
+*  _[[elisp:(blee:menu-sel:outline:popupMenu)][±]]_ _[[elisp:(blee:menu-sel:navigation:popupMenu)][Ξ]]_ [[elisp:(outline-show-branches+toggle)][|=]] [[elisp:(bx:orgm:indirectBufOther)][|>]] *[[elisp:(blee:ppmm:org-mode-toggle)][|N]]*  Cls-basic  [[elisp:(outline-show-subtree+toggle)][||]] /ScreenstudioWebClient/  superClass=object  [[elisp:(org-cycle)][| ]]
+#+end_org """
 class ScreenstudioWebClient(object):
 ####+END:
     """
@@ -224,8 +123,8 @@ class ScreenstudioWebClient(object):
             print(e)
             return False
 
-        icm.ANN_here(response)
-        icm.ANN_here(response.status_code)
+        b_io.ann.here(response)
+        b_io.ann.here(response.status_code)
 
         startRecordingUrl = "{serviceUrl}/?action=record".format(serviceUrl=self.serviceUrl)
         print(startRecordingUrl)
@@ -242,60 +141,60 @@ class ScreenstudioWebClient(object):
         self.recordingStart()
       
     def recordingStatus(self,):
-        icm.ANN_here("NOTYET")
+        b_io.ann.here("NOTYET")
 
 ####+BEGIN: bx:dblock:python:section :title "ICM Examples"
 """
-*  [[elisp:(beginning-of-buffer)][Top]] ################ [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(delete-other-windows)][(1)]]    *ICM Examples*  [[elisp:(org-cycle)][| ]]  [[elisp:(org-show-subtree)][|=]] 
+*  [[elisp:(beginning-of-buffer)][Top]] ############## [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(delete-other-windows)][(1)]]    *ICM Examples*  [[elisp:(org-cycle)][| ]]  [[elisp:(org-show-subtree)][|=]]
 """
 ####+END:
 
-####+BEGIN: bx:icm:python:func :funcName "commonParamsSpecify" :funcType "void" :retType "bool" :deco "" :argsList "icmParams"
-"""
-*  [[elisp:(org-cycle)][| ]]  [[elisp:(org-show-subtree)][|=]] [[elisp:(show-children)][|V]] [[elisp:(org-tree-to-indirect-buffer)][|>]] [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(beginning-of-buffer)][Top]] [[elisp:(delete-other-windows)][(1)]] || Func-void      :: /commonParamsSpecify/ retType=bool argsList=(icmParams)  [[elisp:(org-cycle)][| ]]
-"""
+####+BEGIN: bx:cs:python:func :funcName "commonParamsSpecify" :funcType "void" :retType "bool" :deco "" :argsList "csParams"
+""" #+begin_org
+*  _[[elisp:(blee:menu-sel:outline:popupMenu)][±]]_ _[[elisp:(blee:menu-sel:navigation:popupMenu)][Ξ]]_ [[elisp:(outline-show-branches+toggle)][|=]] [[elisp:(bx:orgm:indirectBufOther)][|>]] *[[elisp:(blee:ppmm:org-mode-toggle)][|N]]*  F-void     [[elisp:(outline-show-subtree+toggle)][||]] /commonParamsSpecify/ retType=bool argsList=(csParams)  [[elisp:(org-cycle)][| ]]
+#+end_org """
 def commonParamsSpecify(
-    icmParams,
+    csParams,
 ):
 ####+END:
 
-    icmParams.parDictAdd(
+    csParams.parDictAdd(
         parName='sessionType',
         parDescription="One of: liveSession or narratedSession",
         parDataType=None,
         parDefault=None,
         parChoices=list(),
-        parScope=icm.ICM_ParamScope.TargetParam,
+        parScope=cs.CmndParamScope.TargetParam,
         argparseShortOpt=None,
         argparseLongOpt='--sessionType',
     )
 
-    icmParams.parDictAdd(
+    csParams.parDictAdd(
         parName='nuOfDisplays',
         parDescription="One of: 1 or 3",
         parDataType=None,
         parDefault=None,
         parChoices=list(),
-        parScope=icm.ICM_ParamScope.TargetParam,
+        parScope=cs.CmndParamScope.TargetParam,
         argparseShortOpt=None,
         argparseLongOpt='--nuOfDisplays',
     )
     
 
 
-####+BEGIN: bx:icm:python:func :funcName "recordingIcmExamples" :funcType "void" :retType "bool" :deco "" :argsList ""
-"""
-*  [[elisp:(org-cycle)][| ]]  [[elisp:(org-show-subtree)][|=]] [[elisp:(show-children)][|V]] [[elisp:(org-tree-to-indirect-buffer)][|>]] [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(beginning-of-buffer)][Top]] [[elisp:(delete-other-windows)][(1)]] || Func-void      :: /recordingIcmExamples/ retType=bool argsList=nil  [[elisp:(org-cycle)][| ]]
-"""
+####+BEGIN: bx:cs:python:func :funcName "recordingIcmExamples" :funcType "void" :retType "bool" :deco "" :argsList ""
+""" #+begin_org
+*  _[[elisp:(blee:menu-sel:outline:popupMenu)][±]]_ _[[elisp:(blee:menu-sel:navigation:popupMenu)][Ξ]]_ [[elisp:(outline-show-branches+toggle)][|=]] [[elisp:(bx:orgm:indirectBufOther)][|>]] *[[elisp:(blee:ppmm:org-mode-toggle)][|N]]*  F-void     [[elisp:(outline-show-subtree+toggle)][||]] /recordingIcmExamples/ retType=bool argsList=nil  [[elisp:(org-cycle)][| ]]
+#+end_org """
 def recordingIcmExamples():
 ####+END:
         def cpsInit(): return collections.OrderedDict()
-        def menuItem(): icm.ex_gCmndMenuItem(cmndName, cps, cmndArgs, verbosity='little')
-        def execLineEx(cmndStr): icm.ex_gExecMenuItem(execLine=cmndStr)
+        def menuItem(): cs.examples.cmndInsert(cmndName, cps, cmndArgs, verbosity='little')
+        def execLineEx(cmndStr): cs.examples.execInsert(execLine=cmndStr)
 
         nuOfDisplays = nuOfDisplaysGet().cmnd().results
 
-        icm.cmndExampleMenuChapter('*Recorder Preparations*')
+        cs.examples.menuChapter('*Recorder Preparations*')
 
         cmndName = "screenstudioRcUpdate"
         cmndArgs = ""; cps = cpsInit(); cps['sessionType'] = "liveSession"
@@ -318,9 +217,9 @@ def recordingIcmExamples():
         cmndName = "recorderIsUp"
         cmndArgs = serviceUrlDefault(None); cps = cpsInit(); # cps['icmsPkgName'] = icmsPkgName 
         menuItem()
-        #icm.ex_gCmndMenuItem(cmndName, cps, cmndArgs, verbosity='full')
+        #cs.examples.cmndInsert(cmndName, cps, cmndArgs, verbosity='full')
 
-        icm.cmndExampleMenuChapter('*Recordings Start/Stop*')
+        cs.examples.menuChapter('*Recordings Start/Stop*')
         
         cmndName = "recordingStart"
         cmndArgs = serviceUrlDefault(None); cps = cpsInit(); # cps['icmsPkgName'] = icmsPkgName 
@@ -335,42 +234,38 @@ def recordingIcmExamples():
  
 ####+BEGIN: bx:dblock:python:section :title "Recording ICMs -- Commands"
 """
-*  [[elisp:(beginning-of-buffer)][Top]] ################ [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(delete-other-windows)][(1)]]    *ICMs -- Commands*  [[elisp:(org-cycle)][| ]]  [[elisp:(org-show-subtree)][|=]] 
+*  [[elisp:(beginning-of-buffer)][Top]] ############## [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(delete-other-windows)][(1)]]    *Recording ICMs -- Commands*  [[elisp:(org-cycle)][| ]]  [[elisp:(org-show-subtree)][|=]]
 """
 ####+END:
 
 
 
-####+BEGIN: bx:icm:python:cmnd:classHead :cmndName "recordingStart" :parsMand "" :parsOpt "" :argsMin "0" :argsMax "1" :asFunc "" :interactiveP ""
-"""
-*  [[elisp:(org-cycle)][| ]]  [[elisp:(org-show-subtree)][|=]] [[elisp:(show-children)][|V]] [[elisp:(org-tree-to-indirect-buffer)][|>]] [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(beginning-of-buffer)][Top]] [[elisp:(delete-other-windows)][(1)]] || ICM-Cmnd       :: /recordingStart/ parsMand= parsOpt= argsMin=0 argsMax=1 asFunc= interactive=  [[elisp:(org-cycle)][| ]]
-"""
-class recordingStart(icm.Cmnd):
+####+BEGIN: b:py3:cs:cmnd/classHead :cmndName "recordingStart" :parsMand "" :parsOpt "" :argsMin 0 :argsMax 1 :pyInv ""
+""" #+begin_org
+*  _[[elisp:(blee:menu-sel:outline:popupMenu)][±]]_ _[[elisp:(blee:menu-sel:navigation:popupMenu)][Ξ]]_ [[elisp:(outline-show-branches+toggle)][|=]] [[elisp:(bx:orgm:indirectBufOther)][|>]] *[[elisp:(blee:ppmm:org-mode-toggle)][|N]]*  CmndSvc-   [[elisp:(outline-show-subtree+toggle)][||]] <<recordingStart>>  =verify= argsMax=1 ro=cli   [[elisp:(org-cycle)][| ]]
+#+end_org """
+class recordingStart(cs.Cmnd):
     cmndParamsMandatory = [ ]
     cmndParamsOptional = [ ]
     cmndArgsLen = {'Min': 0, 'Max': 1,}
 
-    @icm.subjectToTracking(fnLoc=True, fnEntry=True, fnExit=True)
+    @cs.track(fnLoc=True, fnEntry=True, fnExit=True)
     def cmnd(self,
-        interactive=False,        # Can also be called non-interactively
-        argsList=None,         # or Args-Input
-    ):
-        cmndOutcome = self.getOpOutcome()
-        if interactive:
-            if not self.cmndLineValidate(outcome=cmndOutcome):
-                return cmndOutcome
-            effectiveArgsList = G.icmRunArgsGet().cmndArgs
-        else:
-            effectiveArgsList = argsList
+             rtInv: cs.RtInvoker,
+             cmndOutcome: b.op.Outcome,
+             argsList: typing.Optional[list[str]]=None,  # CsArgs
+    ) -> b.op.Outcome:
 
+        failed = b_io.eh.badOutcome
         callParamsDict = {}
-        if not icm.cmndCallParamsValidate(callParamsDict, interactive, outcome=cmndOutcome):
-            return cmndOutcome
+        if self.invocationValidate(rtInv, cmndOutcome, callParamsDict, argsList).isProblematic():
+            return failed(cmndOutcome)
+        cmndArgsSpecDict = self.cmndArgsSpec()
 ####+END:
         serviceUrl = serviceUrlDefault(effectiveArgsList[0])
 
         myName=self.myName()
-        thisOutcome = icm.OpOutcome(invokerName=myName)
+        thisOutcome = b.op.Outcome(invokerName=myName)
 
         screenstudioClient = ScreenstudioWebClient(serviceUrl=serviceUrl)
 
@@ -384,36 +279,32 @@ class recordingStart(icm.Cmnd):
 """
     
 
-####+BEGIN: bx:icm:python:cmnd:classHead :cmndName "recordingStop" :parsMand "" :parsOpt "" :argsMin "0" :argsMax "1" :asFunc "" :interactiveP ""
-"""
-*  [[elisp:(org-cycle)][| ]]  [[elisp:(org-show-subtree)][|=]] [[elisp:(show-children)][|V]] [[elisp:(org-tree-to-indirect-buffer)][|>]] [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(beginning-of-buffer)][Top]] [[elisp:(delete-other-windows)][(1)]] || ICM-Cmnd       :: /recordingStop/ parsMand= parsOpt= argsMin=0 argsMax=1 asFunc= interactive=  [[elisp:(org-cycle)][| ]]
-"""
-class recordingStop(icm.Cmnd):
+####+BEGIN: b:py3:cs:cmnd/classHead :cmndName "recordingStop" :parsMand "" :parsOpt "" :argsMin 0 :argsMax 1 :pyInv ""
+""" #+begin_org
+*  _[[elisp:(blee:menu-sel:outline:popupMenu)][±]]_ _[[elisp:(blee:menu-sel:navigation:popupMenu)][Ξ]]_ [[elisp:(outline-show-branches+toggle)][|=]] [[elisp:(bx:orgm:indirectBufOther)][|>]] *[[elisp:(blee:ppmm:org-mode-toggle)][|N]]*  CmndSvc-   [[elisp:(outline-show-subtree+toggle)][||]] <<recordingStop>>  =verify= argsMax=1 ro=cli   [[elisp:(org-cycle)][| ]]
+#+end_org """
+class recordingStop(cs.Cmnd):
     cmndParamsMandatory = [ ]
     cmndParamsOptional = [ ]
     cmndArgsLen = {'Min': 0, 'Max': 1,}
 
-    @icm.subjectToTracking(fnLoc=True, fnEntry=True, fnExit=True)
+    @cs.track(fnLoc=True, fnEntry=True, fnExit=True)
     def cmnd(self,
-        interactive=False,        # Can also be called non-interactively
-        argsList=None,         # or Args-Input
-    ):
-        cmndOutcome = self.getOpOutcome()
-        if interactive:
-            if not self.cmndLineValidate(outcome=cmndOutcome):
-                return cmndOutcome
-            effectiveArgsList = G.icmRunArgsGet().cmndArgs
-        else:
-            effectiveArgsList = argsList
+             rtInv: cs.RtInvoker,
+             cmndOutcome: b.op.Outcome,
+             argsList: typing.Optional[list[str]]=None,  # CsArgs
+    ) -> b.op.Outcome:
 
+        failed = b_io.eh.badOutcome
         callParamsDict = {}
-        if not icm.cmndCallParamsValidate(callParamsDict, interactive, outcome=cmndOutcome):
-            return cmndOutcome
+        if self.invocationValidate(rtInv, cmndOutcome, callParamsDict, argsList).isProblematic():
+            return failed(cmndOutcome)
+        cmndArgsSpecDict = self.cmndArgsSpec()
 ####+END:
         serviceUrl = serviceUrlDefault(effectiveArgsList[0])
 
         myName=self.myName()
-        thisOutcome = icm.OpOutcome(invokerName=myName)
+        thisOutcome = b.op.Outcome(invokerName=myName)
 
         screenstudioClient = ScreenstudioWebClient(serviceUrl=serviceUrl)
 
@@ -430,32 +321,30 @@ class recordingStop(icm.Cmnd):
  
 ####+BEGIN: bx:dblock:python:section :title "Recorder Configuration And Run ICMs -- Commands"
 """
-*  [[elisp:(beginning-of-buffer)][Top]] ################ [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(delete-other-windows)][(1)]]    *ICMs -- Commands*  [[elisp:(org-cycle)][| ]]  [[elisp:(org-show-subtree)][|=]] 
+*  [[elisp:(beginning-of-buffer)][Top]] ############## [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(delete-other-windows)][(1)]]    *Recorder Configuration And Run ICMs -- Commands*  [[elisp:(org-cycle)][| ]]  [[elisp:(org-show-subtree)][|=]]
 """
 ####+END:
 
 
-####+BEGIN: bx:icm:python:cmnd:classHead :cmndName "nuOfDisplaysGet" :comment "" :parsMand "" :parsOpt "" :argsMin "0" :argsMax "0" :asFunc "" :interactiveP ""
-"""
-*  [[elisp:(org-cycle)][| ]]  [[elisp:(org-show-subtree)][|=]] [[elisp:(show-children)][|V]] [[elisp:(org-tree-to-indirect-buffer)][|>]] [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(beginning-of-buffer)][Top]] [[elisp:(delete-other-windows)][(1)]] || ICM-Cmnd       :: /nuOfDisplaysGet/ parsMand= parsOpt= argsMin=0 argsMax=0 asFunc= interactive=  [[elisp:(org-cycle)][| ]]
-"""
-class nuOfDisplaysGet(icm.Cmnd):
+####+BEGIN: b:py3:cs:cmnd/classHead :cmndName "nuOfDisplaysGet" :comment "" :parsMand "" :parsOpt "" :argsMin 0 :argsMax 0 :pyInv ""
+""" #+begin_org
+*  _[[elisp:(blee:menu-sel:outline:popupMenu)][±]]_ _[[elisp:(blee:menu-sel:navigation:popupMenu)][Ξ]]_ [[elisp:(outline-show-branches+toggle)][|=]] [[elisp:(bx:orgm:indirectBufOther)][|>]] *[[elisp:(blee:ppmm:org-mode-toggle)][|N]]*  CmndSvc-   [[elisp:(outline-show-subtree+toggle)][||]] <<nuOfDisplaysGet>>  =verify= ro=cli   [[elisp:(org-cycle)][| ]]
+#+end_org """
+class nuOfDisplaysGet(cs.Cmnd):
     cmndParamsMandatory = [ ]
     cmndParamsOptional = [ ]
     cmndArgsLen = {'Min': 0, 'Max': 0,}
 
-    @icm.subjectToTracking(fnLoc=True, fnEntry=True, fnExit=True)
+    @cs.track(fnLoc=True, fnEntry=True, fnExit=True)
     def cmnd(self,
-        interactive=False,        # Can also be called non-interactively
-    ):
-        cmndOutcome = self.getOpOutcome()
-        if interactive:
-            if not self.cmndLineValidate(outcome=cmndOutcome):
-                return cmndOutcome
+             rtInv: cs.RtInvoker,
+             cmndOutcome: b.op.Outcome,
+    ) -> b.op.Outcome:
 
+        failed = b_io.eh.badOutcome
         callParamsDict = {}
-        if not icm.cmndCallParamsValidate(callParamsDict, interactive, outcome=cmndOutcome):
-            return cmndOutcome
+        if self.invocationValidate(rtInv, cmndOutcome, callParamsDict, None).isProblematic():
+            return failed(cmndOutcome)
 ####+END:
 
         outcome = icm.subProc_bash(
@@ -463,40 +352,38 @@ class nuOfDisplaysGet(icm.Cmnd):
 xrandr -q | grep ' connected' | wc -l\
 """
         ).log()
-        if outcome.isProblematic(): return(icm.EH_badOutcome(outcome))
+        if outcome.isProblematic(): return(io.eh.badOutcome(outcome))
 
         nuOfScreens = outcome.stdout.strip('\n')
 
-        if interactive:
-            icm.ANN_write("{}".format(nuOfScreens))
+        if rtInv.outs:
+            b_io.ann.write("{}".format(nuOfScreens))
         
         return cmndOutcome.set(
-            opError=icm.OpError.Success,
+            opError=b.OpError.Success,
             opResults=nuOfScreens,
         )
 
 
-####+BEGIN: bx:icm:python:cmnd:classHead :cmndName "screenstudioRun" :comment "" :parsMand "" :parsOpt "" :argsMin "0" :argsMax "0" :asFunc "" :interactiveP ""
-"""
-*  [[elisp:(org-cycle)][| ]]  [[elisp:(org-show-subtree)][|=]] [[elisp:(show-children)][|V]] [[elisp:(org-tree-to-indirect-buffer)][|>]] [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(beginning-of-buffer)][Top]] [[elisp:(delete-other-windows)][(1)]] || ICM-Cmnd       :: /screenstudioRun/ parsMand= parsOpt= argsMin=0 argsMax=0 asFunc= interactive=  [[elisp:(org-cycle)][| ]]
-"""
-class screenstudioRun(icm.Cmnd):
+####+BEGIN: b:py3:cs:cmnd/classHead :cmndName "screenstudioRun" :comment "" :parsMand "" :parsOpt "" :argsMin 0 :argsMax 0 :pyInv ""
+""" #+begin_org
+*  _[[elisp:(blee:menu-sel:outline:popupMenu)][±]]_ _[[elisp:(blee:menu-sel:navigation:popupMenu)][Ξ]]_ [[elisp:(outline-show-branches+toggle)][|=]] [[elisp:(bx:orgm:indirectBufOther)][|>]] *[[elisp:(blee:ppmm:org-mode-toggle)][|N]]*  CmndSvc-   [[elisp:(outline-show-subtree+toggle)][||]] <<screenstudioRun>>  =verify= ro=cli   [[elisp:(org-cycle)][| ]]
+#+end_org """
+class screenstudioRun(cs.Cmnd):
     cmndParamsMandatory = [ ]
     cmndParamsOptional = [ ]
     cmndArgsLen = {'Min': 0, 'Max': 0,}
 
-    @icm.subjectToTracking(fnLoc=True, fnEntry=True, fnExit=True)
+    @cs.track(fnLoc=True, fnEntry=True, fnExit=True)
     def cmnd(self,
-        interactive=False,        # Can also be called non-interactively
-    ):
-        cmndOutcome = self.getOpOutcome()
-        if interactive:
-            if not self.cmndLineValidate(outcome=cmndOutcome):
-                return cmndOutcome
+             rtInv: cs.RtInvoker,
+             cmndOutcome: b.op.Outcome,
+    ) -> b.op.Outcome:
 
+        failed = b_io.eh.badOutcome
         callParamsDict = {}
-        if not icm.cmndCallParamsValidate(callParamsDict, interactive, outcome=cmndOutcome):
-            return cmndOutcome
+        if self.invocationValidate(rtInv, cmndOutcome, callParamsDict, None).isProblematic():
+            return failed(cmndOutcome)
 ####+END:
         """
 ** TODO UnUsed.
@@ -507,44 +394,42 @@ class screenstudioRun(icm.Cmnd):
         outcome = icm.subProc_bash(
             """screenstudio"""
         ).log()
-        if outcome.isProblematic(): return(icm.EH_badOutcome(outcome))
+        if outcome.isProblematic(): return(io.eh.badOutcome(outcome))
         
         return cmndOutcome.set(
-            opError=icm.OpError.Success,
+            opError=b.OpError.Success,
             opResults=None,
         )
 
 
-####+BEGIN: bx:icm:python:cmnd:classHead :cmndName "screenstudioRcUpdate" :comment "" :parsMand "sessionType" :parsOpt "nuOfDisplays" :argsMin "0" :argsMax "0" :asFunc "" :interactiveP ""
-"""
-*  [[elisp:(org-cycle)][| ]]  [[elisp:(org-show-subtree)][|=]] [[elisp:(show-children)][|V]] [[elisp:(org-tree-to-indirect-buffer)][|>]] [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(beginning-of-buffer)][Top]] [[elisp:(delete-other-windows)][(1)]] || ICM-Cmnd       :: /screenstudioRcUpdate/ parsMand=sessionType parsOpt=nuOfDisplays argsMin=0 argsMax=0 asFunc= interactive=  [[elisp:(org-cycle)][| ]]
-"""
-class screenstudioRcUpdate(icm.Cmnd):
+####+BEGIN: b:py3:cs:cmnd/classHead :cmndName "screenstudioRcUpdate" :comment "" :parsMand "sessionType" :parsOpt "nuOfDisplays" :argsMin 0 :argsMax 0 :pyInv ""
+""" #+begin_org
+*  _[[elisp:(blee:menu-sel:outline:popupMenu)][±]]_ _[[elisp:(blee:menu-sel:navigation:popupMenu)][Ξ]]_ [[elisp:(outline-show-branches+toggle)][|=]] [[elisp:(bx:orgm:indirectBufOther)][|>]] *[[elisp:(blee:ppmm:org-mode-toggle)][|N]]*  CmndSvc-   [[elisp:(outline-show-subtree+toggle)][||]] <<screenstudioRcUpdate>>  =verify= parsMand=sessionType parsOpt=nuOfDisplays ro=cli   [[elisp:(org-cycle)][| ]]
+#+end_org """
+class screenstudioRcUpdate(cs.Cmnd):
     cmndParamsMandatory = [ 'sessionType', ]
     cmndParamsOptional = [ 'nuOfDisplays', ]
     cmndArgsLen = {'Min': 0, 'Max': 0,}
 
-    @icm.subjectToTracking(fnLoc=True, fnEntry=True, fnExit=True)
+    @cs.track(fnLoc=True, fnEntry=True, fnExit=True)
     def cmnd(self,
-        interactive=False,        # Can also be called non-interactively
-        sessionType=None,         # or Cmnd-Input
-        nuOfDisplays=None,         # or Cmnd-Input
-    ):
-        cmndOutcome = self.getOpOutcome()
-        if interactive:
-            if not self.cmndLineValidate(outcome=cmndOutcome):
-                return cmndOutcome
+             rtInv: cs.RtInvoker,
+             cmndOutcome: b.op.Outcome,
+             sessionType: typing.Optional[str]=None,  # Cs Mandatory Param
+             nuOfDisplays: typing.Optional[str]=None,  # Cs Optional Param
+    ) -> b.op.Outcome:
 
+        failed = b_io.eh.badOutcome
         callParamsDict = {'sessionType': sessionType, 'nuOfDisplays': nuOfDisplays, }
-        if not icm.cmndCallParamsValidate(callParamsDict, interactive, outcome=cmndOutcome):
-            return cmndOutcome
-        sessionType = callParamsDict['sessionType']
-        nuOfDisplays = callParamsDict['nuOfDisplays']
+        if self.invocationValidate(rtInv, cmndOutcome, callParamsDict, None).isProblematic():
+            return failed(cmndOutcome)
+        sessionType = csParam.mappedValue('sessionType', sessionType)
+        nuOfDisplays = csParam.mappedValue('nuOfDisplays', nuOfDisplays)
 ####+END:
 
         if not nuOfDisplays:
             outcome = nuOfDisplaysGet().cmnd()
-            if outcome.isProblematic(): return(icm.EH_badOutcome(outcome))
+            if outcome.isProblematic(): return(io.eh.badOutcome(outcome))
             
             nuOfDisplays = outcome.results
 
@@ -553,7 +438,7 @@ class screenstudioRcUpdate(icm.Cmnd):
             sessionType=sessionType,
             nuOfDisplays=nuOfDisplays,
         )
-        if outcome.isProblematic(): return(icm.EH_badOutcome(outcome))
+        if outcome.isProblematic(): return(io.eh.badOutcome(outcome))
 
         screenstudioRcStr = outcome.results
 
@@ -562,18 +447,18 @@ class screenstudioRcUpdate(icm.Cmnd):
         with open(screenstudioRcPath, "w") as thisFile:
             thisFile.write(screenstudioRcStr + '\n')
 
-        if interactive:
-            icm.ANN_here("screenstudioRcPath={val}".format(val=screenstudioRcPath))
+        if rtInv.outs:
+            b_io.ann.here("screenstudioRcPath={val}".format(val=screenstudioRcPath))
         
         return cmndOutcome.set(
-            opError=icm.OpError.Success,
+            opError=b.OpError.Success,
             opResults=screenstudioRcPath,
         )
 
-####+BEGIN: bx:icm:python:func :funcName "screenstudioRcFileNameGet" :funcType "anyOrNone" :retType "bool" :deco "" :argsList "sessionType nuOfDisplays"
-"""
-*  [[elisp:(org-cycle)][| ]]  [[elisp:(org-show-subtree)][|=]] [[elisp:(show-children)][|V]] [[elisp:(org-tree-to-indirect-buffer)][|>]] [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(beginning-of-buffer)][Top]] [[elisp:(delete-other-windows)][(1)]] || Func-anyOrNone :: /screenstudioRcFileNameGet/ retType=bool argsList=(sessionType nuOfDisplays)  [[elisp:(org-cycle)][| ]]
-"""
+####+BEGIN: bx:cs:python:func :funcName "screenstudioRcFileNameGet" :funcType "anyOrNone" :retType "bool" :deco "" :argsList "sessionType nuOfDisplays"
+""" #+begin_org
+*  _[[elisp:(blee:menu-sel:outline:popupMenu)][±]]_ _[[elisp:(blee:menu-sel:navigation:popupMenu)][Ξ]]_ [[elisp:(outline-show-branches+toggle)][|=]] [[elisp:(bx:orgm:indirectBufOther)][|>]] *[[elisp:(blee:ppmm:org-mode-toggle)][|N]]*  F-anyOrNone [[elisp:(outline-show-subtree+toggle)][||]] /screenstudioRcFileNameGet/ retType=bool argsList=(sessionType nuOfDisplays)  [[elisp:(org-cycle)][| ]]
+#+end_org """
 def screenstudioRcFileNameGet(
     sessionType,
     nuOfDisplays,
@@ -586,36 +471,34 @@ def screenstudioRcFileNameGet(
     return os.path.abspath(fileName)
 
 
-####+BEGIN: bx:icm:python:cmnd:classHead :cmndName "screenstudioRcStdout" :comment "" :parsMand "sessionType" :parsOpt "nuOfDisplays" :argsMin "0" :argsMax "0" :asFunc "" :interactiveP ""
-"""
-*  [[elisp:(org-cycle)][| ]]  [[elisp:(org-show-subtree)][|=]] [[elisp:(show-children)][|V]] [[elisp:(org-tree-to-indirect-buffer)][|>]] [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(beginning-of-buffer)][Top]] [[elisp:(delete-other-windows)][(1)]] || ICM-Cmnd       :: /screenstudioRcStdout/ parsMand=sessionType parsOpt=nuOfDisplays argsMin=0 argsMax=0 asFunc= interactive=  [[elisp:(org-cycle)][| ]]
-"""
-class screenstudioRcStdout(icm.Cmnd):
+####+BEGIN: b:py3:cs:cmnd/classHead :cmndName "screenstudioRcStdout" :comment "" :parsMand "sessionType" :parsOpt "nuOfDisplays" :argsMin 0 :argsMax 0 :pyInv ""
+""" #+begin_org
+*  _[[elisp:(blee:menu-sel:outline:popupMenu)][±]]_ _[[elisp:(blee:menu-sel:navigation:popupMenu)][Ξ]]_ [[elisp:(outline-show-branches+toggle)][|=]] [[elisp:(bx:orgm:indirectBufOther)][|>]] *[[elisp:(blee:ppmm:org-mode-toggle)][|N]]*  CmndSvc-   [[elisp:(outline-show-subtree+toggle)][||]] <<screenstudioRcStdout>>  =verify= parsMand=sessionType parsOpt=nuOfDisplays ro=cli   [[elisp:(org-cycle)][| ]]
+#+end_org """
+class screenstudioRcStdout(cs.Cmnd):
     cmndParamsMandatory = [ 'sessionType', ]
     cmndParamsOptional = [ 'nuOfDisplays', ]
     cmndArgsLen = {'Min': 0, 'Max': 0,}
 
-    @icm.subjectToTracking(fnLoc=True, fnEntry=True, fnExit=True)
+    @cs.track(fnLoc=True, fnEntry=True, fnExit=True)
     def cmnd(self,
-        interactive=False,        # Can also be called non-interactively
-        sessionType=None,         # or Cmnd-Input
-        nuOfDisplays=None,         # or Cmnd-Input
-    ):
-        cmndOutcome = self.getOpOutcome()
-        if interactive:
-            if not self.cmndLineValidate(outcome=cmndOutcome):
-                return cmndOutcome
+             rtInv: cs.RtInvoker,
+             cmndOutcome: b.op.Outcome,
+             sessionType: typing.Optional[str]=None,  # Cs Mandatory Param
+             nuOfDisplays: typing.Optional[str]=None,  # Cs Optional Param
+    ) -> b.op.Outcome:
 
+        failed = b_io.eh.badOutcome
         callParamsDict = {'sessionType': sessionType, 'nuOfDisplays': nuOfDisplays, }
-        if not icm.cmndCallParamsValidate(callParamsDict, interactive, outcome=cmndOutcome):
-            return cmndOutcome
-        sessionType = callParamsDict['sessionType']
-        nuOfDisplays = callParamsDict['nuOfDisplays']
+        if self.invocationValidate(rtInv, cmndOutcome, callParamsDict, None).isProblematic():
+            return failed(cmndOutcome)
+        sessionType = csParam.mappedValue('sessionType', sessionType)
+        nuOfDisplays = csParam.mappedValue('nuOfDisplays', nuOfDisplays)
 ####+END:
 
         if not nuOfDisplays:
             outcome = nuOfDisplaysGet().cmnd()
-            if outcome.isProblematic(): return(icm.EH_badOutcome(outcome))
+            if outcome.isProblematic(): return(io.eh.badOutcome(outcome))
             
             nuOfDisplays = outcome.result
 
@@ -630,7 +513,7 @@ class screenstudioRcStdout(icm.Cmnd):
             microphoneStr="""Yeti Stereo Microphone Analog Stereo"""
             
         else:
-            icm.EH_usageError("Bad sessionType -- {}".format(sessionType))
+            b_io.eh.usageError("Bad sessionType -- {}".format(sessionType))
 
         displaysStr = screenstudioRcTemplate(
             nuOfDisplays,
@@ -645,18 +528,18 @@ class screenstudioRcStdout(icm.Cmnd):
         else:
             resStr = ""   # NOTYET, Is This An Error?
 
-        if interactive:
+        if rtInv.outs:
             print(resStr)
         
         return cmndOutcome.set(
-            opError=icm.OpError.Success,
+            opError=b.OpError.Success,
             opResults=resStr
         )
 
-####+BEGIN: bx:icm:python:func :funcName "screenstudioRcTemplate" :funcType "anyOrNone" :retType "bool" :deco "" :argsList "nuOfDisplays"
-"""
-*  [[elisp:(org-cycle)][| ]]  [[elisp:(org-show-subtree)][|=]] [[elisp:(show-children)][|V]] [[elisp:(org-tree-to-indirect-buffer)][|>]] [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(beginning-of-buffer)][Top]] [[elisp:(delete-other-windows)][(1)]] || Func-anyOrNone :: /screenstudioRcTemplate/ retType=bool argsList=(nuOfDisplays)  [[elisp:(org-cycle)][| ]]
-"""
+####+BEGIN: bx:cs:python:func :funcName "screenstudioRcTemplate" :funcType "anyOrNone" :retType "bool" :deco "" :argsList "nuOfDisplays"
+""" #+begin_org
+*  _[[elisp:(blee:menu-sel:outline:popupMenu)][±]]_ _[[elisp:(blee:menu-sel:navigation:popupMenu)][Ξ]]_ [[elisp:(outline-show-branches+toggle)][|=]] [[elisp:(bx:orgm:indirectBufOther)][|>]] *[[elisp:(blee:ppmm:org-mode-toggle)][|N]]*  F-anyOrNone [[elisp:(outline-show-subtree+toggle)][||]] /screenstudioRcTemplate/ retType=bool argsList=(nuOfDisplays)  [[elisp:(org-cycle)][| ]]
+#+end_org """
 def screenstudioRcTemplate(
     nuOfDisplays,
 ):
@@ -686,12 +569,8 @@ def screenstudioRcTemplate(
     
     
 
-####+BEGIN: bx:icm:python:section :title "End Of Editable Text"
-"""
-*  [[elisp:(beginning-of-buffer)][Top]] ################ [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(delete-other-windows)][(1)]]    *End Of Editable Text*  [[elisp:(org-cycle)][| ]]  [[elisp:(org-show-subtree)][|=]] 
-"""
-####+END:
-
-####+BEGIN: bx:dblock:global:file-insert-cond :cond "./blee.el" :file "/libre/ByStar/InitialTemplates/software/plusOrg/dblock/inserts/endOfFileControls.org"
-#+STARTUP: showall
+####+BEGIN: blee:bxPanel:foldingSection :outLevel 0 :title " ~End Of Editable Text~ "
+""" #+begin_org
+*  _[[elisp:(blee:menu-sel:outline:popupMenu)][±]]_ _[[elisp:(blee:menu-sel:navigation:popupMenu)][Ξ]]_ [[elisp:(outline-show-branches+toggle)][|=]] [[elisp:(bx:orgm:indirectBufOther)][|>]] *[[elisp:(blee:ppmm:org-mode-toggle)][|N]]*     [[elisp:(outline-show-subtree+toggle)][| _ ~End Of Editable Text~ _: |]]    [[elisp:(org-shifttab)][<)]] E|
+#+end_org """
 ####+END:

@@ -5,7 +5,7 @@ SEED="
 *  /[dblock]/ /Seed/ :: [[file:/bisos/core/bsip/bin/seedFtoCommon.sh]] |
 "
 FILE="
-*  /This File/ :: /l/pip/lcnt/ftoProc.sh
+*  /This File/ :: /l/pip/lcnt/py3/panels/_nodeBase_/ftoProc.sh
 "
 if [ "${loadFiles}" == "" ] ; then
     /bisos/core/bsip/bin/seedFtoCommon.sh -l $0 "$@"
@@ -25,7 +25,6 @@ nodesOrdered=""
 
 ####+BEGIN: bx:dblock:pypi:bash:leavesList :types ""
 leavesList="
-py3
 "
 ####+END:
 

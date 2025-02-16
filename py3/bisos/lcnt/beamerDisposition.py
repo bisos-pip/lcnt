@@ -3,7 +3,7 @@
 * TODO *[Summary]* ::  A /library/ Beginning point for development of new ICM oriented libraries.
 """
 
-####+BEGIN: bx:icm:python:top-of-file :partof "bystar" :copyleft "halaal+minimal"
+####+BEGIN: bx:cs:python:top-of-file :partof "bystar" :copyleft "halaal+minimal"
 """
 *  This file:/de/bx/nne/dev-py/pypi/pkgs/bisos/examples/dev/bisos/examples/icmLibBegin.py :: [[elisp:(org-cycle)][| ]]
 ** is part of The Libre-Halaal ByStar Digital Ecosystem. http://www.by-star.net
@@ -33,8 +33,8 @@ __status__ = "Production"
 
 __credits__ = [""]
 
-####+BEGIN: bx:dblock:global:file-insert-cond :cond "./blee.el" :file "/libre/ByStar/InitialTemplates/update/sw/icm/py/icmInfo-mbNedaGpl.py"
-icmInfo = {
+####+BEGIN: bx:dblock:global:file-insert-cond :cond "./blee.el" :file "/libre/ByStar/InitialTemplates/update/sw/icm/py/csInfo-mbNedaGpl.py"
+csInfo = {
     'authors':         ["[[http://mohsen.1.banan.byname.net][Mohsen Banan]]"],
     'copyright':       "Copyright 2017, [[http://www.neda.com][Neda Communications, Inc.]]",
     'licenses':        ["[[https://www.gnu.org/licenses/agpl-3.0.en.html][Affero GPL]]", "Libre-Halaal Services License", "Neda Commercial License"],
@@ -44,7 +44,7 @@ icmInfo = {
 }
 ####+END:
 
-####+BEGIN: bx:icm:python:topControls 
+####+BEGIN: bx:cs:python:topControls 
 """
 *  [[elisp:(org-cycle)][|/Controls/| ]] :: [[elisp:(org-show-subtree)][|=]] [[elisp:(show-all)][Show-All]]  [[elisp:(org-shifttab)][Overview]]  [[elisp:(progn (org-shifttab) (org-content))][Content]] | [[file:Panel.org][Panel]] | [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] | [[elisp:(bx:org:run-me)][Run]] | [[elisp:(bx:org:run-me-eml)][RunEml]] | [[elisp:(delete-other-windows)][(1)]] | [[elisp:(progn (save-buffer) (kill-buffer))][S&Q]]  [[elisp:(save-buffer)][Save]]  [[elisp:(kill-buffer)][Quit]] [[elisp:(org-cycle)][| ]]
 ** /Version Control/ ::  [[elisp:(call-interactively (quote cvs-update))][cvs-update]]  [[elisp:(vc-update)][vc-update]] | [[elisp:(bx:org:agenda:this-file-otherWin)][Agenda-List]]  [[elisp:(bx:org:todo:this-file-otherWin)][ToDo-List]]
@@ -59,30 +59,11 @@ icmInfo = {
 """
 
 
-####+BEGIN: bx:icm:python:section :title "ContentsList"
+####+BEGIN: bx:cs:python:section :title "ContentsList"
 """
 *  [[elisp:(beginning-of-buffer)][Top]] ################ [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(delete-other-windows)][(1)]]    *ContentsList*  [[elisp:(org-cycle)][| ]]  [[elisp:(org-show-subtree)][|=]] 
 """
 ####+END:
-
-####+BEGIN: bx:dblock:python:func :funcName "insertPathForImports" :funcType "FrameWrk" :retType "none" :deco "" :argsList "path"
-"""
-*  [[elisp:(org-cycle)][| ]]  [[elisp:(org-show-subtree)][|=]] [[elisp:(show-children)][|V]] [[elisp:(org-tree-to-indirect-buffer)][|>]] [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(beginning-of-buffer)][Top]] [[elisp:(delete-other-windows)][(1)]] || Func-FrameWrk  :: /insertPathForImports/ retType=none argsList=(path)  [[elisp:(org-cycle)][| ]]
-"""
-def insertPathForImports(
-    path,
-):
-####+END:
-    """
-** Extends Python imports path with  ../lib/python
-"""
-    import os
-    import sys
-    absolutePath = os.path.abspath(path)    
-    if os.path.isdir(absolutePath):
-        sys.path.insert(1, absolutePath)
-
-insertPathForImports("../lib/python/")
 
 
 
@@ -92,6 +73,19 @@ insertPathForImports("../lib/python/")
 """
 ####+END:
 
+####+BEGINNOT: b:py3:cs:framework/imports :basedOn "classification"
+""" #+begin_org
+*  _[[elisp:(blee:menu-sel:outline:popupMenu)][±]]_ _[[elisp:(blee:menu-sel:navigation:popupMenu)][Ξ]]_ [[elisp:(outline-show-branches+toggle)][|=]] [[elisp:(bx:orgm:indirectBufOther)][|>]] *[[elisp:(blee:ppmm:org-mode-toggle)][|N]]*  CsFrmWrk   [[elisp:(outline-show-subtree+toggle)][||]] *Imports* =Based on Classification=cs-u=
+#+end_org """
+from bisos import b
+from bisos.b import cs
+from bisos.b import b_io
+from bisos.common import csParam
+
+import collections
+####+END:
+
+
 import os
 import sys
 import collections
@@ -100,16 +94,8 @@ import enum
 import pexpect
 # Not using import pxssh -- because we need to custom manipulate the prompt
 
-# NOTYET, should become a dblock with its own subItem
-from unisos import ucf
-from unisos import icm
 
 from bisos.lcnt import screenstudioWebClient
-
-G = icm.IcmGlobalContext()
-G.icmLibsAppend = __file__
-G.icmCmndsLibsAppend = __file__
-# NOTYET DBLOCK Ends -- Rest of bisos libs follow;
 
 
 ####+BEGIN: bx:dblock:python:section :title "Library Description (Overview)"
@@ -118,69 +104,6 @@ G.icmCmndsLibsAppend = __file__
 """
 ####+END:
 
-####+BEGIN: bx:dblock:python:icm:cmnd:classHead :cmndName "icmBegin_LibOverview" :parsMand "" :parsOpt "" :argsMin "0" :argsMax "3" :asFunc "" :interactiveP ""
-"""
-*  [[elisp:(org-cycle)][| ]]  [[elisp:(org-show-subtree)][|=]] [[elisp:(show-children)][|V]] [[elisp:(org-tree-to-indirect-buffer)][|>]] [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(beginning-of-buffer)][Top]] [[elisp:(delete-other-windows)][(1)]] || ICM-Cmnd       :: /icmBegin_LibOverview/ parsMand= parsOpt= argsMin=0 argsMax=3 asFunc= interactive=  [[elisp:(org-cycle)][| ]]
-"""
-class icmBegin_LibOverview(icm.Cmnd):
-    cmndParamsMandatory = [ ]
-    cmndParamsOptional = [ ]
-    cmndArgsLen = {'Min': 0, 'Max': 3,}
-
-    @icm.subjectToTracking(fnLoc=True, fnEntry=True, fnExit=True)
-    def cmnd(self,
-        interactive=False,        # Can also be called non-interactively
-        argsList=None,         # or Args-Input
-    ):
-        G = icm.IcmGlobalContext()
-        cmndOutcome = self.getOpOutcome()
-        if interactive:
-            if not self.cmndLineValidate(outcome=cmndOutcome):
-                return cmndOutcome
-            effectiveArgsList = G.icmRunArgsGet().cmndArgs
-        else:
-            effectiveArgsList = argsList
-
-        callParamsDict = {}
-        if not icm.cmndCallParamsValidate(callParamsDict, interactive, outcome=cmndOutcome):
-            return cmndOutcome
-####+END:
-
-        moduleDescription="""
-*       [[elisp:(org-show-subtree)][|=]]  [[elisp:(org-cycle)][| *Description:* | ]]
-**  [[elisp:(org-cycle)][| ]]  [Xref]          :: *[Related/Xrefs:]*  <<Xref-Here->>  -- External Documents  [[elisp:(org-cycle)][| ]]
-
-**  [[elisp:(org-cycle)][| ]]   Model and Terminology                                      :Overview:
-This module is part of BISOS and its primary documentation is in  http://www.by-star.net/PLPC/180047
-**      [End-Of-Description]
-"""
-        
-        moduleUsage="""
-*       [[elisp:(org-show-subtree)][|=]]  [[elisp:(org-cycle)][| *Usage:* | ]]
-
-**      How-Tos:
-**      [End-Of-Usage]
-"""
-        
-        moduleStatus="""
-*       [[elisp:(org-show-subtree)][|=]]  [[elisp:(org-cycle)][| *Status:* | ]]
-**  [[elisp:(org-cycle)][| ]]  [Info]          :: *[Current-Info:]* Status/Maintenance -- General TODO List [[elisp:(org-cycle)][| ]]
-** TODO [[elisp:(org-cycle)][| ]]  Current         :: Just getting started [[elisp:(org-cycle)][| ]]
-**      [End-Of-Status]
-"""
-
-####+BEGIN: bx:dblock:global:file-insert-cond :cond "./blee.el" :file "/libre/ByStar/InitialTemplates/update/sw/icm/py/moduleOverview.py"
-        cmndArgsSpec = {"0&-1": ['moduleDescription', 'moduleUsage', 'moduleStatus']}
-        cmndArgsValid = cmndArgsSpec["0&-1"]
-        icm.unusedSuppressForEval(moduleDescription, moduleUsage, moduleStatus)
-        for each in effectiveArgsList:
-            if each in cmndArgsValid:
-                if interactive:
-                    exec("""print({})""".format(each))
-                
-        return(format(str(__doc__)+moduleDescription))
-####+END:
- 
 ####+BEGIN: bx:dblock:python:section :title "Start Your Sections Here"
 """
 *  [[elisp:(beginning-of-buffer)][Top]] ################ [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(delete-other-windows)][(1)]]    *Start Your Sections Here*  [[elisp:(org-cycle)][| ]]  [[elisp:(org-show-subtree)][|=]] 
@@ -188,7 +111,7 @@ This module is part of BISOS and its primary documentation is in  http://www.by-
 ####+END:
 
 
-####+BEGIN: bx:icm:python:func :funcName "withSlideNumberGetFrameName" :funcType "anyOrNone" :retType "bool" :deco "" :argsList "slideNu dispositionBase=None"
+####+BEGIN: bx:cs:python:func :funcName "withSlideNumberGetFrameName" :funcType "anyOrNone" :retType "bool" :deco "" :argsList "slideNu dispositionBase=None"
 """
 *  [[elisp:(org-cycle)][| ]]  [[elisp:(org-show-subtree)][|=]] [[elisp:(show-children)][|V]] [[elisp:(org-tree-to-indirect-buffer)][|>]] [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(beginning-of-buffer)][Top]] [[elisp:(delete-other-windows)][(1)]] || Func-anyOrNone :: /withSlideNumberGetFrameName/ retType=bool argsList=(slideNu dispositionBase=None)  [[elisp:(org-cycle)][| ]]
 """
@@ -204,20 +127,20 @@ def withSlideNumberGetFrameName(
     #filesList = os.listdir(dispositionBase)  # This is instead of sorting
 
     this = format("slide" + str(slideNu))       
-    frameFileParam = icm.FILE_Param()
+    frameFileParam = b.fp.FileParam()
     frameFileParam = frameFileParam.readFrom(storeBase=dispositionBase, parName=this)
 
     if frameFileParam == None:
-        return icm.EH_critical_usageError('frameFileParam')
+        return b_io.eh.critical_usageError('frameFileParam')
 
     thisLabeled = frameFileParam.parValueGet()
-    thisLabeledBase = os.path.join(dispositionBase, thisLabeled)
+    # thisLabeledBase = os.path.join(dispositionBase, thisLabeled)
 
     return thisLabeled
     
 
 
-####+BEGIN: bx:icm:python:section :title "End Of Editable Text"
+####+BEGIN: blee:bxPanel:foldingSection :outLevel 0 :title " ~End Of Editable Text~ "
 """
 *  [[elisp:(beginning-of-buffer)][Top]] ################ [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(delete-other-windows)][(1)]]    *End Of Editable Text*  [[elisp:(org-cycle)][| ]]  [[elisp:(org-show-subtree)][|=]] 
 """
