@@ -270,7 +270,7 @@ class isbnCalculate13(cs.Cmnd):
 
         isbnCheckSum = isbn.calculate(inIsbn)
 
-        if rtInv.outs: print(isbnCheckSum)
+        # if rtInv.outs: print(isbnCheckSum)
         cmndOutcome.results = isbnCheckSum
 
         return(cmndOutcome)
@@ -327,7 +327,7 @@ class isbnValidate13(cs.Cmnd):
 
         isValid = isbn.validate(inIsbn)
 
-        if rtInv.outs: print(isValid)
+        # if rtInv.outs: print(isValid)
         cmndOutcome.results = isValid
 
         return(cmndOutcome)
@@ -392,7 +392,7 @@ class pdfNuOfPages(cs.Cmnd):
                 f"""echo $(pdfinfo {inFile}  | grep ^Pages | cut -d ':' -f 2)""",
         ).stdout):  return(icm.EH_badOutcome(cmndOutcome))
 
-        if rtInv.outs: print(nuOfPages)
+        # if rtInv.outs: print(nuOfPages)
         cmndOutcome.results = nuOfPages
 
         return(cmndOutcome)
@@ -464,7 +464,7 @@ class spineWidthSoft(cs.Cmnd):
         bookSpineWidthSoft = (float(10)/float(176)) * (nuOfPages/90) * weightInGsm + 1
         bookSpineWidthSoftStr = "{:.2f}".format(bookSpineWidthSoft)
 
-        if rtInv.outs: print(bookSpineWidthSoftStr)
+        # if rtInv.outs: print(bookSpineWidthSoftStr)
         cmndOutcome.results = bookSpineWidthSoftStr
 
         return(cmndOutcome)
@@ -510,7 +510,7 @@ class spineWidthHard(cs.Cmnd):
 
         bookSpineWidthHardStr = "{:.2f}".format(bookSpineWidthHard)
 
-        if rtInv.outs: print (bookSpineWidthHardStr)
+        # if rtInv.outs: print (bookSpineWidthHardStr)
         cmndOutcome.results = bookSpineWidthHardStr
 
         return(cmndOutcome)
@@ -559,7 +559,7 @@ class pdfSpineWidthSoft(cs.Cmnd):
                 nuOfPages=nuOfPages,
         ).results): return(b_io.eh.badOutcome(cmndOutcome))
 
-        if rtInv.outs: print(spineWidth)
+        # if rtInv.outs: print(spineWidth)
         cmndOutcome.results = spineWidth
 
         return(cmndOutcome)
@@ -628,7 +628,7 @@ class pdfSpineWidthHard(cs.Cmnd):
                 nuOfPages=nuOfPages,
         ).results): return(b_io.eh.badOutcome(cmndOutcome))
 
-        if rtInv.outs: print(spineWidth)
+        # if rtInv.outs: print(spineWidth)
         cmndOutcome.results = spineWidth
 
         return(cmndOutcome)
