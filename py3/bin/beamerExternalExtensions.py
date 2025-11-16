@@ -608,12 +608,10 @@ class dispositionBaseSetup(cs.Cmnd):
 
         dispositionBase = dispositionBaseDefault(dispositionBase)
 
-        dispositionParamBaseSetup().cmnd(
-            interactive=False,
+        dispositionParamBaseSetup().pyCmnd(
             dispositionBase=dispositionBase,
             dispositionParBase='.',
         )
-
 
 
         def cmndDesc(): """
@@ -653,7 +651,12 @@ class dispositionParamBaseSetup(cs.Cmnd):
 
         parRoot = os.path.join(dispositionBase, dispositionParBase)    
 
-        thisParamBase = icm.FILE_ParamBase(fileSysPath=parRoot)
+        """
+        NOTYET-BEGIN
+        Needs-to-be-revisited
+
+        # thisParamBase = icm.FILE_ParamBase(fileSysPath=parRoot)
+        thisParamBase = b.fp.FILE_ParamBase(fileSysPath=parRoot)
 
         thisParamBaseState = thisParamBase.baseValidityPredicate()
     
@@ -665,6 +668,9 @@ class dispositionParamBaseSetup(cs.Cmnd):
             b_io.tm.here('InPlace')
         else:
             return b_io.eh.critical_oops('thisParamBaseState=' + thisParamBaseState)
+
+        NOTYET-END
+        """
 
         return
 
@@ -702,15 +708,16 @@ class dispositionParamSet(cs.Cmnd):
 
         dispositionBase = dispositionBaseDefault(dispositionBase)
 
-        dispositionParName = effectiveArgsList[0]
-        dispositionParValue = effectiveArgsList[1]
+        cmndArgs = self.cmndArgsGet("0&2", cmndArgsSpecDict, argsList)
 
-        dispositionBaseSetup().cmnd(interactive=False,
-                                  dispositionBase=dispositionBase)
+        dispositionParName = cmndArgs[0]
+        dispositionParValue = cmndArgs[1]
+
+        dispositionBaseSetup().pyCmnd(dispositionBase=dispositionBase)
 
         parRoot = os.path.join(dispositionBase, dispositionParBase)
 
-        thisFileParam = b.fp.FILE_Param()
+        thisFileParam = b.fp.FileParam()
         return  thisFileParam.writeTo(storeBase=parRoot,
                                       parName=dispositionParName,
                                       parValue=dispositionParValue)
@@ -826,14 +833,14 @@ class latexSrcToDispositionUpdate(cs.Cmnd):
 
         dispositionBase = dispositionBaseDefault(dispositionBase)
 
-        pdfFileName = effectiveArgsList[0]
+        cmndArg = self.cmndArgsGet("0", cmndArgsSpecDict, argsList)
+        pdfFileName = cmndArg
     
         # document = PdfFileReader(file(pdfFileName, "rb"))
         document = PdfFileReader(open(pdfFileName, "rb"))
         pages = document.getNumPages()    
 
-        dispositionBaseSetup().cmnd(
-            interactive=False,
+        dispositionBaseSetup().pyCmnd(
             dispositionBase=dispositionBase,
         )
 
@@ -842,8 +849,7 @@ class latexSrcToDispositionUpdate(cs.Cmnd):
         #navFileName = fileName + ".nav"
         snmFileName = fileName + ".snm"
 
-        slideNumbersNames = frameNamesGet().cmnd(
-            interactive=False,
+        slideNumbersNames = frameNamesGet().pyCmnd(
             argsList=[snmFileName, pages,],
         )
     
@@ -854,15 +860,13 @@ class latexSrcToDispositionUpdate(cs.Cmnd):
             slideNumberName=format("slide" + str(slideNu))                
             frameName = slideNumbersNames[i]
         
-            dispositionParamSet().cmnd(
-                interactive=False,
+            dispositionParamSet().pyCmnd(
                 dispositionBase=dispositionBase,
                 dispositionParBase='.',
                 argsList=[slideNumberName, frameName,],
             )
 
-            dispositionParamBaseSetup().cmnd(
-                interactive=False,
+            dispositionParamBaseSetup().pyCmnd(
                 dispositionBase=dispositionBase,
                 dispositionParBase=frameName,
             )
@@ -873,8 +877,7 @@ class latexSrcToDispositionUpdate(cs.Cmnd):
                     pass
                 else:
                     audioAbsFilePath = os.path.abspath(format("./audio" + "/" + frameName + '.wav'))
-                    dispositionParamSet().cmnd(
-                        interactive=False,
+                    dispositionParamSet().pyCmnd(
                         dispositionBase=dispositionBase,
                         dispositionParBase=frameName,
                         argsList=['audio', audioAbsFilePath,],
@@ -885,8 +888,7 @@ class latexSrcToDispositionUpdate(cs.Cmnd):
 
             # The first two slides (0 and 1)
             if i < 2:
-                dispositionParamSet().cmnd(
-                    interactive=False,
+                dispositionParamSet().pyCmnd(
                     dispositionBase=dispositionBase,
                     dispositionParBase=frameName,
                     argsList=['transition', 'PagePeel'],
@@ -976,18 +978,17 @@ class frameNameQuote(cs.Cmnd):
         cmndArgsSpecDict = self.cmndArgsSpec()
 ####+END:
 
-        frameName = effectiveArgsList[0]
+        cmndArg = self.cmndArgsGet("0", cmndArgsSpecDict, argsList)
+        frameName = cmndArg
         frameNameQuoted=""
 
-        thisOutcome = b.op.Outcome(invokerName=G.icmMyFullName())
+        thisOutcome = b.op.Outcome(invokerName=cs.G.icmMyFullName())
 
         #
-        thisOutcome = icm.subProc_bash(
-            """uri@Encode.sh {frameName}"""
-            .format(frameName=frameName),
-            stdin=None, outcome=thisOutcome,
-        )#.out()
-        
+        thisOutcome = b.subProc.WOpW(invedBy=self, log=0).bash(
+            f"""uri@Encode.sh {frameName}"""
+        )
+
         if thisOutcome.isProblematic():
             return(io.eh.badOutcome(thisOutcome))
 
@@ -1026,8 +1027,10 @@ class frameNamesGet(cs.Cmnd):
         cmndArgsSpecDict = self.cmndArgsSpec()
 ####+END:
 
-        snmFileName = effectiveArgsList[0]
-        numberOfPages = int(effectiveArgsList[1])
+        cmndArgs = self.cmndArgsGet("0&2", cmndArgsSpecDict, argsList)
+
+        snmFileName = cmndArgs[0]
+        numberOfPages = int(cmndArgs[1])
 
         slideNumbersNames = []
         for i in range(0,numberOfPages):
@@ -1050,8 +1053,7 @@ class frameNamesGet(cs.Cmnd):
                     # print "matchObj.group(5) : ", matchObj.group(5)
                     # print "matchObj.group(6) : ", matchObj.group(6)
 
-                    slideNumbersNames[int(matchObj.group(5))-1] = frameNameQuote().cmnd(
-                        interactive=False,
+                    slideNumbersNames[int(matchObj.group(5))-1] = frameNameQuote().pyCmnd(
                         argsList=[matchObj.group(2)]
                     )
                 else:
