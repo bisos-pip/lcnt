@@ -613,6 +613,7 @@ class dispositionBaseSetup(cs.Cmnd):
             dispositionParBase='.',
         )
 
+        return cmndOutcome
 
         def cmndDesc(): """
 ** Sets up the base ./disposition.gened FILE_Param directory. Calls dispositionParamBaseSetup with dispositionParBase='.'
@@ -672,7 +673,7 @@ class dispositionParamBaseSetup(cs.Cmnd):
         NOTYET-END
         """
 
-        return
+        return cmndOutcome
 
 
 
@@ -737,8 +738,7 @@ def impressiveFrameParSet(
         Specified in .tex file. Meant to be terse. 
     """
 
-    frameParSet().cmnd(
-        interactive=False,
+    frameParSet().pyCmnd(
         argsList=[frameName, parName, parValue,],
     )
 
@@ -770,11 +770,11 @@ class frameParSet(cs.Cmnd):
 
         dispositionBase = dispositionBaseDefault(dispositionBase)
 
-        frameName = effectiveArgsList[0]
-        parName = effectiveArgsList[1]
-        parValue = effectiveArgsList[2]
+        frameName = self.cmndArgsGet("0", cmndArgsSpecDict, argsList)
+        parName = self.cmndArgsGet("1", cmndArgsSpecDict, argsList)
+        parValue = self.cmndArgsGet("2", cmndArgsSpecDict, argsList)
 
-        dispositionBaseSetup().cmnd(interactive=False,
+        dispositionBaseSetup().pyCmnd(
                                   dispositionBase=dispositionBase)
 
         dispositionParBase = frameName
@@ -833,9 +833,8 @@ class latexSrcToDispositionUpdate(cs.Cmnd):
 
         dispositionBase = dispositionBaseDefault(dispositionBase)
 
-        cmndArg = self.cmndArgsGet("0", cmndArgsSpecDict, argsList)
-        pdfFileName = cmndArg
-    
+        pdfFileName = self.cmndArgsGet("0", cmndArgsSpecDict, argsList)
+
         # document = PdfFileReader(file(pdfFileName, "rb"))
         document = PdfFileReader(open(pdfFileName, "rb"))
         pages = document.getNumPages()    
@@ -851,7 +850,7 @@ class latexSrcToDispositionUpdate(cs.Cmnd):
 
         slideNumbersNames = frameNamesGet().pyCmnd(
             argsList=[snmFileName, pages,],
-        )
+        ).results
     
         for i in range(len(slideNumbersNames)):
             # impressive's first slide, usually titlePage is slide Nu 1
@@ -894,6 +893,8 @@ class latexSrcToDispositionUpdate(cs.Cmnd):
                     argsList=['transition', 'PagePeel'],
                 )
 
+        return cmndOutcome
+
 
 ####+BEGIN: b:py3:cs:cmnd/classHead :cmndName "frameNamesList" :comment "$1 is pdfFile (interactiveOnly)" :parsMand "" :parsOpt "dispositionBase" :argsMin 1 :argsMax 1 :pyInv ""
 """ #+begin_org
@@ -922,7 +923,7 @@ class frameNamesList(cs.Cmnd):
 
         dispositionBase = dispositionBaseDefault(dispositionBase)
 
-        pdfFileName = effectiveArgsList[0]
+        pdfFileName = self.cmndArgsGet("0", cmndArgsSpecDict, argsList)
 
         thisFile=open(pdfFileName, "rb")
 
@@ -936,10 +937,12 @@ class frameNamesList(cs.Cmnd):
         #navFileName = fileName + ".nav"
         snmFileName = fileName + ".snm"
 
-        slideNumbersNames = frameNamesGet().cmnd(
-            interactive=False,
+        slideNumbersNames = frameNamesGet().pyCmnd(
             argsList=[snmFileName, pages,],
-        )
+        ).results
+
+        # print("Frame Names List from PDF File: {pdfFileName}".format(pdfFileName=pdfFileName))
+        # print(f"{slideNumbersNames}")
 
         for i in range(len(slideNumbersNames)):
 
@@ -951,8 +954,10 @@ class frameNamesList(cs.Cmnd):
                     slideNumber=i+1, frameName=frameName,)
                 )
 
-        if not interactive:
+        if not rtInv.outs:
             b_io.eh.critical_usageErro("Not expected to be used non-interactivly. Use frameNamesGet directly.")
+
+        return cmndOutcome
             
 
 ####+BEGIN: b:py3:cs:cmnd/classHead :cmndName "frameNameQuote" :comment "$1 is frameName" :parsMand "" :parsOpt "" :argsMin 1 :argsMax 1 :pyInv ""
@@ -997,7 +1002,8 @@ class frameNameQuote(cs.Cmnd):
         if rtInv.outs:
             icm.ANN_note(frameNameQuoted)
 
-        return frameNameQuoted
+        cmndOutcome.results = frameNameQuoted
+        return cmndOutcome
 
     def cmndDesc(): """
 ** Given frameName return frameNameQuoted.
@@ -1055,14 +1061,15 @@ class frameNamesGet(cs.Cmnd):
 
                     slideNumbersNames[int(matchObj.group(5))-1] = frameNameQuote().pyCmnd(
                         argsList=[matchObj.group(2)]
-                    )
+                    ).results
                 else:
                     b_io.tm.here("No match!!")
 
         if rtInv.outs:
             icm.ANN_note(slideNumbersNames)
 
-        return slideNumbersNames
+        cmndOutcome.results = slideNumbersNames
+        return cmndOutcome
 
 ####+BEGIN: b:py3:cs:cmnd/classHead :cmndName "beamerExternalTagsUpdateAsFPs" :comment "$1 is .ttytex -- extractes from tex and uses impressiveFrameParSet()" :parsMand "" :parsOpt "dispositionBase" :argsMin 1 :argsMax 1 :pyInv ""
 """ #+begin_org
@@ -1094,9 +1101,8 @@ class beamerExternalTagsUpdateAsFPs(cs.Cmnd):
 
         dispositionBase = dispositionBaseDefault(dispositionBase)
 
-        opOutcome = latexSup.latexInputFilesList().cmnd(
-            interactive=False,
-            argsList=effectiveArgsList,
+        opOutcome = latexSup.latexInputFilesList().pyCmnd(
+            argsList=argsList,
         )
 
         if opOutcome.isProblematic():
@@ -1166,10 +1172,10 @@ class updateDispositionBase(cs.Cmnd):
 
         dispositionBase = dispositionBaseDefault(dispositionBase)
 
-        inPdf = effectiveArgsList[0]
+        cmndArg = self.cmndArgsGet("0", cmndArgsSpecDict, argsList)
+        inPdf = cmndArg
 
-        latexSrcToDispositionUpdate().cmnd(
-            interactive=False,
+        latexSrcToDispositionUpdate().pyCmnd(
             dispositionBase=dispositionBase,
             argsList=[inPdf,],
         )
@@ -1177,13 +1183,12 @@ class updateDispositionBase(cs.Cmnd):
         fileName, fileExtension = os.path.splitext(inPdf)
         ttytexFileName = fileName + ".ttytex"
 
-        beamerExternalTagsUpdateAsFPs().cmnd(
-            interactive=False,
+        beamerExternalTagsUpdateAsFPs().pyCmnd(
             dispositionBase=dispositionBase,
             argsList=[ttytexFileName,],
         )
 
-        return
+        return cmndOutcome
 
 
 ####+BEGIN: b:py3:cs:cmnd/classHead :cmndName "dispositionFrameNamesList" :comment "" :parsMand "" :parsOpt "framesRange dispositionBase" :argsMin 0 :argsMax 0 :pyInv ""
@@ -1261,10 +1266,10 @@ translate  dispositionBase info into impressive parameters and write them to std
                     frameName=thisLabeled,)
                 )
 
-            if not interactive:
+            if not rtInv.outs:
                 b_io.eh.critical_usageErro("Not expected to be used non-interactivly. Use frameNamesGet directly.")
 
-        return
+        return cmndOutcome
 
     
     
@@ -1325,7 +1330,7 @@ class dispositionToImpressiveInfoPurposedStdout(cs.Cmnd):
         dispositionBase = dispositionBaseDefault(dispositionBase)
 
         purposesList = []
-        for thisArg in effectiveArgsList:
+        for thisArg in argsList:
             purposesList.append(thisArg)
 
         thisParamBase = b.fp.FILE_ParamBase(fileSysPath=dispositionBase)
@@ -1404,7 +1409,7 @@ PageProps = {
                         filePar = icm.FILE_Param()
                         filePar = filePar.readFrom(storeBase=thisLabeledBase, parName='audio')
                         if filePar == None:
-                            return #io.eh.critical_usageError('')
+                            return cmndOutcome #io.eh.critical_usageError('')
 
                         else:
                             audioValue = filePar.parValueGet()
@@ -1434,7 +1439,7 @@ PageProps = {
                 filePar = icm.FILE_Param()
                 filePar = filePar.readFrom(storeBase=thisLabeledBase, parName='audio')
                 if filePar == None:
-                    return #io.eh.critical_usageError('')
+                    return cmndOutcome #io.eh.critical_usageError('')
 
                 else:
                     audioValue = filePar.parValueGet()
@@ -1472,7 +1477,7 @@ PageProps = {
                 filePar = icm.FILE_Param()
                 filePar = filePar.readFrom(storeBase=thisLabeledBase, parName='audio')
                 if filePar == None:
-                    return #io.eh.critical_usageError('')
+                    return cmndOutcome #io.eh.critical_usageError('')
                 audioValue = filePar.parValueGet()
 
                 audioSansSuffix = os.path.splitext(audioValue)[0]
@@ -1494,7 +1499,7 @@ PageProps = {
                 filePar = icm.FILE_Param()
                 filePar = filePar.readFrom(storeBase=thisLabeledBase, parName='always')
                 if filePar == None:
-                    return #io.eh.critical_usageError('')
+                    return cmndOutcome #io.eh.critical_usageError('')
                 thisValue = filePar.parValueGet()
                 sys.stdout.write("""
               'always': """ + thisValue + """,""")
@@ -1503,7 +1508,7 @@ PageProps = {
                 filePar = icm.FILE_Param()
                 filePar = filePar.readFrom(storeBase=thisLabeledBase, parName='transition')
                 if filePar == None:
-                    return #io.eh.critical_usageError('')
+                    return cmndOutcome #io.eh.critical_usageError('')
                 transitionValue = filePar.parValueGet()
                 transitionValue = impressiveTransitionValue(transitionValue)
                 sys.stdout.write("""
@@ -1594,7 +1599,7 @@ PageProps = {
                 filePar = icm.FILE_Param()
                 filePar = filePar.readFrom(storeBase=thisLabeledBase, parName='OnLeave')
                 if filePar == None:
-                    return #io.eh.critical_usageError('')
+                    return cmndOutcome #io.eh.critical_usageError('')
                 thisValue = filePar.parValueGet()
                 sys.stdout.write("""
               'OnLeave': """ + thisValue + """,""")
@@ -1636,7 +1641,7 @@ PageProps = {
             )
         impressiveInfoTailStdout(purposesList)
 
-        return
+        return cmndOutcome
 
 
 ####+BEGIN: b:py3:cs:cmnd/classHead :cmndName "dispositionToPresenterStdout" :comment "No longer used" :parsMand "" :parsOpt "dispositionBase" :argsMin 1 :argsMax 1 :pyInv ""
@@ -1666,7 +1671,7 @@ class dispositionToPresenterStdout(cs.Cmnd):
 
         dispositionBase = dispositionBaseDefault(dispositionBase)
 
-        filename = effectiveArgsList[0]
+        filename = self.cmndArgsGet("0", cmndArgsSpecDict, argsList)
 
         document = PdfFileReader(open(filename, "rb"))
         pages = document.getNumPages()
@@ -1695,6 +1700,8 @@ class dispositionToPresenterStdout(cs.Cmnd):
                     out.write("    "+str(i)+": {\n        'transition': None,\n        'overview': True,\n        'notes': '',\n        'OnEnter': UpdateInfo\n    },\n")
                 else:
                     out.write("    "+str(i)+": {\n        'transition': None,\n        'overview': True,\n        'notes': '',\n        'OnEnter': UpdateInfo\n    }\n}")
+
+        return cmndOutcome
 
     def impressiveInfoHeadStr(self,
                              path,
@@ -1755,6 +1762,7 @@ class dispositionToImpressiveStdout_voiceOver_Obsoleted(cs.Cmnd):
             self.impressiveInfoHeadStr()
         )
 
+        return cmndOutcome
                     
     def cmndDesc(): """
 ** Map dispositionBase into ImpressiveInfo for voiceOver purposes.
@@ -1873,6 +1881,8 @@ class dispositionToImpressiveStdout_recorderEach(cs.Cmnd):
         sys.stdout.write(
             self.impressiveInfoHeadStr()
         )
+        
+        return cmndOutcome
                     
     def cmndDesc(): """
 ** Map dispositionBase into ImpressiveInfo for voiceOver purposes.
@@ -1959,20 +1969,18 @@ class updateThenImpressiveInfoStdout(cs.Cmnd):
 
         dispositionBase = dispositionBaseDefault(dispositionBase)
 
-        updateDispositionBase().cmnd(
-            interactive=False,
+        updateDispositionBase().pyCmnd(
             dispositionBase=dispositionBase,
             argsList=[inPdf,],
         )
 
-        dispositionToImpressiveInfoPurposedStdout().cmnd(
-            interactive=False,
+        dispositionToImpressiveInfoPurposedStdout().pyCmnd(
             dispositionBase=dispositionBase,
             framesRange=framesRange,
-            argsList=effectiveArgsList,
+            argsList=argsList,
         )
 
-        return
+        return cmndOutcome
 
     def cmndDesc(): """
 ** Given a purpose (voiceOver, presentation, etc) create an info file based on purposesList.
@@ -2021,12 +2029,11 @@ class dispositionToImpressivePurposed(cs.Cmnd):
 
         ucf.DIR_ensure(impressiveInfoPath)
 
-        purposesList = effectiveArgsList
+        purposesList = argsList
         
         with open(impressiveInfoPath, 'w') as f:
             with ucf.stdout_redirector(f):
-                dispositionToImpressiveInfoPurposedStdout().cmnd(
-                    interactive=False,
+                dispositionToImpressiveInfoPurposedStdout().pyCmnd(
                     framesRange=framesRange,
                     dispositionBase=dispositionBase,
                     argsList=purposesList,
@@ -2043,7 +2050,7 @@ class dispositionToImpressivePurposed(cs.Cmnd):
                 b_io.ann.write("impressive --nologo -Q -k -I {impressiveInfoPath} {inPdf}".
                           format(impressiveInfoPath=impressiveInfoPath, inPdf=inPdf))
                 
-            
+        return cmndOutcome
 
     def cmndDesc(): """
 ** Given a purpose (voiceOver, presentation, etc) create an info file based on purposesList.
