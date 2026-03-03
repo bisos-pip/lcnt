@@ -230,6 +230,9 @@ class updatePages(cs.Cmnd):
             slideFrameNamePath = dispositionGenedPath.joinpath(
                 slideFrameNamePar.parValueGet()
             )
+
+            slideFrameNamePath.mkdir(parents=True, exist_ok=True)
+            
             slideFrameNamePdf = slideFrameNamePath.joinpath('slide.pdf')
             #
             if b.subProc.WOpW(invedBy=self, log=1).bash(
