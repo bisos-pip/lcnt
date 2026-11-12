@@ -12,7 +12,13 @@ import typing
 #   - rawBisos: the bases BXO is the clone bxlcnt/bro_lcntBases-rawBisos. (bpoActivate.sh and the usgBpos
 #     model are for the sited BISOS only; the leaf stays "available" there.)
 #   - /de/sys/lcnt is a real directory; /lcnt is a link to it; inside it are links into the BXO.
-#   - var and outputs are not created. Nothing is ever linked inside the clone.
+#   - var is not created. Nothing is ever linked inside the clone.
+# Changed with the user, 2026-11-12 (lcnt AI-WorkPlan.org, Stage 5):
+#   - lgpc (Libre Generated Public Content) is a real directory holding a link rawBisos into the BXO,
+#     so that other hierarchies (bystar, ...) can sit beside it outside the clone.
+#   - lgcc (Libre Generated Confidential Content) is an empty real directory: a placeholder where the
+#     user builds her own hierarchy. Nothing is linked into it.
+#   - outputs/all/lists is a real directory: every build keeps /lcnt/outputs/all/lists/nuBaseDir there.
 #
 
 bxoOverrideName = "LCNT_BASES_BXO"
@@ -22,18 +28,20 @@ deSys = "/de/sys"
 deSysLcnt = "/de/sys/lcnt"
 lcntShortcut = "/lcnt"
 
+# Real directories in /de/sys/lcnt (made with their parents; never links).
+realDirs: typing.List[str] = [
+    "lgpc",
+    "lgcc",
+    "outputs/all/lists",
+]
+
 # (name in /de/sys/lcnt, path in the BXO)
 links: typing.List[typing.Tuple[str, str]] = [
     ("bxdpt", "bxdpt"),
     ("BIB", "BIB"),
     ("CENTRAL", "CENTRAL"),
     ("REGISTRY", "REGISTRY"),
-    ("lgpc", "lcnt/lgpc"),
-]
-
-# Linked when the BXO has it, reported as absent (never required) when it does not.
-optionalLinks: typing.List[typing.Tuple[str, str]] = [
-    ("lgcc", "lcnt/lgcc"),
+    ("lgpc/rawBisos", "lcnt/lgpc/rawBisos"),
 ]
 
 
@@ -48,9 +56,17 @@ def linkSpecs(bxo: str = "") -> typing.List[typing.Tuple[str, str, str]]:
     return [(name, os.path.join(deSysLcnt, name), os.path.join(bxo, rel)) for name, rel in links]
 
 
-def optionalLinkSpecs(bxo: str = "") -> typing.List[typing.Tuple[str, str, str]]:
-    bxo = bxo or bxoPath()
-    return [(name, os.path.join(deSysLcnt, name), os.path.join(bxo, rel)) for name, rel in optionalLinks]
+def realDirPaths() -> typing.List[str]:
+    return [os.path.join(deSysLcnt, each) for each in realDirs]
+
+
+def realDirState(path: str) -> str:
+    """One of: ok (a real directory), link (a link: the pre-Stage-5 lgpc), notADir, absent."""
+    if os.path.islink(path):
+        return "link"
+    if not os.path.exists(path):
+        return "absent"
+    return "ok" if os.path.isdir(path) else "notADir"
 
 
 def linkState(linkPath: str, target: str) -> str:

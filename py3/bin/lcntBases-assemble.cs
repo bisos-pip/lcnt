@@ -51,8 +51,8 @@ csInfo['cmndParts'] = 'IcmCmndParts[common] IcmCmndParts[param]'
 * [[elisp:(org-cycle)][| ~Description~ |]] :: [[file:/bisos/git/auth/bxRepos/blee-binders/bisos-core/PyFwrk/bisos-pip/bisos.cs/_nodeBase_/fullUsagePanel-en.org][BISOS CmndSvcs Panel]]   [[elisp:(org-cycle)][| ]]
 
 This is the assemble step of lcntBases-cbs.pcs. fullUpdate makes /de/sys (sudo), the real directory
-/de/sys/lcnt, the shortcut /lcnt, and in /de/sys/lcnt the links bxdpt BIB CENTRAL REGISTRY and lgpc (to lcnt/lgpc)
-into the bases BXO: the clone bxlcnt/bro_lcntBases-rawBisos (override for tests: LCNT_BASES_BXO). Nothing is
+/de/sys/lcnt, the shortcut /lcnt, in /de/sys/lcnt the real directories lgpc, lgcc (a placeholder) and outputs/all/lists,
+and the links bxdpt BIB CENTRAL REGISTRY and lgpc/rawBisos (to lcnt/lgpc/rawBisos) into the bases BXO: the clone bxlcnt/bro_lcntBases-rawBisos (override for tests: LCNT_BASES_BXO). Nothing is
 ever linked inside the clone. toolchainCheck verifies lcntCore (checked, never installed here) and every
 link, and fails loudly, since neither this step nor the CBM walker report a failure as one.
 rawBisos only: bpoActivate.sh and the usgBpos model are for the sited BISOS.
@@ -172,9 +172,9 @@ class examples(cs.Cmnd):
         #
 
         cs.examples.menuChapter('=Verification=')
-        cmnd('toolchainCheck', comment=" # lcntCore, /lcnt, the links into the bases BXO")
+        cmnd('toolchainCheck', comment=" # lcntCore, /lcnt, the real dirs (lgpc lgcc outputs), the links into the BXO")
         cs.examples.menuChapter('=Full Update=')
-        cmnd('fullUpdate', comment=" # sudo: /de/sys, /lcnt; then the links; then toolchainCheck")
+        cmnd('fullUpdate', comment=" # sudo: /de/sys, /lcnt; the real dirs; the links; then toolchainCheck")
 
         return(cmndOutcome)
 
@@ -199,7 +199,7 @@ class fullUpdate(cs.Cmnd):
             return failed(cmndOutcome)
 ####+END:
         if self.cmndDocStr(f""" #+begin_org
-** [[elisp:(org-cycle)][| *CmndDesc:* | ]]  Make /de/sys/lcnt, /lcnt and the links into the bases BXO; then toolchainCheck.
+** [[elisp:(org-cycle)][| *CmndDesc:* | ]]  Make /de/sys/lcnt, /lcnt, the real dirs (lgpc, lgcc, outputs/all/lists) and the links; then toolchainCheck.
         #+end_org """): return(cmndOutcome)
 
         self.captureRunStr(""" #+begin_org
@@ -232,9 +232,22 @@ class fullUpdate(cs.Cmnd):
             sudoRun(["sudo", "ln", "-s", info.deSysLcnt, info.lcntShortcut])
 
         if os.path.isdir(info.deSysLcnt):
-            specs = info.linkSpecs(bxo)
-            specs += [each for each in info.optionalLinkSpecs(bxo) if os.path.exists(each[2])]
-            for name, linkPath, target in specs:
+            for path in info.realDirPaths():
+                state = info.realDirState(path)
+                if state == "link":
+                    os.unlink(path)     # the pre-Stage-5 lgpc was a link into the BXO
+                    print(f"lcntBases: removed the link {path}; it becomes a real directory")
+                elif state == "notADir":
+                    print(f"lcntBases: FAILED: {path} is not a directory; not replacing it")
+                    continue
+                if not os.path.isdir(path):
+                    os.makedirs(path)
+                    print(f"lcntBases: made {path}")
+            for name, linkPath, target in info.linkSpecs(bxo):
+                parent = os.path.dirname(linkPath)
+                if os.path.islink(parent) or not os.path.isdir(parent):
+                    print(f"lcntBases: FAILED: {parent} is not a real directory; not linking {name} (never inside the clone)")
+                    continue
                 state = info.linkState(linkPath, target)
                 if state == "ok":
                     continue
@@ -269,7 +282,7 @@ class toolchainCheck(cs.Cmnd):
             return failed(cmndOutcome)
 ####+END:
         if self.cmndDocStr(""" #+begin_org
-** [[elisp:(org-cycle)][| *CmndDesc:* | ]]  Verify lcntBases: lcntCore, the bases BXO, /lcnt and every link; failing loudly.
+** [[elisp:(org-cycle)][| *CmndDesc:* | ]]  Verify lcntBases: lcntCore, the bases BXO, /lcnt, the real dirs and every link; failing loudly.
         #+end_org """): return(cmndOutcome)
 
         self.captureRunStr(""" #+begin_org
@@ -310,16 +323,14 @@ class toolchainCheck(cs.Cmnd):
         if not shortcutOk:
             missing.append(info.lcntShortcut)
 
-        for name, linkPath, target in info.linkSpecs(bxo):
-            state = info.linkState(linkPath, target)
-            print(f"{name:14} {state}  {linkPath} -> {target}")
+        for path in info.realDirPaths():
+            state = info.realDirState(path)
+            name = os.path.relpath(path, info.deSysLcnt)
+            print(f"{name:14} {'real directory' if state == 'ok' else state.upper()}  {path}")
             if state != "ok":
-                missing.append(f"{name} ({state})")
+                missing.append(f"{name} ({state}, a real directory wanted)")
 
-        for name, linkPath, target in info.optionalLinkSpecs(bxo):
-            if not os.path.exists(target):
-                print(f"{name:14} absent in the bases BXO (not required)")
-                continue
+        for name, linkPath, target in info.linkSpecs(bxo):
             state = info.linkState(linkPath, target)
             print(f"{name:14} {state}  {linkPath} -> {target}")
             if state != "ok":

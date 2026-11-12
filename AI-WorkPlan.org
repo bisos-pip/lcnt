@@ -857,6 +857,54 @@ pursued.
 
 ** -
 
+* Stage 5: Adjustments based on usage
+
+<<Stage 5>>
+
+Goal: As we use these, fine tune as needed
+
+** TODO [#A] <<5.1>> The current symlink /de/sys/lcnt/lgpc -> /bisos/git/bxRepos/bxlcnt/bro_lcntBases-rawBisos/lcnt/lgpc is wrong.
+SCHEDULED: <2026-11-12 Thu>
+Instead we should have a
+mkdir /de/sys/lcnt/lgpc
+ln -s /bisos/git/bxRepos/bxlcnt/bro_lcntBases-rawBisos/lcnt/lgpc/rawBisos/   /de/sys/lcnt/lgpc/rawBisos
+----- Results: ------
+2026-11-12 (Claude; with the user: lgcc, Libre Generated Confidential Content, is only an empty
+directory, a placeholder for the user's own hierarchy; the =bystar= link the user made inside the clone
+is deleted, the user recreates =/de/sys/lcnt/lgpc/bystar= later; not marked DONE):
+- =lcntBasesInfo.py=: a =realDirs= list (=lgpc=, =lgcc=, =outputs/all/lists=, see 5.2) and the link
+  =lgpc/rawBisos= -> =lcnt/lgpc/rawBisos= instead of =lgpc= -> =lcnt/lgpc=; the optional =lgcc= link
+  is gone.
+- =lcntBases-assemble.cs=: =fullUpdate= makes the real directories, removes the old =lgpc= link first
+  (a link only; a real file is refused), and refuses to link into a parent that is a link, so nothing
+  can land inside the clone. =toolchainCheck= requires each real directory and reports =LINK= or
+  =ABSENT=.
+- Done on this host: the untracked link =lcnt/lgpc/bystar= in the clone was deleted (its pub-shuttle
+  target untouched). Before, =toolchainCheck= reported =lgpc LINK=, =lgcc ABSENT=. =fullUpdate=
+  removed the link, made =lgpc=, =lgcc=, =outputs/all/lists=, linked =lgpc/rawBisos=, and ended
+  =lcntBases: complete=; a second run changed nothing. =/lcnt/lgpc/rawBisos/permanent/examples/*= still
+  resolves.
+
+** TODO [#A] <<5.2>> mkdir /de/sys/lcnt/outputs
+SCHEDULED: <2026-11-12 Thu>
+Verify that it is being used.
+----- Results: ------
+2026-11-12 (Claude; with the user: create =outputs/all/lists=, the path the scripts need;
+not marked DONE):
+- Who uses it: only =/lcnt/outputs/all/lists/nuBaseDir= (=bisos/lcnt/bin/lcnLcntLib.sh=). Every build
+  calls =lcntNuBaseVerifyAndFix=: if the file is missing it warns and =touch=es it (which failed while
+  the directory was absent), else it appends the document's lcntNu. =seedLcntProc.sh -i lcntNuUpdate=
+  rebuilds the list from =/lcnt/lgpc=, =/info/externalLimited= and =/lcnt/sw=; =lcnLcntOutputs.sh=
+  reads =nuBaseDir.*= for bibliographies. =var= is still not created.
+- Made by lcntBases (=realDirs=, with 5.1) and verified with two builds of =pres-basic=
+  (=lcntProc.sh -h -v -n showRun -p extent=build -i lcntBuild cur=): the first warned once, created the
+  file and added =PLPC-580002: /lcnt/lgpc/rawBisos/permanent/examples/pres-basic=; the second gave no
+  =nuBaseDir= message and no duplicate line. The PDF was built (=Results/c-580002-pres-basic-pres.pdf=).
+- Seen, unrelated: each build's dblock pass reports =bx-dblock= "Missing emacsServerSocket" (it wants
+  the user's Emacs via =G_emacsServerPid=); =/lcnt/sw= and =/info/externalLimited= do not exist, so
+  =lcntNuUpdate= would list only =/lcnt/lgpc=.
+
+
 
 # Local Variables:
 # eval: (setq-local toc-org-max-depth 4)

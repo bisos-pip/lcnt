@@ -30,7 +30,9 @@ Fill in the sections below when asked to update, following the structure provide
   here and
   materialized on the dev host (a privileged docker container on an AWS VM): =lcntCore= (Stage 2),
   =lcntBases= (Stage 3) and =lcntMultiMedia= (Stage 4, Container set only). The user considers Stage 3 a
-  cut. All uncommitted.
+  cut. Committed and pushed as 6c934f7 (leaves in =bro_rawBisos=). Stage 5 (adjustments from use),
+  uncommitted: lcntBases now makes =lgpc= a real directory holding the link =rawBisos=, an empty =lgcc=,
+  and =outputs/all/lists= for =nuBaseDir=; materialized on this host.
 
 * Architecture
   Each CBM is a leaf =sys/cbm/collective/induct/<name>/cbmProc.spcs= (a pointer to the CBS) in the
@@ -52,10 +54,12 @@ Fill in the sections below when asked to update, following the structure provide
   idempotent; the
   check passes. The reveal HTML needs the user's Emacs server (=G_emacsServerPid= must name it).
 
-  lcntBases (rawBisos only): =/de/sys/lcnt= (real directory) with =bxdpt BIB CENTRAL REGISTRY lgpc=
-  linked
-  into the clone =bxlcnt/bro_lcntBases-rawBisos=, and =/lcnt= to it; idempotent; the check names every
-  missing or wrong link. =pres-basic= builds (the user built all three examples and =matoof-son-26=).
+  lcntBases (rawBisos only): =/de/sys/lcnt= (real directory) with =bxdpt BIB CENTRAL REGISTRY= linked
+  into the clone =bxlcnt/bro_lcntBases-rawBisos=, the real directories =lgpc= (holding the link
+  =rawBisos= into the clone), =lgcc= (empty) and =outputs/all/lists=, and =/lcnt= to it; idempotent;
+  the check names every missing or wrong link or directory. =pres-basic= builds, and with =outputs=
+  in place the build keeps =nuBaseDir= without the warning (the user built all three examples and
+  =matoof-son-26=).
 
 * What Is Untested
   The VM and Box sets (audio, vlc, OBS, kdenlive, v4l2loopback): only their lists and the check logic.
@@ -74,13 +78,14 @@ Fill in the sections below when asked to update, following the structure provide
     on every run and list packages that no longer exist; the check, not their exit status, is the
     verdict.
   - lcntBases: the bases BXO is the clone =bxlcnt/bro_lcntBases-rawBisos=; =bpoActivate.sh= and the
-    usgBpos
-    model are the sited BISOS's, where the leaf stays =available=. Nothing is ever linked inside the
-    clone.
-    =var= and =outputs= are not created, though every build reports the missing =nuBaseDir= list as a
-    warning. (User, 2026-11-12.)
+    usgBpos model are the sited BISOS's, where the leaf stays =available=. Nothing is ever linked
+    inside the clone. =var= is not created. (User, 2026-11-12.)
+  - Stage 5 (User, 2026-11-12): =lgpc= is a real directory with =rawBisos= linked into the clone, so
+    other hierarchies (the user's =bystar=) sit beside it outside the clone; =lgcc= (Libre Generated
+    Confidential Content) is an empty placeholder for the user's own hierarchy; =outputs/all/lists=
+    is created, because every build keeps =nuBaseDir= there.
   - Out-of-chain: the clone =bro_lcntBases-rawBisos= and =rePublication/fonts= are not in
-    =bxRepos-gitist.pcs=; recorded in the AI-Outputs ledger (=blee-binders/evolution=, uncommitted).
+    =bxRepos-gitist.pcs=; recorded in the AI-Outputs ledger (=blee-binders/evolution=, committed).
   - Out-of-chain: the font "XB Zar" comes from the clone =/bisos/git/auth/bxRepos/rePublication/fonts=
     (https://github.com/rePublication/fonts), which is not in =bxRepos-gitist.pcs=.
 

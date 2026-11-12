@@ -104,9 +104,14 @@ The legacy scripts and the CBM walker exit 0 even when a step failed, so only =t
 ** lcntBases
 
 The bases BXO on rawBisos is the clone =bxlcnt/bro_lcntBases-rawBisos= (override for tests:
-=LCNT_BASES_BXO=). The assemble step makes =/de/sys= and =/lcnt= with sudo, and links =bxdpt=, =BIB=,
-=CENTRAL=, =REGISTRY= and =lgpc= (to =lcnt/lgpc=) inside =/de/sys/lcnt=; it never links inside the clone.
-=lcntBases-assemble.cs -i fullUpdate= repairs a broken link and refuses to replace a real directory.
+=LCNT_BASES_BXO=). The assemble step makes =/de/sys= and =/lcnt= with sudo. Inside =/de/sys/lcnt= it
+links =bxdpt=, =BIB=, =CENTRAL= and =REGISTRY= into the clone, and makes three real directories:
+- =lgpc= (Libre Generated Public Content), holding the link =rawBisos= to the clone's
+  =lcnt/lgpc/rawBisos=; other hierarchies (such as =bystar=) are added beside it by the user, never inside the clone.
+- =lgcc= (Libre Generated Confidential Content), empty: a placeholder for the user's own hierarchy.
+- =outputs/all/lists=, where every build keeps =/lcnt/outputs/all/lists/nuBaseDir=.
+=lcntBases-assemble.cs -i fullUpdate= repairs a broken link, turns the old =lgpc= link into the real
+directory, and refuses to replace a real file or directory. It never links inside the clone.
 On the sited BISOS the bases come from a BPO instead and this leaf stays =available=.
 
 ** lcntMultiMedia
