@@ -43,7 +43,7 @@ def longDescription():
 # b:py3:pypi:setup/version Arguments  :forSys t :forPyPi t :constant "666"
 ####+BEGIN: b:py3:pypi:setup/version :comment "Auto Detected"
 
-# ./pypiUploadVer DID NOT exist -- forPypiVersion=0.15 -- forLocalVersion=0.11 -- constant=NA
+# ./pypiUploadVer DID NOT exist -- forPypiVersion=0.16 -- forLocalVersion=0.11 -- constant=NA
 def pkgVersion():
         return '0.11'
 
@@ -52,11 +52,13 @@ def pkgVersion():
 # b:py3:pypi:setup/requires :extras ; :requirements "requirements.txt" (bring here requirements.txt)
 ####+BEGIN: b:py3:pypi:setup/requires :extras ("checkdigit")
 
-requires = [
+requires = [ 
 "bisos",
 "bisos.b",
+"bisos.capability",
 "bisos.common",
 "bisos.csPlayer",
+"bisos.sbom",
 "checkdigit",
 "setuptools==75.8.0",
 "wheel==0.38.4",
@@ -66,12 +68,23 @@ requires = [
 # b:py3:pypi:setup/scripts :comment
 ####+BEGIN: b:py3:pypi:setup/scripts :comment ""
 
-scripts = [
-'bin/beamerExternalExtensions.251130',
+scripts = [ 
 'bin/beamerExternalExtensions.py',
 'bin/beamerPdfPages.cs',
 'bin/bookUtils.cs',
+'bin/cbmProc-lcntBases.spcs',
+'bin/cbmProc-lcntCore.spcs',
+'bin/cbmProc-lcntMultiMedia.spcs',
 'bin/exmpl-lcntProc.cs',
+'bin/lcntBases-assemble.cs',
+'bin/lcntBases-cbs.pcs',
+'bin/lcntBases-sbom.pcs',
+'bin/lcntCore-assemble.cs',
+'bin/lcntCore-cbs.pcs',
+'bin/lcntCore-sbom.pcs',
+'bin/lcntMultiMedia-assemble.cs',
+'bin/lcntMultiMedia-cbs.pcs',
+'bin/lcntMultiMedia-sbom.pcs',
 'bin/screenstudioWebClientIcm.py',
 'bin/seedLcntProc.cs',
 ]
@@ -80,7 +93,7 @@ scripts = [
 # b:py3:pypi:setup/dataFiles :comment
 ####+BEGIN: b:py3:pypi:setup/dataFiles :comment "Instead of ./MANIFEST.in or in pyproject.toml"
 
-data_files = [
+data_files = [ 
 ('',  ['lh-agpl3-LICENSE.txt', '_description.org', 'README.rst']),
 ]
 ####+END:

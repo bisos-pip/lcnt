@@ -1,0 +1,129 @@
+#!/usr/bin/env python
+
+""" #+begin_org
+* Panel::  [[file:./py3/panels/bisos.lcnt/_nodeBase_/fullUsagePanel-en.org]]
+* Overview and Relevant Pointers
+lcntCore-sbom.pcs
+The software bill of materials of the LCNT core: what an LCNT build needs on the platform.
+It calls the existing scripts (lcaLaTexBinsPrep.sh), it does not reproduce their package lists.
+It nests rawBisos-fonts-sbom.pcs (the Persian and other fonts) through sbomsList.
+Audio and video are not core (a later lcntMultiMedia). The PDF viewer is evince; acroread is obsolete.
+#+end_org """
+
+from bisos import b
+from bisos.b import cs
+from bisos.b import b_io
+
+import pathlib
+
+from bisos.sbom import pkgsSeed  # pkgsSeed.plantWithWhich("seedSbom.cs")
+
+ap = pkgsSeed.aptPkg
+sbom = pkgsSeed.sbomSpec
+
+lcntBinDir = pathlib.Path("/bisos/core/lcnt/bin")
+latexBinsPrep = lcntBinDir.joinpath("lcaLaTexBinsPrep.sh")
+fontsSbom = pathlib.Path("/bisos/core/bsip/bin/rawBisos-fonts-sbom.pcs")
+
+
+def lcntAptUpdate() -> None:
+    """The Debian index goes stale: texlive-full's imagemagick, from debian-security, was a 404 on 2026-11-11."""
+    if b.subProc.WOpW(invedBy=None, log=1).bash(
+            """sudo apt-get update""",
+    ).isProblematic():
+        print("lcntCore-sbom: FAILED: apt-get update")
+
+
+def lcntLatexFullUpdate() -> None:
+    """lcaLaTexBinsPrep.sh -i fullUpdate: preview_latex, texlive_full and hevea. It re-runs itself as root."""
+    if b.subProc.WOpW(invedBy=None, log=1).bash(
+            f"""{latexBinsPrep} -h -v -n showRun -i fullUpdate""",
+    ).isProblematic():
+        print("lcntCore-sbom: FAILED: lcaLaTexBinsPrep.sh -i fullUpdate")
+
+
+def lcntLatexExtraInstall() -> None:
+    """lcaLaTexBinsPrep.sh -i extraInstall: the bxtex macros link and extra packages. Needs root."""
+    if b.subProc.WOpW(invedBy=None, log=1).bash(
+            f"""sudo {latexBinsPrep} -h -v -n showRun -i extraInstall""",
+    ).isProblematic():
+        print("lcntCore-sbom: FAILED: lcaLaTexBinsPrep.sh -i extraInstall")
+
+
+aptPkgsList = [
+    ap("lcntAptUpdate", func=lcntAptUpdate),
+    ap("lcntLatexFullUpdate", func=lcntLatexFullUpdate),
+    ap("lcntLatexExtraInstall", func=lcntLatexExtraInstall),
+    ap("evince"),   # The PDF viewer (rawBisos-sbom.pcs has it too); acroread is obsolete on Linux
+]
+
+sbomsList = [
+    sbom(str(fontsSbom)),
+]
+
+pkgsSeed.setup(
+    aptPkgsList=aptPkgsList,
+    sbomsList=sbomsList,
+)
+
+
+####+BEGIN: b:py3:cs:cmnd/classHead :cmndName "readme" :extent "verify" :comment "Describe" :parsMand "" :parsOpt "" :argsMin 0 :argsMax 0 :pyInv ""
+""" #+begin_org
+*  _[[elisp:(blee:menu-sel:outline:popupMenu)][±]]_ _[[elisp:(blee:menu-sel:navigation:popupMenu)][Ξ]]_ [[elisp:(outline-show-branches+toggle)][|=]] [[elisp:(bx:orgm:indirectBufOther)][|>]] *[[elisp:(blee:ppmm:org-mode-toggle)][|N]]*  CmndSvc-   [[elisp:(outline-show-subtree+toggle)][||]] <<readme>>  *Describe*  =verify= ro=cli   [[elisp:(org-cycle)][| ]]
+#+end_org """
+class readme(cs.Cmnd):
+    cmndParamsMandatory = [ ]
+    cmndParamsOptional = [ ]
+    cmndArgsLen = {'Min': 0, 'Max': 0,}
+
+    @cs.track(fnLoc=True, fnEntry=True, fnExit=True)
+    def cmnd(self,
+             rtInv: cs.RtInvoker,
+             cmndOutcome: b.op.Outcome,
+    ) -> b.op.Outcome:
+        """Describe"""
+        failed = b_io.eh.badOutcome
+        callParamsDict = {}
+        if self.invocationValidate(rtInv, cmndOutcome, callParamsDict, None).isProblematic():
+            return failed(cmndOutcome)
+####+END:
+        descriptionStr = """\
+The LCNT core, in order (uses sudo):
+|--------------------------+---------------------------------------------------------------------|
+| lcntAptUpdate            | apt-get update (a stale index 404s texlive-full's dependencies)     |
+| lcntLatexFullUpdate      | lcaLaTexBinsPrep.sh -i fullUpdate: preview_latex, texlive_full, hevea |
+| lcntLatexExtraInstall    | lcaLaTexBinsPrep.sh -i extraInstall: bxtex macros link, extra packages |
+| evince                   | The PDF viewer (acroread is obsolete on Linux)                      |
+| rawBisos-fonts-sbom.pcs  | Nested sbom: Persian and other fonts (sbomsList)                    |
+|--------------------------+---------------------------------------------------------------------|
+Verification is lcntCore-assemble.cs -i toolchainCheck: this sbom reports but does not stop on a
+failed step, and neither pypiProc nor the CBM walker report a failed install as one.\
+"""
+        print(descriptionStr)
+
+        return cmndOutcome.set(
+            opError=b.op.OpError.Success,
+            opResults=None,
+        )
+
+
+def examples_csu() -> b.op.Outcome:
+    """Common Usage Examples for this Command-Service Unit"""
+
+    cmnd = cs.examples.cmndEnter
+    literal = cs.examples.execInsert
+
+    cmndOutcome = b.op.Outcome()
+
+    cs.examples.menuChapter('*Description*')
+    cmnd('readme', comment=" # An overview short description")
+
+    cs.examples.menuChapter('*Plan (read-only)*')
+    literal("lcntCore-sbom.pcs -i aptPkgs_list")
+    literal("lcntCore-sbom.pcs -i sbomSpecs_list")
+
+    cs.examples.menuChapter('*Update (uses sudo)*')
+    literal("lcntCore-sbom.pcs -i sbom_fullUpdate")
+
+    cs.examples.menuChapter('*End-Of Examples*')
+    return cmndOutcome

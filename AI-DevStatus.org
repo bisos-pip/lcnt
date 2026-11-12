@@ -1,0 +1,89 @@
+#+title: Development Status & Continuation Handoff
+#+TAGS: me ai aiAndMe
+
+# Provenance (installed once by aiActivity.cs --- not regenerated):
+#   Date:      2026-11-11T20:36:35+00:00
+#   User:      bystar
+#   Templates: /bisos/apps/defaults/ai-templates
+#   Command:   /bisos/venv/py3/devbin/aiActivity.cs -i initiate --activity=bisos-pip
+
+####+BEGIN: b:ai:file/particulars
+* AI Working Context
+  Working Directory: /bisos/git/auth/bxRepos/bisos-pip/lcnt
+  File: /bisos/git/auth/bxRepos/bisos-pip/lcnt/AI-DevStatus.org
+  Activity: bisos-pip
+  Companion Docs: AI-WORKFLOW.org, AI-Activity.org, AI-DevStatus.org, README.org
+####+END:
+
+This file is a working-state handoff so development can continue on another
+machine (which has this repo but NOT the developer's =~=). It captures the
+architecture, what works, what is untested and the design decisions made so far.
+
+This file is maintained by Claude. Updates are typically triggered by the
+=/bx-status-update= slash command, after major interactions, or before a release.
+
+Note to a fresh Claude: this file is intentionally sparse at project start.
+Fill in the sections below when asked to update, following the structure provided.
+
+* Current State
+  As of 2026-11-12 three CBMs of the =induct= capabilityType, realm =collective=, are implemented
+  here and
+  materialized on the dev host (a privileged docker container on an AWS VM): =lcntCore= (Stage 2),
+  =lcntBases= (Stage 3) and =lcntMultiMedia= (Stage 4, Container set only). The user considers Stage 3 a
+  cut. All uncommitted.
+
+* Architecture
+  Each CBM is a leaf =sys/cbm/collective/induct/<name>/cbmProc.spcs= (a pointer to the CBS) in the
+  =bro_rawBisosPlatform= tree. Files in =py3/bin/=: =lcntCore-{sbom.pcs,assemble.cs,cbs.pcs}=,
+  =lcntBases-{sbom.pcs,assemble.cs,cbs.pcs}=, =lcntMultiMedia-{sbom.pcs,assemble.cs,cbs.pcs}=,
+  =cbmProc-lcnt{Core,Bases,MultiMedia}.spcs= (the leaf copies).
+  =py3/bisos/lcnt/lcntBasesInfo.py= is the pure source of the bases BXO and its links.
+  =py3/bisos/lcnt/lcntMultiMediaInfo.py= is the pure source of the environment (Container, VM or Box,
+  override =LCNT_MM_ENV=) and its package sets. The =assemble.cs= =toolchainCheck= verifies, since
+  the CBM
+  walker and the old scripts report failures as success.
+
+* What Works
+  lcntCore: texlive-full, hevea, evince, the Persian fonts (the nested =rawBisos-fonts-sbom.pcs=),
+  idempotent;
+  =contentProductionExample= builds its PDF (via =seedLcntProc.sh= directly: its =lcntProc.sh= stub
+  is stale).
+  lcntMultiMedia in a Container: mpv, gimp, imagemagick, pdftk-java, reveal.js and plugins;
+  idempotent; the
+  check passes. The reveal HTML needs the user's Emacs server (=G_emacsServerPid= must name it).
+
+  lcntBases (rawBisos only): =/de/sys/lcnt= (real directory) with =bxdpt BIB CENTRAL REGISTRY lgpc=
+  linked
+  into the clone =bxlcnt/bro_lcntBases-rawBisos=, and =/lcnt= to it; idempotent; the check names every
+  missing or wrong link. =pres-basic= builds (the user built all three examples and =matoof-son-26=).
+
+* What Is Untested
+  The VM and Box sets (audio, vlc, OBS, kdenlive, v4l2loopback): only their lists and the check logic.
+  The reveal HTML and =matoof-son-26= were built by the user after Stage 3, not by Claude; Claude did
+  not run them. The article builds hit a stuck Emacs server (to be looked into) and a =/mode= problem
+  of =art-ltr-basic= (the user has a fix). Deferred by the user: aeneas,
+  whisper, subed, wdiff, the subtitle work. OBS profile and websocket, =mmUniteVideo.cs=: not written.
+
+* Key Design Decisions
+  - Everything is core; the environment decides what is installed: Container = PDF and reveal HTML only
+    (display-only programs allowed), VM = plus audio, Box = plus video recording. lcntMultiMedia
+    checks that
+    lcntCore is materialized and never installs it. (User, 2026-11-11.)
+  - The legacy scripts (=lcaLaTexBinsPrep.sh=, =lcaJsRevealBinsPrep.sh=) still work on Debian 13 but
+    exit 1
+    on every run and list packages that no longer exist; the check, not their exit status, is the
+    verdict.
+  - lcntBases: the bases BXO is the clone =bxlcnt/bro_lcntBases-rawBisos=; =bpoActivate.sh= and the
+    usgBpos
+    model are the sited BISOS's, where the leaf stays =available=. Nothing is ever linked inside the
+    clone.
+    =var= and =outputs= are not created, though every build reports the missing =nuBaseDir= list as a
+    warning. (User, 2026-11-12.)
+  - Out-of-chain: the clone =bro_lcntBases-rawBisos= and =rePublication/fonts= are not in
+    =bxRepos-gitist.pcs=; recorded in the AI-Outputs ledger (=blee-binders/evolution=, uncommitted).
+  - Out-of-chain: the font "XB Zar" comes from the clone =/bisos/git/auth/bxRepos/rePublication/fonts=
+    (https://github.com/rePublication/fonts), which is not in =bxRepos-gitist.pcs=.
+
+# Local Variables:
+# eval: (setq-local toc-org-max-depth 4)
+# End:

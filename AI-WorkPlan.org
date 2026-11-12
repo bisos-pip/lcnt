@@ -1,0 +1,864 @@
+#+title: Work Plan
+#+DATE: <2026-06-10 Wed 13:54>
+#+AUTHOR: Mohsen BANAN
+#+OPTIONS: toc:4
+#+TAGS: me ai aiAndMe
+
+# Provenance (installed once by aiActivity.cs --- not regenerated):
+#   Date:      2026-11-11T20:36:35+00:00
+#   User:      bystar
+#   Templates: /bisos/apps/defaults/ai-templates
+#   Command:   /bisos/venv/py3/devbin/aiActivity.cs -i initiate --activity=bisos-pip
+
+####+BEGIN: b:ai:workflow/driver
+*  [[elisp:(revert-buffer)][revert-buffer]] | [[elisp:(toggle-read-only)][read/wr]] | [[elisp:(show-all)][Show-All]]  [[elisp:(org-shifttab)][Overview]]  [[elisp:(progn (org-shifttab) (org-content))][Content]] | [[elisp:(delete-other-windows)][(1)]] | [[elisp:(progn (save-buffer) (kill-buffer))][S&Q]] [[elisp:(save-buffer)][Save]] [[elisp:(kill-buffer)][Quit]] [[elisp:(bury-buffer)][Bury]] [[elisp:(magit)][Magit]]
+*  [[elisp:(org-cycle)][AI Workflow Driver :: /bx- commands]]    *After |S|: submitted*
+  newStart :: [[elisp:(blee:bnsm:panel-goto "/bisos/panels/bisos-core/bisos-pip/bisos.aiActivity/newStart/_nodeBase_")][Panel]] | [[bashRun:vscodeClaude-assemble.cs -i fullCheck][setup-check]] | [[bashRun:vscodeClaude-assemble.cs -i fullUpdate][setup]] | [[elisp:(b:vscode/init)][partner-init]] | [[elisp:(b:vscode/partnerShow)][partner-show]] | [[aiActivity:session-start][session-start]]
+  VS Code  :: [[elisp:(b:vscode/fileOpen)][Visit]] | [[elisp:(b:vscode/rootOpen)][root-window]] | [[elisp:(b:vscode:claude/dispatch)][Transient]]
+  Session  :: [[elisp:(b:vscode:claude/sessionSelect)][select-session]] | [[aiActivity:session-start][session-start]] | [[aiActivity:session-report][session-report]]  *|S|*  [[aiActivity:S=session-start][session-start]]
+  Activity :: [[aiActivity:activity-reach][activity-reach]] | [[aiActivity:activity-report][activity-report]]  *|S|*  [[aiActivity:S=activity-reach][activity-reach]]
+  Read     :: [[aiActivity:status-read][status-read]] | [[aiActivity:archive-read][archive-read]] | [[aiActivity:ai-outputs][ai-outputs]]  *|S|*  [[aiActivity:S=status-read][status-read]] | [[aiActivity:S=archive-read][archive-read]] | [[aiActivity:S=ai-outputs][ai-outputs]]
+  Work     :: [[aiActivity:todo-do][todo-do]] | [[aiActivity:todo-done][todo-done]]  *|S|*  [[aiActivity:S=todo-do][todo-do]] | [[aiActivity:S=todo-done][todo-done]]
+  Record   :: [[aiActivity:status-update][status-update]] | [[aiActivity:archive-update][archive-update]]  *|S|*  [[aiActivity:S=status-update][status-update]] | [[aiActivity:S=archive-update][archive-update]]
+  Git      :: [[aiActivity:git-commit-msg][git-commit-msg]] | [[aiActivity:git-commit-walk][git-commit-walk]]  *|S|*  [[aiActivity:S=git-commit-msg][git-commit-msg]]
+  Close    :: [[aiActivity:git-uncommitted-list][git-uncommitted-list]] | [[aiActivity:session-verify][session-verify]]  *|S|*  [[aiActivity:S=git-uncommitted-list][git-uncommitted-list]] | [[aiActivity:S=session-verify][session-verify]]
+
+####+END:
+
+####+BEGIN: b:ai:file/particulars
+* AI Working Context
+  Working Directory: /bisos/git/auth/bxRepos/bisos-pip/lcnt
+  File: /bisos/git/auth/bxRepos/bisos-pip/lcnt/AI-WorkPlan.org
+  Activity: bisos-pip
+  Companion Docs: AI-WORKFLOW.org, AI-Activity.org, AI-DevStatus.org, README.org
+####+END:
+
+This Work Plan file drives the AI collaborative development.
+Interactions are broken down into "Stages". Each Stage has a set
+of TODOs that I work with Claude to accomplish.
+
+Note to a fresh Claude: read this file together with AI-WORKFLOW.org,
+AI-Activity.org and AI-DevStatus.org to orient yourself. The =<<Context Confirmation>>=
+TODO below is the standard first step, or use =/bx-session-start= as the automated equivalent.
+TODOs tagged =:ai:= are assigned to Claude. After completing a TODO, summarize results
+under =----- Results: ------= and mark it DONE.
+
+
+* Overview, Purpose and Context
+
+<<Overview>>
+
+Description of the specifics of this particular AI-Activity comes here.
+
+
+* Stage 0: Confirm AI's Understanding of This Repo's Context
+
+Goal: Confirm AI's understanding of the context and capture that in [[Context Confirmation]] TODO.
+
+
+* Stage 0 TODOs
+** +
+** LOOP [#A] <<Context Confirmation>> for AI (typically triggered by /bx-session-start) :aiAndMe:
+SCHEDULED: <2026-06-09 Tue>
+Must be repeated each time a new Claude instance is started here.
+Based on the series of files starting from CLAUDE.md in this repo,
+describe succinctly what you have understood.
+Enumerate explicitly which files you have imported and which you have considered.
+Prompt the user to confirm that the desired/appropriate model (/model) is being used for this project.
+Since this is to be repeated, leave the todo tag as LOOP.
+** -
+
+* Stage 1: Misc Place Holder 
+
+<<Stage 1>>
+
+Goal: A placeholder for misc ideas and TODOs
+
+
+* Stage 1 TODOs (Misc)
+** +
+** TODO [#C] A Placeholder
+** -
+
+
+* Stage 2: Create the needed CBM scripts so that lcntCore can be materialized
+
+<<Stage 2>>
+
+Goal: Create lcntCore-{assemble.cs,cbs.pcs,sbom.pcs} to allow for sys/cbm/collective/induct/lcntCore/
+
+this package supplies the CBSs, sboms and assemble steps that a CBM leaf points at.
+CBM sits on top of CBS: a leaf holds only a pointer (=capabilityName= + =cbsSpec=).
+
+The capabilities of this stage are of capabilityType =induct=, in realm =collective= at:
+sys/cbm/collective/induct/lcntCore
+
+Of relevance to this are:
+
+- Related aiActivity skills
+- The Blee-Panels at /bisos/panels/bisos-apps/lcnt/lcntFoundations
+- The scripts at /bisos/core/lcnt/bin
+- The aiActivity at /bisos/apps/defaults/ai-templates/lcnt/AI-Activity.org and its related skils
+- An example and related .sty etc at: /bisos/git/bxRepos/bxlcnt/
+
+This stage is only for setting up the lcnt foundations not the lcnt bases (/de/lcnt) etc.
+lcntBases are addressed in [[Stage 3]]
+
+
+* Stage 2 TODOs  -- In Progress
+** +
+** TODO [#A] <<2.1>> Plan for Creation the lcntCore-{assemble.cs,cbs.pcs,sbom.pcs} files and
+assocaited CBM sys/cbm/collective/induct/lcntCore
+SCHEDULED: <2026-11-11 Wed 21:04>
+:PROPERTIES:
+:ORIGIN: Mohsen
+:IMPORTANCE: Medium
+:REPO: this
+:BASE: this
+:FOUND: <2026-11-11 Wed 21:04>
+:END:
+Use the manual instructions at /bisos/panels/bisos-apps/lcnt/lcntFoundations
+Describe detail of how this will be done.
+----- Results: ------
+2026-11-11 Plan (nothing implemented; decisions by the user the same day):
+
+Scope: Stage 2 is the /core/ of the panel's "Usual set up", step 1 (=bisosLcntSetup.sh -i
+bisosLcntBinsPrep=):
+the LaTeX toolchain, the Persian fonts and the PDF viewer. Steps 2 to 6 (the =pip_lcntBases= BPO,
+=/de/sys/lcnt=, =/lcnt=) are Stage 3.
+
+Decisions:
+- Use the existing scripts: =lcaLaTexBinsPrep.sh -i fullUpdate= and =-i extraInstall= are called, not
+  reproduced as apt lists.
+- Fonts: =buePersian.sh= was transitioned in 2026 to =/bisos/core/bsip/bin/rawBisos-fonts-sbom.pcs= (apt
+  =fonts-farsiweb= etc., plus =persianFontPkgs= and =fontXbZarInstall= funcs). =lcntCore-sbom.pcs=
+  nests it
+  (=sbomsList=); =buePersian.sh= is not called.
+- Audio/video (=lca*BinsPrep.sh=: Aeneas, OBS, whisper, media) is not core: a later, separate CBM
+  =lcntMultiMedia= (new Stage). Core is LaTeX, fonts and the viewer only.
+- Acroread is dropped: Adobe ended Acrobat Reader for Linux in 2013 (last was 9.5.5, 32-bit, not in
+  Debian
+  12 or 13); =rawBisos-sbom.pcs= has =ap("evince")=. =nlcAcroreadBinsPrep.sh= is not called.
+- =py3/setup.py= needs no hand-edit: its =scripts= dblock lists the stale
+  =bin/beamerExternalExtensions.251130=
+  (the file is now =.py=); regenerating it with =bx-dblock -i dblockUpdateFiles setup.py= (or
+  =pypiProc.sh
+  -i artifactsUpdate=) drops it and unblocks the editable install.
+
+Files (all in =py3/bin/=, COMEEGA dblock headers, modelled on =bisos-pip/vscodeClaude=):
+1. =lcntCore-sbom.pcs= --- =pkgsSeed.setup()= with
+   =sbomsList=[sbom("/bisos/core/bsip/bin/rawBisos-fonts-sbom.pcs")]=
+   (the nesting under test) and the LaTeX steps as funcs that run =lcaLaTexBinsPrep.sh -i fullUpdate= and
+   =-i extraInstall= (both need root).
+2. =lcntCore-assemble.cs= --- what is not packages: a check of the toolchain (=xelatex=, =hevea=, a
+   Persian
+   font via =fc-list=, =evince=), failing loudly.
+3. =lcntCore-cbs.pcs= --- =cba_seed.setup(seedType="induct", sbom="lcntCore-sbom.pcs",
+   assemble="lcntCore-assemble.cs")=; verifies itself, since neither =g_csMain= nor the walker
+   reports failure.
+4. The leaf =sys/cbm/collective/induct/lcntCore/= in the =bro_rawBisos= tree: =cbmProc.spcs=
+   (=capabilityName="lcntCore"=, =cbsSpec= absolute to =lcntCore-cbs.pcs=), =cbmProc.control= =
+   =available=,
+   empty =cbmProc.status=. The empty =induct/lcnt/README.org= stays (user may remove it).
+5. =setup.py= dblock regeneration (above), then =pypiProc.sh -i pkgReInstall edit= into =dev-bisos3=.
+
+Test (for [[2.2]]), at =/bisos/git/bxRepos/bxlcnt/facilities/contentProductionExample/=:
+- Nesting: =lcntCore-sbom.pcs= lists/plans the nested fonts sbom's packages (read-only first).
+- Gate: =cbm_materialize= with =control=available= must skip; with =enabled= it runs the CBS.
+- Idempotence: materialize twice; the second changes nothing.
+- Result: =lcntProc.sh -p extent="build+view" -i lcntBuild cur= builds the example.
+- Needs sudo and apt: the real run is done on this host (a privileged container; sudo and apt are allowed
+  and nothing here prohibits LCNT).
+- =/de/sys/lcnt= and =/lcnt= are Stage 3 (lcntBases); the example is expected to build without them.
+  If it
+  does not, that is a finding to record, not a reason to pull Stage 3 in.
+
+** TODO [#A] <<2.2>> Implement based on [[2.1]]
+SCHEDULED: <2026-11-11 Wed 21:04>
+:PROPERTIES:
+:ORIGIN: Mohsen
+:IMPORTANCE: Medium
+:REPO: this
+:BASE: this
+:FOUND: <2026-11-11 Wed 21:04>
+:END:
+The implementation is to be tested at: /bisos/git/bxRepos/bxlcnt/facilities/contentProductionExample/
+----- Results: ------
+2026-11-11 Implemented per [[2.1]] and tested on this host (Debian 13, privileged container, sudo
+and apt).
+
+Done (all in =py3/bin/=, uncommitted):
+- =lcntCore-sbom.pcs= --- pseudo-packages =lcntAptUpdate=, =lcntLatexFullUpdate= and
+  =lcntLatexExtraInstall=
+  (they call =lcaLaTexBinsPrep.sh -i fullUpdate= and =-i extraInstall=), =evince=, and the nested
+  =rawBisos-fonts-sbom.pcs= through =sbomsList=. The =apt-get update= was added: the first run of the
+  script 404ed on a stale debian-security index.
+- =lcntCore-assemble.cs= --- =toolchainCheck= (=fullUpdate= calls it): =xelatex=, =pdflatex=, =hevea=,
+  =evince=, =beamer.cls=, =arabxetex.sty= and the font "XB Zar" must be there, else it fails loudly.
+  Generated from =prometheus-assemble.cs=; pyflakes shows only the model's usual unused-import warnings.
+- =lcntCore-cbs.pcs= (=seedType="induct"=) and =cbmProc-lcntCore.spcs= (the pointer, absolute =cbsSpec=).
+- The leaf =sys/cbm/collective/induct/lcntCore/= in =bro_rawBisosPlatform= (=cbmProc.spcs=, =.control=,
+  =.status=), now =enabled= on this host. =induct/lcnt/README.org= was left as is.
+- =py3/setup.py= regenerated with =bx-dblock -p emacsSocket=... -i dblockUpdateFiles setup.py= (the Emacs
+  of this session): the stale =beamerExternalExtensions.251130= is gone, the four new files are in, and
+  =bisos.capability= and =bisos.sbom= are now in =requires=. =bisos.lcnt= is now editable in =dev-bisos3=
+  (one of the four non-installing packages is fixed; =pycs=, =qmailSvc=, =gnome= remain). devbin
+  links made.
+- Nesting works: =lcntCore-sbom.pcs -i sbomSpecs_list= lists the fonts sbom, and a real run executed it
+  (apt fonts and the =persianFontPkgs= and =fontXbZarInstall= funcs).
+
+Tested:
+- Gate: =control=available= skipped with a status line; =enabled= ran the CBS.
+- Real run 1 (about 9 minutes): texlive-full (4.5 GB), hevea, evince and the rest installed;
+  =toolchainCheck= complete. Run 2 (35 s): nothing installed, same result: idempotent.
+- Example: =/bisos/git/bxRepos/bxlcnt/facilities/contentProductionExample/= built with the seed directly
+  (=seedLcntProc.sh -l ./lcntProc.sh -p extent=build -i lcntBuild ./LCNT-INFO/Builds/presPdf=, 17 s,
+  rc 0):
+  a valid beamer PDF (=pdfinfo=: xdvipdfmx) in =Results/=. =/de/sys/lcnt= was not needed, as expected.
+
+Found (the CBM reported =ran: cbs_materialize ok= for all of these; only =toolchainCheck= caught them):
+- The font "XB Zar" came from the =rePublication/fonts= clone, which did not exist: the fonts sbom's
+  unzip
+  failed (exit 9) and the first example build died in fontspec ("The font XB Zar cannot be found").
+  I cloned
+  =https://github.com/rePublication/fonts= to =/bisos/git/auth/bxRepos/rePublication/fonts=,
+  re-materialized,
+  and the font was there. That repo is not in =bxRepos-gitist.pcs=: it needs a place there, or the
+  fonts sbom
+  needs to fetch it. [[https://github.com/rePublication/fonts]] is public.
+- =lcaLaTexBinsPrep.sh -i fullUpdate= installs everything and exits 1 on every run (not diagnosed).
+  =-i extraInstall= tries packages that no longer exist in Debian 13: arabtex, lgrind (no package),
+  latex-beamer, tex4ht, transfig (no candidate); texlive-full covers them. The legacy script is in the
+  =bisos/lcnt= repo, untouched.
+- =contentProductionExample/lcntProc.sh= execs =/opt/public/osmt/bin/seedLcntProc.sh=, which does
+  not exist
+  (rc 127); the dblock is stale (=bxlcnt= repo, not touched). The seed is
+  =/bisos/core/lcnt/bin/seedLcntProc.sh=.
+- Non-fatal in the build: =/lcnt/outputs/all/lists/nuBaseDir= missing (lcntBases, Stage 3),
+  =LCNT-INFO/Releases/cur= missing, and the dblock pass skipped for lack of an Emacs server socket
+  (=bx-dblock= needs =-p emacsSocket=).
+- The build left untracked outputs in the example (=Results/=, =curBuild=, =*.vrb=, =*.aux=, ...): clean
+  with =lcntProc.sh -i fullClean= or leave out of the commit.
+
+Not done: audio/video (a later =lcntMultiMedia=); the blee panel; a rawBisos VM run (this host
+already had
+LCNT scripts); the three uninstallable packages.
+** -
+
+
+* Stage 3: Create the needed CBM scripts so that lcntBases can be materialized
+
+<<Stage 3>>
+
+Goal: Create lcntBases-{assemble.cs,cbs.pcs,sbom.pcs} to allow for sys/cbm/collective/induct/lcntBases/
+
+this package supplies the CBSs, sboms and assemble steps that a CBM leaf points at.
+CBM sits on top of CBS: a leaf holds only a pointer (=capabilityName= + =cbsSpec=).
+
+The capabilities of this stage are of capabilityType =induct=, in realm =collective= at:
+sys/cbm/collective/induct/lcntCore
+
+Of relevance to this are:
+
+- Related aiActivity skills
+- The Blee-Panels at /bisos/panels/bisos-apps/lcnt/lcntFoundations
+- The scripts at /bisos/core/lcnt/bin
+- The aiActivity at /bisos/apps/defaults/ai-templates/lcnt/AI-Activity.org and its related skils
+- An example and related .sty etc at: /bisos/git/bxRepos//bxlcnt/
+
+The lcntCore is addressed  at [[Stage 2]]
+
+* Stage 3 TODOs  -- In Progress
+** +
+** TODO [#A] <<3.1>> Plan for Creation of the lcntBases-{assemble.cs,cbs.pcs,sbom.pcs} files and
+assocaited CBM sys/cbm/collective/induct/lcntBases
+SCHEDULED: <2026-11-11 Wed 21:04>
+:PROPERTIES:
+:ORIGIN: Mohsen
+:IMPORTANCE: Medium
+:REPO: this
+:BASE: this
+:FOUND: <2026-11-11 Wed 21:04>
+:END:
+Use the manual instructions at /bisos/panels/bisos-apps/lcnt/lcntFoundations
+Describe detail of how this will be done.
+----- Results: ------
+2026-11-12 (plan only; nothing run, nothing changed on the host)
+
+*What the manual does.* The lcntFoundations panel lists six steps; the old script behind them is
+=bisosLcntSetup.sh -i lcntBasesFullSetup= (called by =bsipProvision.sh= line 188). It is three steps:
+- =lcntBaseBpoActivate=: =bpoActivate.sh -p bpoId=pip_lcntBases -i bpoActivate=.
+- =lcntBasesSetup=: makes =/de/sys/lcnt= (sudo mkdir, chown bisos), links =/lcnt= to it, then links
+  =bxdpt=, =BIB=, =CENTRAL=, =REGISTRY= and =outputs= from the bases BXO into =/de/sys/lcnt=.
+- =usgBposLcntBasesSetup=: links =lgpc= and =lgcc= of the user's lcntBases BPO (found through
+  =usgBpos.sh -i usgBpos_lcntBases_bxoPath=) into =/de/sys/lcnt=.
+Step 6 of the manual (the user links individual =pip_lcnt-s= under =lgpc=) is a content choice and
+stays manual.
+
+*What this host has (checked).*
+- =/de= holds only =run=; =/de/sys= and =/lcnt= do not exist.
+- =lcntBasesSetup= hardcodes the bases BXO =/bisos/git/bxRepos/bxlcnt/bro_lcntBases-rawBisos=. It is
+  not there: =bxlcnt= holds only =bxtex=, =facilities=, =overview=, =results=. No =lcntBases= repo is
+  under =bxRepos=, and none is in the gitist lists I searched.
+- No usgBpos tree exists (=curUsgBposBase/lcntBases= and its =bpoId= file are absent), so
+  =usgBposLcntBasesSetup= would assert-fail.
+- The lgpc content for the example is =mb-ephemera/pub-shuttle/pip_lcnt_bystarCommon/lcnt/lgpc/bystar=.
+  =mb-ephemera= is not a git repo here.
+- =bpoActivate.sh=, =usgBpos.sh= and =bisosCurrentsManage.sh= are installed.
+
+*Settled with the user, 2026-11-12.*
+- The bases BXO on rawBisos is =/bisos/git/bxRepos/bxlcnt/bro_lcntBases-rawBisos=, cloned by hand (it was
+  missing; AI-Outputs entry, with =rePublication/fonts=; both belong in =bxRepos-gitist.pcs=).
+  =bpoActivate.sh= and the usgBpos model are for the sited BISOS only; a switch to sited changes this.
+- =/de/sys/lcnt= is a real directory (as the old script makes it). =/lcnt= is a link to it: a convenient,
+  common shortcut. The assemble step links =lgpc= to the BXO's =lcnt/lgpc=. All needed =sudo= is allowed.
+- =var= and =outputs= are not created now. Evidence: =var= is a git-tracked symlink in the clone to
+  =/bisos/var/bpoId/pip_lcntBases= (dangling here); =/lcnt/outputs= is read only by the list,
+  bibliography and Plone3 tools (=nuBaseDir=, =plpc.bib=), not by a document build, and the Stage 2
+  example built without any =/de/sys/lcnt=. Revisit if a tool needs it.
+- The first examples are the three in the clone: =lcnt/lgpc/rawBisos/permanent/examples/=
+  =art-ltr-basic=, =artPres-ltr-basic=, =pres-basic=. =matoof-son-26= and =pub-shuttle= wait.
+
+*Plan (as Stage 2: a Python CBS verifies; the old script is not reused).*
+The old =lcntBasesSetup= cannot be called: it hardcodes the BXO path and makes =var= and =outputs=
+links; here the assemble step does the few links itself.
+- =lcntBases-sbom.pcs=: no packages (the toolchain is lcntCore's); its readme says so.
+- =lcntBases-assemble.cs=: =fullUpdate= does, idempotently:
+  1. =sudo mkdir -p /de/sys=, owned by =bisos:bisos=, group write; =mkdir -p /de/sys/lcnt=.
+  2. =sudo ln -s /de/sys/lcnt /lcnt= when =/lcnt= is absent; a =/lcnt= that is not that link fails.
+  3. In =/de/sys/lcnt=: =bxdpt BIB CENTRAL REGISTRY= to the same names in the BXO, and =lgpc= to
+     =lcnt/lgpc= of the BXO. Never a link inside the clone: it must stay clean.
+  =toolchainCheck= first requires lcntCore ("the LCNT toolchain is complete"), then that =/lcnt=
+  resolves to =/de/sys/lcnt=, that each link resolves to an existing directory in the BXO, and that
+  the BXO is a git clone with no change from the CBM. Each failure is named; none is hidden.
+- =lcntBases-cbs.pcs= (=seedType="induct"=) and =cbmProc-lcntBases.spcs=; the leaf
+  =sys/cbm/collective/induct/lcntBases=. setup.py regenerated through your Emacs; editable reinstall.
+- Tests here: gate (available skips, enabled runs); two runs (idempotent); the check failing for a
+  broken link and for a missing BXO; then a build of each of the three examples with =lcntProc.sh=
+  (or =seedLcntProc.sh= directly if the stub is stale), and the reveal HTML of =pres-basic=.
+- Not done in this stage: sited BISOS (the leaf stays =available= there), =lgcc= (absent from the
+  clone; reported, not required), =var=, =outputs=, =matoof-son-26=.
+
+** TODO [#A] <<3.2>> Implement based on [[3.1]]
+SCHEDULED: <2026-11-11 Wed 21:04>
+:PROPERTIES:
+:ORIGIN: Mohsen
+:IMPORTANCE: Medium
+:REPO: this
+:BASE: this
+:FOUND: <2026-11-11 Wed 21:04>
+:END:
+----- Results: ------
+2026-11-12 (implemented and tested; the article builds and the reveal build are NOT done)
+
+*Done.*
+- Files in =py3/bin/=: =lcntBases-{sbom.pcs,assemble.cs,cbs.pcs}=, =cbmProc-lcntBases.spcs=; and
+  =py3/bisos/lcnt/lcntBasesInfo.py= (pure facts: the BXO, the links, =linkState=). setup.py regenerated
+  through the session's Emacs; editable reinstall; devbin links; leaf planted at
+  =sys/cbm/collective/induct/lcntBases= (now =enabled=).
+- Materialized through the CBM (2.5 s): =sudo= made =/de/sys= (bisos:bisos, g+ws) and =/lcnt=; the
+  assemble step made =/de/sys/lcnt= and linked =bxdpt BIB CENTRAL REGISTRY lgpc= into the BXO.
+  =lgcc= is absent from the clone: reported, not required.
+
+*Tested.*
+- Gate: =available= skips with an audit line; =enabled= runs.
+- =toolchainCheck= before any setup failed loudly, naming all six missing items.
+- Second materialize: no sudo, no link made, "complete". The clone stayed clean (=git status= empty).
+- A removed link, a link to the wrong place, a missing BXO (=LCNT_BASES_BXO=), and a real directory where
+  a link goes: each named by the check; =fullUpdate= repaired the first two and refused to replace the
+  fourth.
+- =pres-basic= (copy in scratch): =lcntProc.sh -p extent=build -i lcntBuild cur= wrote a 4-page PDF
+  (=presPdf=; 16:9 page; Latin Modern fonts embedded).
+
+*Correction to 3.1.* I wrote that =/lcnt/outputs= is not used by a document build. It is: every
+=lcntProc.sh= run calls =lcntNuBaseVerifyAndFix= (=seedLcntProc.sh= line 150), which reports
+"PROBLEM: Missing /lcnt/outputs/all/lists/nuBaseDir" and then carries on. The build succeeds, so it is a
+warning, but it means =outputs= is read by builds. Not changed: the user's decision (no =var=/=outputs=)
+stands until they say otherwise.
+
+*Update, same day (user).* The user built all three examples and rebuilt =matoof-son-26= themselves.
+=art-ltr-basic= has a =/mode= problem, which the user has a fix for and has not applied; it, the stuck
+Emacs below and the stub noise are unrelated to the CBM goal. The user considers this a cut.
+
+*Not done by me (as of my run).*
+- =art-ltr-basic= and =artPres-ltr-basic= (article builds): both stalled at the dblock pass, in
+  =emacsclient -e (org-dblock-update-file-bx "articleEnFa.ttytex")= against the user's Emacs. After my
+  250 s timeouts that Emacs stopped answering =(emacs-pid)=. Likely a prompt or a long elisp wait there;
+  nothing else was sent to it. Retry once it responds.
+- The =pres-reveal= build of =pres-basic=: not tried (needs the same Emacs).
+- Also seen: =./lcntProc.sh: line 169: lcntAttrSource: unbound variable= in the example's stub (the
+  stubs are generated, in the bases repo; not touched).
+
+** -
+
+
+
+* Stage 4: Create the needed CBM scripts so that lcntMultiMedia can be materialized
+
+<<Stage 4>>
+
+Goal: Create lcntMultiMedia-{assemble.cs,cbs.pcs,sbom.pcs} to allow for
+sys/cbm/collective/induct/lcntMultiMedia/ --- everything LCNT needs to turn a presentation into a
+narrated, captioned video: audio and video recording and editing, screen capture (OBS), forced alignment
+and transcription, subtitles, and the =mmUnite= flow.
+
+This package supplies the CBSs, sboms and assemble steps that a CBM leaf points at.
+CBM sits on top of CBS: a leaf holds only a pointer (=capabilityName= + =cbsSpec=).
+
+The capability of this stage is of capabilityType =induct=, in realm =collective= at:
+sys/cbm/collective/induct/lcntMultiMedia
+
+Relation to the other stages:
+- It builds on [[Stage 2]] (lcntCore: LaTeX, HeVeA, fonts, evince). lcntMultiMedia checks that
+  lcntCore is
+  there and never reinstalls it. The leaf is materialized after lcntCore.
+- It does not need [[Stage 3]] (lcntBases). =mmUnite= works inside one LCNT document directory.
+- Packages are installed by the existing scripts or the existing sboms, as in Stage 2 (decision of
+  2026-11-11); the scripts are the source of what is needed, a CBS verifies the result.
+- One CBM, conditioned on the environment: Container, VM or Box (rawMetal, a pure box). Everything is
+  core (nothing is "optional"); what is installed and checked depends on the environment, see [[4.11]].
+  In a container the reveal presentation must still build, with no ability to record or play audio and no
+  video recording.
+
+Of relevance to this are:
+
+- Related aiActivity skills, in particular =lcnt-multimedia=
+- The Blee-Panel /bisos/panels/bisos-apps/lcnt/lcntScreencasting (its TODO list is the source of several
+  items below) and its sub-panels =lcntAlbum= and =teleprompter=
+- The scripts at /bisos/core/lcnt/bin: =lcaAudioVideoBinsPrep.sh=, =lcaObsStudioBinsPrep.sh=,
+  =lcaPy3AeneasBinsPrep.sh=, =mmBinsPrep.sh=, =seedMmUnite.sh=,
+  =seedAudioProc.sh=, =whisper-binsPrep.cs=, =whisper-libsPrep.cs=, =subed-sbom.cs=,
+  =playwright-sbom.pcs=
+- =py3/bin/beamerExternalExtensions.py= and =py3/bisos/lcnt/beamerDisposition.py= (this package)
+- The example for testing: /bisos/git/bxRepos/bxlcnt/ (a presentation with narration), for example
+  /bisos/git/bxRepos/bxlcnt/facilities/contentProductionExample/
+- The example of a presentation intended to become a video (user, 2026-11-11):
+/bxRepos/mb-ephemera/pub-shuttle/pip_lcnt_bystarCommon/lcnt/lgpc/bystar/permanent/engineering/matoof-son/matoof-son-26
+  (an EnFa presentation, =pres+art=; =curBuild= is =presPdf=, builds =presPdf= and =pres-reveal=;
+  no =audio/= or =video/= directory yet: it is the first candidate for =mmUnitePrep=)
+
+** What exists today, and what is missing
+
+The pipeline that the panel describes:
+: LaTeX-pnotes --> file.pdfpc --> file.narration --aeneas--> file.vtt --> captioned.mp4
+: Verification: file.mp4 --whisper--> file.whisper ; wdiff file.narration file.whisper
+: Builds: ./LCNT-INFO/Builds/reveal and reveal-captioned (whenNotCaptioned / whenCaptioned)
+
+| Piece                 | Where it is today                           | State on Debian 13            |
+|-----------------------+---------------------------------------------+-------------------------------|
+| Audio tools           | =lcaAudioVideoBinsPrep.sh=, =mmBinsPrep.sh= | legacy lists, unchecked       |
+| Video tools           | =lcaAudioVideoBinsPrep.sh=                  | legacy list, unchecked        |
+| OBS, v4l2loopback     | =lcaObsStudioBinsPrep.sh=                   | legacy; DKMS needs headers    |
+| Aeneas (alignment)    | =lcaPy3AeneasBinsPrep.sh=, =subed-sbom.cs=  | Python 3.13 build: risk       |
+| Whisper               | =whisper-binsPrep.cs=, =-libsPrep.cs=       | two near-copies; torch is big |
+| subed, wdiff, mpv     | =subed-sbom.cs= (a =.cs=, not =.pcs=)       | subed is a fork in forked/    |
+| Playwright            | =playwright-sbom.pcs=                       | in use by crawl4ai            |
+| pdfpc, pdftk          | =lcaAudioVideoBinsPrep.sh=                  | pdfpc: no candidate           |
+| mmUnite, audio, video | =seedMmUnite.sh=, templates                 | mmUniteVideo not done         |
+| Teleprompter, albums  | panels only                                 | not an installable piece      |
+
+The missing features, each a TODO below: OBS as a recording tool that LCNT can drive (scenes, profiles,
+the websocket), a virtual camera where the platform allows one, the video editing and encoding set,
+alignment and transcription that install and run on Debian 13, subtitles and chapters (subed,
+Chapters.vtt), the pdfpc notes, =mmUniteVideo= (the panel's open item, "similarly for videos"), derived
+videos (the panel: "similar to audioRecord, create actions and starting points for derived videos"), and
+a CBS check that fails loudly for each.
+
+* Stage 4 TODOs  -- Not Started
+** +
+** TODO [#A] <<4.1>> Plan for Creation of the lcntMultiMedia-{assemble.cs,cbs.pcs,sbom.pcs} files and CBM
+SCHEDULED: <2026-11-11 Wed 22:30>
+:PROPERTIES:
+:ORIGIN: Mohsen
+:IMPORTANCE: Medium
+:REPO: this
+:BASE: this
+:FOUND: <2026-11-11 Wed 22:30>
+:END:
+Use the manual instructions at /bisos/panels/bisos-apps/lcnt/lcntScreencasting and the scripts listed in
+the Stage 4 goal. Model on [[2.1]] and its Results (=lcntCore-*=). Describe how this will be
+done, including the decisions of [[4.11]].
+----- Results: ------
+2026-11-11 Plan (nothing implemented). Inputs: the decisions of [[4.11]], [[2.2]] and what was learned by
+building the examples in a scratch copy today.
+
+What was learned (read-only, in a copy under the scratchpad):
+- =matoof-son-26= builds its PDF only partly here: it uses
+  =/de/lcnt/lgpc/bystar/permanent/common/figures=,
+  which is the LCNT bases ([[Stage 3]]; =/de/lcnt= and =/lcnt= do not exist here). It also needs the
+  sibling
+  directory =matoof-son/common= (=common -> ../common=). So =contentProductionExample= (no bases) is the
+  container test, and =matoof-son-26= needs Stage 3, or its figures, to build fully.
+- The reveal build runs HeVeA and writes =revealJsBase/presentationEnFa.html=; its
+  =bx:dblock:global:file-insert= blocks are expanded by =bx-dblock= through the user's running Emacs
+  server.
+  In my first scratch build my shell had a stale =G_emacsServerPid= (511), so no socket was found and the
+  HTML stayed a 479-byte skeleton. With =G_emacsServerPid=3248 (the Emacs of this session) the same build
+  gave a 6457-byte page, with the reveal head inserted. So the facility works; it needs the Emacs server
+  of the user (the shell that runs the build must see it). My TODO 4.13 was a misunderstanding.
+- reveal.js is in =/usr/local/lib/node_modules= (=node_modules= in =revealJsBase= links there). It is
+  installed by =/bisos/git/bxRepos/bisos/bsip4/bin/lcaJsRevealBinsPrep.sh= (old; npm, =npm install -g
+  --prefix=/usr/local reveal.js reveal.js-plugins=, a link for reveal.js-menu), not by lcntCore.
+  Node here
+  is 20.19.2. It belongs to the reveal side of this CBM, in every environment: the sbom takes it
+  from that
+  script, or lists the npm packages, as decided in [[4.2]].
+- Debian 13: =pdftk= is =pdftk-java=; mp3gain and mencoder exist but are obsolete and are left out.
+  The host kernel is 4.18 (el8) under the container: v4l2loopback cannot work in a container.
+
+Design (the shape of [[2.1]], with the environment as the new part):
+1. =py3/bisos/lcnt/lcntMultiMediaInfo.py= --- pure, the single source of facts: the environment detection
+   (=systemd-detect-virt --container= gives Container; else =--vm= gives VM; else Box; an override
+   parameter, for example =LCNT_MM_ENV=), and the three package sets. The sbom and the check import it.
+2. =py3/bin/lcntMultiMedia-sbom.pcs= --- =pkgsSeed= with the apt list of the detected environment,
+   built at
+   import, and a readme that prints the table. No nested lcntCore (decided).
+3. =py3/bin/lcntMultiMedia-assemble.cs= --- =environment= (prints what was detected and the set),
+   =toolchainCheck= (first =lcntCore-assemble.cs -i toolchainCheck=, then every program of the set,
+   by name,
+   failing loudly; programs outside the set are reported as skipped for the environment, not missing),
+   =fullUpdate= calls the check. In a container it ends by building the example's PDF and reveal HTML
+   (with the user's Emacs server in the environment).
+4. =py3/bin/lcntMultiMedia-cbs.pcs= (=seedType="induct"=, sbom + assemble) and
+   =cbmProc-lcntMultiMedia.spcs=
+   (absolute =cbsSpec=), leaf =sys/cbm/collective/induct/lcntMultiMedia/= with =available= control,
+   planted after lcntCore.
+5. =setup.py= dblock regeneration (as in [[2.2]]), editable install, devbin links.
+
+The sets (apt, Debian 13; deferred: aeneas, whisper, subed, wdiff, the pdfpc viewer):
+|-----------+--------------------------------------------------------------------------------|
+| Container | mpv, gimp, imagemagick, pdftk-java (display-only, PDF and image tools)         |
+| VM        | Container + sox, ffmpeg, audacity, pavucontrol, vlc, lame, flac, vorbis-tools, |
+|           | mp3info, gifsicle, scrot (audio record, play, edit; no video recording)        |
+| Box       | VM + obs-studio, v4l2loopback-dkms (+ linux-headers), kdenlive (video)         |
+|-----------+--------------------------------------------------------------------------------|
+=pdftk= is the legacy name: the existing scripts are the source of the list, adapted by name. Fonts and
+the PDF viewer are lcntCore's.
+
+Existing scripts: used as the source of what is needed (=lcaAudioVideoBinsPrep.sh=, =mmBinsPrep.sh=,
+=lcaObsStudioBinsPrep.sh=), but they are legacy shell with old distro hooks; if one runs on Debian 13 as
+=lcaLaTexBinsPrep.sh= did, the sbom calls it, else the sbom lists the packages (decided per script when
+[[4.2]] is done, and recorded).
+
+Tests (for [[4.2]]):
+- Detection: here it must say Container (=docker=); the override says VM and Box; read-only.
+- Plan, read-only, for each environment: =lcntMultiMedia-sbom.pcs -i aptPkgs_list= with each override.
+- Container, real (this host): materialize twice (idempotent), the check passes with no OBS, the example
+  =contentProductionExample= builds its PDF. The reveal HTML and =matoof-son-26= waited for Stage 3
+  (now a cut: the user built them, see 3.2).
+- VM and Box: apt installs are not run here (the Box set needs a display and a kernel module that this
+  host does not have); only the lists, the check logic with the programs faked absent, and =bash -n=.
+  Say so in the Results of [[4.2]].
+- Gate: =available= skips; the check fails loudly with a program removed from the path.
+
+Not in this stage: aeneas, whisper, subed, Chapters.vtt (deferred), OBS profile content beyond
+[[4.3]], and
+the per-document scripts =mmUniteAudio.sh= and =mmUniteVideo.sh= (they are [[4.10]]).
+
+** TODO [#A] <<4.2>> Implement based on [[4.1]]
+SCHEDULED: <2026-11-11 Wed 22:30>
+:PROPERTIES:
+:ORIGIN: Mohsen
+:IMPORTANCE: Medium
+:REPO: this
+:BASE: this
+:FOUND: <2026-11-11 Wed 22:30>
+:END:
+The implementation is tested with =contentProductionExample= now (the container: its PDF).
+=matoof-son-26=
+(see the Stage 4 goal) and the reveal HTML waited for [[Stage 3]] (now a cut; the user built them,
+see [[3.2]]). It is tested as far as this host allows
+(no audio device, no display, no usable kernel headers): say what was not run. The sbom only checks that
+lcntCore is materialized, it does not nest it (decided in [[4.11]]).
+----- Results: ------
+2026-11-11 Implemented per [[4.1]] and tested in a container (this host); VM and Box not run here.
+
+Done (=py3/bin/= unless noted; uncommitted):
+- =py3/bisos/lcnt/lcntMultiMediaInfo.py= --- pure: =environmentDetect()= (override =LCNT_MM_ENV=),
+  the apt sets (cumulative) with the programs each provides, the reveal.js facts.
+- =lcntMultiMedia-sbom.pcs= --- apt list of the detected environment, built at import: =apt-get update=,
+  (Box) the kernel headers func, the packages, and =lcntMmRevealJs= (the old =lcaJsRevealBinsPrep.sh=).
+  It does not nest lcntCore.
+- =lcntMultiMedia-assemble.cs= --- =environment=, =toolchainCheck= (lcntCore complete? then each
+program of
+  the environment, node, npm, reveal.js and reveal.js-plugins in =/usr/local/lib/node_modules=, on a
+Box the
+  v4l2loopback module; programs of other environments are reported as skipped), =fullUpdate=.
+- =lcntMultiMedia-cbs.pcs=, =cbmProc-lcntMultiMedia.spcs=, and the leaf
+  =sys/cbm/collective/induct/lcntMultiMedia/= (now =enabled= on this host).
+- =setup.py= regenerated with =bx-dblock= through the Emacs of this session (the four files are in
+  =scripts=), editable install, devbin links.
+
+Tested:
+- Detection here: =Container= (=container=docker vm=amazon=); the override gives VM and Box; a bad
+value is
+  refused. Read-only plans per environment: 6, 15 and 18 apt entries (with the func entries).
+- Gate: =available= skipped with a status line; =enabled= ran the CBS.
+- Container, real: run 1 (1.5 min) installed mpv, gimp, pdftk-java and reveal.js-plugins;
+=toolchainCheck=
+  said =complete for Container= (lcntCore complete, mpv, gimp, convert, pdftk, node, npm, reveal.js and
+  plugins present). Run 2 (17 s) unpacked nothing: idempotent.
+- The check fails loudly: before the install it said mpv, gimp, pdftk and reveal.js-plugins were
+missing; with
+  =LCNT_MM_ENV=VM= and =Box= it lists every missing audio/video program as missing.
+- The reveal HTML: in a scratch copy of =matoof-son-26= with =G_emacsServerPid= set to the session's
+Emacs,
+  the dblocks were expanded and the page was complete (see [[4.1]], [[4.13]]). A full build of that
+example
+  waited for [[Stage 3]] (its figures are under =/de/lcnt=); the user rebuilt it after [[3.2]].
+
+Found:
+- =lcaJsRevealBinsPrep.sh -i fullUpdate= exits 1 on every run, though reveal.js-plugins gets
+installed (the
+  same legacy pattern as =lcaLaTexBinsPrep.sh= in [[2.2]]); the sbom reports "FAILED" and the check
+decides.
+- =impressive= (the PDF presentation player of =seedMmUnite.sh= play and record) is in Debian 13:
+added to the
+  VM set; it is for narration sessions, so it is not in the Container set.
+
+Not done: any install of the VM or Box sets (this host is a container: no audio device, no display,
+a 4.18
+kernel); the full build of =matoof-son-26=; the =reveal-captioned= build.
+
+** TODO [#B] <<4.3>> OBS Studio: install and make it drivable by LCNT
+:PROPERTIES:
+:ORIGIN: Mohsen
+:IMPORTANCE: Medium
+:REPO: this
+:END:
+=lcaObsStudioBinsPrep.sh= lists ffmpeg, v4l2loopback-dkms and obs-studio (apt has 30.2.3). Add what is
+missing: a recording profile and scene collection for a screencast of a presentation (the slides
+window plus the narrator's audio), OBS's built-in websocket enabled so that =mmUniteVideo= can start and
+stop a recording, the output directory. v4l2loopback-dkms needs kernel headers and a kernel module.
+Decided 2026-11-11: everything that relates to video recording (OBS, v4l2loopback) is for the Box only;
+it is neither installed nor required in a container (and not in a VM). On a container the CBS says it
+was skipped for the environment, it does not fail.
+----- Results: ------
+2026-11-11 Partly: the install side is specified and coded, nothing of OBS ran.
+- OBS (=obs-studio=), =v4l2loopback-dkms= and the kernel headers are in the Box set only: a
+container and a
+  VM neither install nor require them (decided); the check reports them as skipped there.
+- Not done, needs a Box: the recording profile and scene collection, OBS's websocket for
+=mmUniteVideo=, the
+  output directory, and whether a virtual camera is wanted. They are the per-user part (the assemble step
+  as the invoking user), to be written and tested on a Box.
+
+** TODO [#B] <<4.4>> Audio tools: recording, editing, conversion
+:PROPERTIES:
+:ORIGIN: Mohsen
+:IMPORTANCE: Medium
+:REPO: this
+:END:
+From =lcaAudioVideoBinsPrep.sh= and =mmBinsPrep.sh=: sox, audacity, lame, mp3info, flac, vorbis-tools,
+pavucontrol, scrot, imagemagick, gifsicle. Check each against Debian 13, drop the obsolete (mp3gain,
+mencoder, libav_tools), and make =lcaAudioVideoBinsPrep.sh= and =mmBinsPrep.sh= agree.
+----- Results: ------
+2026-11-11 The audio set is decided and coded, not installed here.
+- Debian 13 has sox, audacity, pavucontrol, lame, flac, vorbis-tools, mp3info, gifsicle, scrot,
+imagemagick
+  (apt-cache checked). Left out as obsolete: mp3gain, mencoder, libav_tools. The VM set has them (plus
+  impressive); imagemagick is in the Container set.
+- =lcaAudioVideoBinsPrep.sh= and =mmBinsPrep.sh= were not changed: the sbom lists the packages by
+name from
+  =lcntMultiMediaInfo.py=, which is now the list that matters.
+- Not run: the VM install (this host is a container).
+
+** TODO [#B] <<4.5>> Video tools: editing and encoding
+:PROPERTIES:
+:ORIGIN: Mohsen
+:IMPORTANCE: Medium
+:REPO: this
+:END:
+ffmpeg (needed by whisper and by the captioned mp4), mpv, vlc, kdenlive, gimp, pdftk. Which of these are
+core to the pipeline (ffmpeg, mpv) and which are optional editors: a =itemOptionalOrderedList= split.
+pdfpc has no candidate in Debian 13: see [[4.9]].
+----- Results: ------
+2026-11-11 The video set is decided and coded, not installed here.
+- Container: mpv, gimp, pdftk-java (installed and checked). VM: ffmpeg, vlc. Box: kdenlive (video
+editing is
+  Box only), with OBS ([[4.3]]).
+- =pdftk= is =pdftk-java= in Debian 13. The VM and Box sets were checked by their lists and by the check
+  logic (missing programs are named), not by installing.
+
+** TODO [#C] <<4.6>> Forced alignment: aeneas on Debian 13 --- DEFERRED
+:PROPERTIES:
+:ORIGIN: Mohsen
+:IMPORTANCE: Low
+:REPO: this
+:END:
+=file.narration --aeneas--> file.vtt=. =lcaPy3AeneasBinsPrep.sh= and =subed-sbom.cs= both install it
+(espeak, libespeak-dev, flac, libxslt-dev, numpy). aeneas is old and builds C extensions and may not
+install under Python 3.13. Decided 2026-11-11: we live without aeneas for now. It is left out of
+lcntMultiMedia (the sboms, the checks and the smoke test); this TODO stays to pick it up later. How the
+=.vtt= is produced meanwhile: see [[4.11]].
+----- Results: ------
+2026-11-11 Deferred by the user; not touched.
+
+** TODO [#A] <<4.7>> Transcription for verification: whisper
+:PROPERTIES:
+:ORIGIN: Mohsen
+:IMPORTANCE: Medium
+:REPO: this
+:END:
+DEFERRED (subtitle creation is revisited later; none in a container). =file.mp4 --whisper-->
+file.whisper=, then =wdiff= against the narration. =whisper-binsPrep.cs= and
+=whisper-libsPrep.cs= are near copies: keep one (the panel says "Adopt Whisper"). openai-whisper brings
+torch (several GB): decide CPU-only, the model size and where models are cached, and whether this is
+core or optional in the CBS.
+----- Results: ------
+2026-11-11 Deferred by the user (subtitle creation is revisited later); not touched.
+
+** TODO [#B] <<4.8>> Subtitles and chapters: subed, wdiff, Chapters.vtt
+:PROPERTIES:
+:ORIGIN: Mohsen
+:IMPORTANCE: Medium
+:REPO: this
+:END:
+DEFERRED with [[4.7]]; subed-related work is never done in a container. =subed-sbom.cs= is a =.cs=,
+not a =.pcs=, and subed is a fork under =bxRepos/forked/subed=. Panel items:
+use subed for Chapters.vtt, add wdiff, absorb subed and modernize its inclusion in Blee. The Emacs side
+is Blee's (a blee package); the sbom here carries the programs (mpv, wdiff).
+----- Results: ------
+2026-11-11 Deferred with [[4.7]]; not touched.
+
+** TODO [#B] <<4.9>> The pdfpc notes: pnote, .pdfpc, latex-pnotes
+:PROPERTIES:
+:ORIGIN: Mohsen
+:IMPORTANCE: Medium
+:REPO: this
+:END:
+=LaTeX-pnotes --> file.pdfpc= needs pdfpc-latex-notes (pnote, https://github.com/cebe/pdfpc-latex-notes),
+the =bxpdfpcnotes.sty= the panel plans, and =latexPnotes.cs=. pdfpc itself is not in Debian 13: decide
+whether the viewer is needed or only the file format.
+----- Results: ------
+2026-11-11 Findings only; nothing implemented, and no decision of the user needed yet.
+- =pdfpcnotes.sty= is already in =/bisos/apps/bxtex/tex/macros= (the LaTeX side that writes
+=file.pdfpc=),
+  and a =matoof-son-26= source uses pnotes: so the format side exists. The panel's =bxpdfpcnotes.sty= and
+  =latexPnotes.cs= are not written.
+- =pdfpc= (the viewer) has no candidate in Debian 13. =seedMmUnite.sh= calls it for the two-screen
+  presentation. Proposed: only the file format is kept, and playing for a narrator uses =impressive=
+  (installed on a VM or a Box). To confirm with the user.
+
+** TODO [#A] <<4.10>> mmUnite, mmUniteAudio and mmUniteVideo as a capability
+:PROPERTIES:
+:ORIGIN: Mohsen
+:IMPORTANCE: High
+:REPO: this
+:END:
+=lcntProc.sh -i mmUnitePrep= brings over =mmUnite.sh=; =mmUnite.sh -i screenCastingFullUpdate= runs
+=beamerExternalExtensions.py= and copies =mmUniteAudio.sh= from the templates. Video is the open item
+("similarly for videos mmUniteVideo.sh", "do it as mmUniteVideo.cs").
+Specify =mmUniteVideo= (image + voice-over = videoedImage, + caption = captionedImage), derived videos
+("create actions and starting points for derived videos"), and the =reveal-captioned= build; decide
+what is the CBS's (the programs) and what stays the LCNT document's (the per-document scripts).
+----- Results: ------
+2026-11-11 Findings only; the per-document scripts were not converted.
+- The scripts exist already, as bash templates:
+=/bisos/apps/defaults/begin/templates/purposed/lcnt/bash/=
+  =mmUniteAudio.sh= (400 lines: frames, record, play, mp3 and length), =mmUniteVideo.sh= (413 lines:
+ffmpeg
+  conversions to 144/360/720/1080, mkv to mp4, recordings prep, captions muxing) and =mmUnite.leaf.sh=.
+  =seedMmUnite.sh -i screenCastingFullUpdate= already runs both in =./audio= and =./video=. So the
+panel's
+  "mmUniteVideo not done" means converting them to =.cs=, not writing them.
+- The programs they call are what this CBM's sets provide: ffmpeg, soxi (sox), impressive, and for
+  recording OBS: all in the VM and Box sets. The CBS's part is the programs; the scripts stay the LCNT
+  document's.
+- Not done: the =mmUniteVideo.cs= conversion, derived videos, the =reveal-captioned= build: they need
+  subtitles ([[4.7]], deferred) and a Box with recording.
+
+** TODO [#B] <<4.11>> Decisions to settle with the user before [[4.1]] is final :aiAndMe:
+:PROPERTIES:
+:ORIGIN: Mohsen
+:IMPORTANCE: Medium
+:REPO: this
+:END:
+- Does lcntMultiMedia nest =lcntCore-sbom.pcs=, or only check that lcntCore is materialized?
+- Which pieces are core and which optional (OBS, kdenlive, vlc, gimp, whisper)?
+- A virtual camera (v4l2loopback) and OBS need a display and a kernel module: are they wanted in
+  containers, or only on VMs and desktops?
+- If aeneas does not run on Python 3.13: the alternative.
+- One CBM, or a split (for example lcntMultiMedia for the programs and a separate capability for
+  OBS and the screencasting profile).
+----- Results: ------
+2026-11-11 Decided by the user:
+1. Only check that lcntCore is materialized (never nest or reinstall it).
+2. Everything is core: no optional list.
+3. All the tools for video recording are not installed in a container; they are for the Box (rawMetal).
+4. aeneas is deferred ([[4.6]]).
+5. One CBM, conditioned on Container vs VM vs Box. In a container the reveal presentation builds, without
+   recording or playing audio and without recording video.
+
+2026-11-11 Confirmed by the user (detection, the three sets, the =.vtt= route), with these changes:
+- A container only does the PDF creation and the HTML for reveal. Display-only programs are fine in it:
+  =mpv= and =gimp= (they show images and video; they neither record nor play audio for the narrator).
+- No whisper in a container. subed-related work is not done in a container.
+- Subtitle creation (whisper, =.vtt=, =wdiff=, subed, Chapters.vtt) is revisited later: [[4.7]] and
+  [[4.8]] wait for that, in every environment.
+
+The result, to be refined in [[4.1]]:
+- Detection: =systemd-detect-virt --container= (any answer: Container), else =systemd-detect-virt --vm=
+  (VM), else Box; an override parameter. On this host: =docker= and =amazon=, so Container.
+- Container: lcntCore (checked, not installed) plus =mpv= and =gimp=, and the PDF and image tools
+  that the
+  build uses (=pdftk=, =imagemagick=: to confirm). No audio record or play, no OBS, no v4l2loopback, no
+  vlc, no kdenlive, no whisper, no subed, no =wdiff=.
+- VM: the Container set plus audio record, play and editing (audacity, pavucontrol, vlc, sox,
+  ffmpeg), but
+  no video recording (OBS, v4l2loopback).
+- Box: everything that is not deferred (not aeneas, not the subtitle work).
+- The CBS check ([[4.12]]) takes the same three sets, so a container passes with no OBS.
+
+2026-11-11 Settled: =pdftk= and =imagemagick= are in the Container set. Video editing (kdenlive) is only
+on the Box; =gimp= stays in every set. Nothing is open in this TODO: [[4.1]] can be written.
+
+** TODO [#A] <<4.12>> The CBS check: =toolchainCheck= for lcntMultiMedia
+:PROPERTIES:
+:ORIGIN: Mohsen
+:IMPORTANCE: High
+:REPO: this
+:END:
+As in [[2.2]]: the assemble step checks each program and the data it needs by name (ffmpeg, sox, mpv,
+obs, whisper and its model, wdiff, ...), and fails loudly, since neither the sbom steps nor the
+CBM walker report a failed install (found again in 2.2: the missing font was caught only by the check).
+The check is conditioned on the environment ([[4.11]]): a container is not required to have OBS or an
+audio device. First check that lcntCore is materialized (=lcntCore-assemble.cs -i toolchainCheck=).
+In a container the test is the build of the example's PDF and reveal HTML. On a VM or Box, add an
+end-to-end smoke test that needs no audio device (a synthesized sentence muxed into a video); the
+subtitle
+step joins it when the subtitle work returns.
+----- Results: ------
+2026-11-11 Done for the environment check; the end-to-end smoke test is not.
+- =lcntMultiMedia-assemble.cs -i toolchainCheck= (see [[4.2]]): checks lcntCore, the environment's
+programs,
+  node, npm, reveal.js and its plugins, and the Box module; fails loudly and says "skipped for
+<env>" for the
+  rest. =fullUpdate= calls it. A container passes with no OBS and no audio.
+- Not done: the VM/Box smoke test (a synthesized sentence muxed into a video), which needs a VM; and in a
+  container the PDF and reveal HTML build of an example: =contentProductionExample= built its PDF in
+  [[2.2]], the reveal HTML and =matoof-son-26= waited for [[Stage 3]] (now a cut; the user built
+  them, see [[3.2]]).
+
+** CANCELLED [#A] <<4.13>> The reveal HTML needs an Emacs server: a headless dblock pass
+:PROPERTIES:
+:ORIGIN: Claude
+:IMPORTANCE: Low
+:REPO: this
+:END:
+Cancelled 2026-11-11: a misunderstanding of mine, raised while planning [[4.1]]. The reveal build
+expands its
+dblocks through the user's running Emacs server (=bx-dblock=, found by =G_emacsServerPid=); my shell's
+variable was stale, so it found none. With the right pid the reveal HTML of a scratch copy of
+=matoof-son-26= was a complete page. No headless Emacs is needed. A private =emacs --daemon= with the
+Doom/Blee config does not start in this container (=vi-tilde-fringe-mode= void); that is noted, not
+pursued.
+----- Results: ------
+
+** -
+
+
+# Local Variables:
+# eval: (setq-local toc-org-max-depth 4)
+# eval: (setq-local org-log-done 'time)
+# End:

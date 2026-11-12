@@ -1,0 +1,29 @@
+#!/usr/bin/env python
+
+""" #+begin_org
+* Panel::  [[file:./py3/panels/bisos.lcnt/_nodeBase_/fullUsagePanel-en.org]]
+* Overview and Relevant Pointers
+lcntBases-cbs.pcs
+cbs: Capability Bundle Specification  -- Based on a cba-sysd.cs seed, of type induct (no units)
+i:  Induct      --- /Non-Service Component/ --- LCNT bases: /de/sys/lcnt linked into the bases BXO
+n:  No Data    -- Materialization is purely based on Realm-BPO
+p:  Platform    -- Materialization is based on Platform-BPO (Site-BPO is not used)
+
+The bundle: lcntBases-sbom.pcs (no packages: the toolchain is lcntCore's) and lcntBases-assemble.cs
+(/de/sys, /de/sys/lcnt, /lcnt and the links into bxlcnt/bro_lcntBases-rawBisos; toolchainCheck verifies
+them and lcntCore, failing loudly). Materialize lcntCore first. rawBisos only: the sited BISOS uses
+bpoActivate.sh and usgBpos, and this leaf stays available there.
+#+end_org """
+
+from bisos.capability import cba_sysd_seed
+from bisos.capability import cba_seed
+
+cba_seed.setup(
+    seedType="induct",  # not systemd: cbs_materialize runs the sbom and the assemble only
+    loader=None,
+    sbom="lcntBases-sbom.pcs",
+    assemble="lcntBases-assemble.cs",
+    materialize=None,
+)
+
+cba_sysd_seed.plantWithWhich("cba-sysd.cs")
