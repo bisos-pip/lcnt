@@ -904,6 +904,30 @@ not marked DONE):
   the user's Emacs via =G_emacsServerPid=); =/lcnt/sw= and =/info/externalLimited= do not exist, so
   =lcntNuUpdate= would list only =/lcnt/lgpc=.
 
+* Stage 6: Publish Released Documents on an Astro Site: the localWeb Export
+
+<<Stage 6>>
+
+Goal: an LCNT document that is released and exported lands on a site's =var/lcnt/= tree, where a generator
+(=bisos.webCap=, =astroSite.cs -i libraryGenerate=) turns it into a Library tab. The contract is
+=/bisos/asc/web/astro/lcntLibrary/README.org=.
+
+* Stage 6 TODOs
+** +
+** TODO [#A] <<6.1>> The =localWeb= export method: =lcntExportLocalWeb.cs= :aiAndMe:
+----- AI Results: ------
+Built and run end to end 2026-11-14 on three permanent examples (an article, an article with a presentation, a
+presentation); not marked DONE; awaiting the user's review.
+- =py3/bisos/lcnt/exportLocalWeb_csu.py= and =py3/bin/lcntExportLocalWeb.cs=: land the release's pdf (and, for an
+  article, its html) in =<siteBase>/var/lcnt/<class>/<nu>/<rel>/= with a =meta.pyl= (a Python literal read with
+  =ast.literal_eval=; pdf entries carry the build name). A presentation exports its pdf only; reveal.js is for later.
+- =bisos/lcnt/bin/lcnLcntExportLib.sh=: =vis_lcntExportInfoGens= writes a =localWeb= spec (article builds, =presPdf=
+  for a presentation; no =destinations=, and not in =Exports/enabledList=, so =export all= never lands anywhere).
+- Documented in =README.org= ("Publishing on an Astro Site") and the lcntProc panel ("exportMethod localWeb").
+- Checked: build, release, export, generate and serve for the three examples; the spec generator on temporary copies.
+- Not done: unit tests; the HeVeA step logs a missing =elispFilterHtml.el= (Plone fixups).
+
+** -
 
 
 # Local Variables:

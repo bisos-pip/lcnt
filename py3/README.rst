@@ -2,6 +2,7 @@
 bisos.lcnt: Command Services (CS) and libraries to support ByStar Libre Content (LCNT) capabilities for impressive (pdf presentations), screenstudio (desktop recorder), etc.
 =============================================================================================================================================================================
 
+
 .. contents::
    :depth: 3
 ..
@@ -43,6 +44,12 @@ Table of Contents TOC
 
    -  `Installation With pip <#installation-with-pip>`__
    -  `Installation With pipx <#installation-with-pipx>`__
+
+-  `Capability Bundles (CBM): lcntCore, lcntBases,
+   lcntMultiMedia <#capability-bundles-cbm-lcntcore-lcntbases-lcntmultimedia>`__
+
+   -  `lcntBases <#lcntbases>`__
+   -  `lcntMultiMedia <#lcntmultimedia>`__
 
 -  `Part of BISOS and ByStar — ByStar Internet Services Operating
    System <#part-of-bisos-and-bystar-----bystar-internet-services-operating-system>`__
@@ -88,6 +95,68 @@ can install it with pipx:
 The following commands are made available:
 /usr/local/bin/beamerExternalExtensions.py
 /usr/local/bin/screenstudioWebClientIcm.py
+
+Capability Bundles (CBM): lcntCore, lcntBases, lcntMultiMedia
+=============================================================
+
+bisos.lcnt supplies the CBSs (capability bundle specifications), sboms
+and assemble steps behind three CBM leaves of capabilityType ``induct``,
+realm ``collective``, at ``sys/cbm/collective/induct/<name>/``. Each
+leaf is a ``cbmProc.spcs`` that only points at the CBS (see
+bisos.capability); it is gated by ``cbmProc.control`` (``available``,
+``enabled``, ``disabled``). Materialize them in this order:
+
++----------------+----------------------------------------------------+
+| Capability     | What it provides                                   |
++================+====================================================+
+| lcntCore       | texlive-full, hevea, evince, the Persian fonts     |
+|                | (nested fonts sbom)                                |
++----------------+----------------------------------------------------+
+| lcntBases      | ``/de/sys/lcnt`` and ``/lcnt``, linked into the    |
+|                | bases BXO (rawBisos only)                          |
++----------------+----------------------------------------------------+
+| lcntMultiMedia | reveal.js, display tools; audio on a VM, video     |
+|                | recording on a Box                                 |
++----------------+----------------------------------------------------+
+
+Each has ``<name>-sbom.pcs``, ``<name>-assemble.cs`` and
+``<name>-cbs.pcs`` in ``py3/bin/``, and a pointer
+``cbmProc-<name>.spcs`` to copy to its leaf. Materialize and verify:
+
+.. code:: bash
+
+   cd /bisos/platform/sys/cbm/collective/induct/lcntCore
+   ./cbmProc.spcs -i cbm_enable
+   ./cbmProc.spcs -i cbm_materialize
+   lcntCore-assemble.cs -i toolchainCheck       # the verdict: it fails loudly
+
+The legacy scripts and the CBM walker exit 0 even when a step failed, so
+only ``toolchainCheck`` (in each ``<name>-assemble.cs``) tells whether a
+capability is complete.
+
+lcntBases
+---------
+
+The bases BXO on rawBisos is the clone ``bxlcnt/bro_lcntBases-rawBisos``
+(override for tests: ``LCNT_BASES_BXO``). The assemble step makes
+``/de/sys`` and ``/lcnt`` with sudo, and links ``bxdpt``, ``BIB``,
+``CENTRAL``, ``REGISTRY`` and ``lgpc`` (to ``lcnt/lgpc``) inside
+``/de/sys/lcnt``; it never links inside the clone.
+``lcntBases-assemble.cs -i fullUpdate`` repairs a broken link and
+refuses to replace a real directory. On the sited BISOS the bases come
+from a BPO instead and this leaf stays ``available``.
+
+lcntMultiMedia
+--------------
+
+The environment decides what is installed: Container (PDF and the reveal
+HTML; display-only tools), VM (adds audio), Box (adds video recording
+and editing). It is detected with ``systemd-detect-virt``; override it
+with ``LCNT_MM_ENV=Container|VM|Box``.
+``lcntMultiMedia-assemble.cs -i environment`` reports it and
+``-i toolchainCheck`` verifies it (and that lcntCore is complete, which
+it never installs). The OBS profile and websocket, aeneas, whisper and
+subed are not done.
 
 Part of BISOS and ByStar — ByStar Internet Services Operating System
 ====================================================================

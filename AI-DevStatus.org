@@ -34,6 +34,17 @@ Fill in the sections below when asked to update, following the structure provide
   uncommitted: lcntBases now makes =lgpc= a real directory holding the link =rawBisos=, an empty =lgcc=,
   and =outputs/all/lists= for =nuBaseDir=; materialized on this host.
 
+  *The localWeb export (2026-11-14).* A new export method, =exportMethod= =localWeb= (=py3/bisos/lcnt/exportLocalWeb_csu.py=,
+  command =py3/bin/lcntExportLocalWeb.cs -i localWebExport=, the =localWeb= case in =bisos/lcnt='s =seedLcntProc.sh=):
+  it lands a document's release (pdf, html of an article, =meta.pyl=, a black-formatted Python literal) in
+  =<siteBase>/var/lcnt/<class>/<nu>/<rel>/= of each astro site named in the spec's =destinations=, then runs the site's
+  generator (=astroSite.cs -i libraryGenerate=, =bisos.webCap=) for the Library and access pages. Built, run and looked at
+  with the three examples (580002, 580003, 580004) on =astroStarter.here=; the contract is in
+  =/bisos/asc/web/astro/lcntLibrary/README.org=. The export-spec generator (=vis_lcntExportInfoGens=) writes a =localWeb=
+  spec without =destinations= (the author lists the sites; not in =enabledList=). Presentations: pdf only for now; reveal.js
+  later. No tests yet; the =.cs= and the =_csu.py= dblocks were refreshed with =bx-dblock= (a new =_csu.py= needs the
+  =file/dblockControls= block, or the writers emit bare org text). Documented in the README and the =lcntProc= panel.
+
 * Architecture
   Each CBM is a leaf =sys/cbm/collective/induct/<name>/cbmProc.spcs= (a pointer to the CBS) in the
   =bro_rawBisosPlatform= tree. Files in =py3/bin/=: =lcntCore-{sbom.pcs,assemble.cs,cbs.pcs}=,

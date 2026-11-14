@@ -43,9 +43,9 @@ def longDescription():
 # b:py3:pypi:setup/version Arguments  :forSys t :forPyPi t :constant "666"
 ####+BEGIN: b:py3:pypi:setup/version :comment "Auto Detected"
 
-# ./pypiUploadVer DID NOT exist -- forPypiVersion=0.16 -- forLocalVersion=0.11 -- constant=NA
+# ./pypiUploadVer DID NOT exist -- forPypiVersion=0.16 -- forLocalVersion=0.15 -- constant=NA
 def pkgVersion():
-        return '0.11'
+        return '0.15'
 
 ####+END:
 
@@ -82,6 +82,7 @@ scripts = [
 'bin/lcntCore-assemble.cs',
 'bin/lcntCore-cbs.pcs',
 'bin/lcntCore-sbom.pcs',
+'bin/lcntExportLocalWeb.cs',
 'bin/lcntMultiMedia-assemble.cs',
 'bin/lcntMultiMedia-cbs.pcs',
 'bin/lcntMultiMedia-sbom.pcs',
