@@ -45,6 +45,13 @@ Fill in the sections below when asked to update, following the structure provide
   later. No tests yet; the =.cs= and the =_csu.py= dblocks were refreshed with =bx-dblock= (a new =_csu.py= needs the
   =file/dblockControls= block, or the writers emit bare org text). Documented in the README and the =lcntProc= panel.
 
+  *localWeb: a pointer, not a landing (2026-11-16).* Changed with the user so a site rebuilds from its own repository
+  (on another host too, for a PALS): the export no longer writes into a site's =var/=. It writes a spec,
+  =<siteBase>/lcntSpecs/<pubcategory>-<nu>-<rel>.pyl= (canonical =/de/sys/lcnt= path, BXO and path in it, last
+  commit, files, metadata from LCNT-INFO), then runs =<siteBase>/astroProc.spcs -i siteBuild= (or the spec's
+  =siteGenerator=). =landOne= moved to bisos.webCap. Planned and recorded in bisos.webCap's AI-WorkPlan.org 4.2,
+  which owns it; tested there with the three examples (580002, 580003, 580004) on =astroStarter.here=.
+
 * Architecture
   Each CBM is a leaf =sys/cbm/collective/induct/<name>/cbmProc.spcs= (a pointer to the CBS) in the
   =bro_rawBisosPlatform= tree. Files in =py3/bin/=: =lcntCore-{sbom.pcs,assemble.cs,cbs.pcs}=,

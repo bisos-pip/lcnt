@@ -35,17 +35,19 @@ An LCNT export spec (=LCNT-INFO/Exports/<spec>/=) with =exportMethod= =localWeb=
 the file-var =destinations=: FQDNs of web sites on this same system (whence "local"), whitespace separated. Each
 FQDN is turned into the site's base directory by a resolver command run as a subprocess: the file-var
 =siteResolver= of the spec (default =astroSite.cs -i siteBase=, which reads nginx), printing "<fqdn> <base>".
-The document's *release* (=Release/<relTag>/=, always made before an export) is landed under the site's
-=<base>/var/lcnt/<class>/<lcntNu>/<relTag>/= (older releases are kept); <class> (lgcc, lgpc, ...) is the one the
-document is in, taken from its path (=.../lcnt/<class>/...=):
-| =html/=     | the HeVeA html (regular files only, with an =index.html=)                      |
-| =*.pdf=     | the released pdf of each build spec of the export spec                          |
-| =meta.pyl=  | one Python literal, formatted by black (read with ast.literal_eval): what an access page shows (docNumber, titles, authors, date, version, group, url, description, formats with sizes, ...); placeholder values ("NA") left out |
-| =*.bib=     | the release's citation file, when there is one                                  |
-=<base>/var= is outside the site's repository. The landing is replaced as a whole, never merged. One
-destination failing does not stop the others. After landing, the site's page generator (the spec's =siteGenerator= file-var, default
-=astroSite.cs -i libraryGenerate=, run as a subprocess with the site's base) writes the Library and the access pages
-from =var/lcnt/*/*/*/meta.pyl= into the site's content tree; the site shows them at its next build.
+The export copies nothing. It writes a *pointer* to the document's release (=Release/<relTag>/=, always made
+before an export) into the site's own repository: =<base>/lcntSpecs/<pubcategory>-<lcntNu>-<relTag>.pyl=, one
+Python literal (formatted by black; read with ast.literal_eval), one file per release, replaced on re-export:
+| =releaseDir=, =lcntInfo=      | the release and LCNT-INFO by their canonical paths (=/de/sys/lcnt/...=)    |
+| =bxoKind=, =bxo=, =bxoPath=   | the BXO holding the release (=bro= <org>/<repo>, or =bpo= <id>), the path in it |
+| =bxoCommit=                   | the last commit of the release directory at export                         |
+| =release=                     | its files: pdfs (with their build), the html directory and entry, bibs     |
+| =meta=                        | what an access page shows, from LCNT-INFO (titles, authors, date, ...)     |
+<class> (lgcc, lgpc, ...) is the one the document is in, taken from its path (=.../lcnt/<class>/...=). The
+site (bisos.webCap) lands the files in its =var/lcnt/= from these specs at each contentBuild; the contract is
+=/bisos/asc/web/astro/lcntLibrary/README.org=. One destination failing does not stop the others. After writing
+the spec, the site is rebuilt: =<base>/astroProc.spcs -i siteBuild=, or the spec's =siteGenerator= file-var (a
+command run with the site's base as its last argument).
 ** Status: In use with BISOS
 ** /[[elisp:(org-cycle)][| Planned Improvements |]]/ :
 #+end_org """
@@ -71,7 +73,11 @@ import shutil
 import subprocess
 
 defaultResolver = "astroSite.cs -i siteBase"
-defaultGenerator = "astroSite.cs -i libraryGenerate"
+specsDirName = "lcntSpecs"
+specVersion = 1
+deSysLcnt = pathlib.Path("/de/sys/lcnt")
+# Where an activated BXO is: a BRO by its <org>/<repo> under the first, a BPO by its id under the second.
+bxoRoots = {"bro": pathlib.Path("/bisos/git/bxRepos"), "bpo": pathlib.Path("/bxo")}
 
 ####+BEGIN: b:py3:cs:orgItem/section :title "Common Parameters Specification" :comment "based on cs.param.CmndParamDict -- As expected from CSU-s"
 """ #+begin_org
@@ -89,13 +95,11 @@ def commonParamsSpecify(
 ) -> None:
     pass
 
-####+BEGIN: blee:bxPanel:foldingSection :outLevel 0 :sep nil :title "Library" :anchor ""  :extraInfo "Landing a release"
+####+BEGIN: blee:bxPanel:foldingSection :outLevel 0 :sep nil :title "Library" :anchor ""  :extraInfo "A release's spec"
 """ #+begin_org
-*  _[[elisp:(blee:menu-sel:outline:popupMenu)][±]]_ _[[elisp:(blee:menu-sel:navigation:popupMenu)][Ξ]]_ [[elisp:(outline-show-branches+toggle)][|=]] [[elisp:(bx:orgm:indirectBufOther)][|>]] *[[elisp:(blee:ppmm:org-mode-toggle)][|N]]*     [[elisp:(outline-show-subtree+toggle)][| _Library_: |]]  Landing a release  [[elisp:(org-shifttab)][<)]] E|
+*  _[[elisp:(blee:menu-sel:outline:popupMenu)][±]]_ _[[elisp:(blee:menu-sel:navigation:popupMenu)][Ξ]]_ [[elisp:(outline-show-branches+toggle)][|=]] [[elisp:(bx:orgm:indirectBufOther)][|>]] *[[elisp:(blee:ppmm:org-mode-toggle)][|N]]*     [[elisp:(outline-show-subtree+toggle)][| _Library_: |]]  A release's spec  [[elisp:(org-shifttab)][<)]] E|
 #+end_org """
 ####+END:
-
-htmlSuffixes = frozenset(['.html', '.htm', '.css', '.png', '.jpg', '.jpeg', '.gif', '.svg'])
 
 
 def fv(path: pathlib.Path) -> typing.Optional[str]:
@@ -153,21 +157,131 @@ def siteBaseOf(fqdn: str, resolver: str) -> typing.Tuple[typing.Optional[pathlib
     return None, problems[0] if problems else f"{fqdn}: the resolver '{resolver}' found no site"
 
 
-def generateFor(base: pathlib.Path, generator: str) -> str:
-    """ Run the site's page generator on base, as a subprocess; "" when it made the pages, else the reason.
+def generateFor(base: pathlib.Path, generator: typing.Optional[str]) -> str:
+    """ Rebuild the site at base, as a subprocess; "" when it built, else the reason.
 
-    The generator (the spec's file-var siteGenerator) writes the Library and the access pages from the site's var/lcnt.
+    The generator is the spec's file-var siteGenerator (run with base as its last argument); without one, the
+    site's own <base>/astroProc.spcs -i siteBuild, which lands var/lcnt from lcntSpecs/ and builds the site.
     Its output is read, since a PyCS command exits 0 even when it fails.
     """
+    cmd = shlex.split(generator) + [str(base)] if generator else [str(base / 'astroProc.spcs'), '-i', 'siteBuild']
     try:
-        out = subprocess.run(shlex.split(generator) + [str(base)], capture_output=True, text=True, timeout=300)
+        out = subprocess.run(cmd, cwd=base, capture_output=True, text=True, timeout=1800)
     except (OSError, subprocess.TimeoutExpired) as err:
-        return f"the generator '{generator}' did not run: {err}"
+        return f"'{' '.join(cmd)}' did not run: {err}"
     text = out.stdout + out.stderr
     if out.returncode != 0 or re.search(r'Traceback|SyntaxError|CRITICAL|EH_Problem|Operation Failed', text):
         lines = [line.strip() for line in text.splitlines() if re.search(r'EH_Problem|Error|PROBLEM|No ', line)]
-        return f"the generator '{generator}' failed on {base}: " + (lines[0] if lines else "see its output")
+        return f"'{' '.join(cmd)}' failed: " + (lines[0] if lines else "see its output")
     return ""
+
+
+def canonicalOf(path: pathlib.Path) -> typing.Optional[pathlib.Path]:
+    """ path as seen through /de/sys/lcnt (the same on every host where its BXO is activated), or None.
+
+    The links of /de/sys/lcnt (and of its real directories, e.g. lgpc/rawBisos) are matched by where they resolve.
+    """
+    real = path.resolve()
+    if not deSysLcnt.is_dir():
+        return None
+    candidates = []
+    for each in deSysLcnt.iterdir():
+        candidates += [each] if each.is_symlink() else list(each.iterdir()) if each.is_dir() else []
+    for link in candidates:
+        if not link.is_symlink():
+            continue
+        try:
+            rest = real.relative_to(link.resolve())
+        except ValueError:
+            continue
+        return link / rest
+    return None
+
+
+def git(directory: pathlib.Path, *args: str) -> str:
+    """ git's stdout in directory, stripped; "" when it fails. """
+    try:
+        out = subprocess.run(['git', '-C', str(directory), *args], capture_output=True, text=True, timeout=60)
+    except (OSError, subprocess.TimeoutExpired):
+        return ""
+    return out.stdout.strip() if out.returncode == 0 else ""
+
+
+def bxoOf(releaseDir: pathlib.Path) -> typing.Dict[str, typing.Any]:
+    """ The BXO holding releaseDir: bxoKind (bro or bpo), bxo, bxoPath and bxoCommit; None where unknown. """
+    found: typing.Dict[str, typing.Any] = {'bxoKind': None, 'bxo': None, 'bxoPath': None, 'bxoCommit': None}
+    top = git(releaseDir, 'rev-parse', '--show-toplevel')
+    if not top:
+        return found
+    top = pathlib.Path(top).resolve()
+    found['bxoPath'] = str(releaseDir.resolve().relative_to(top))
+    found['bxoCommit'] = git(releaseDir, 'log', '-1', '--format=%H', '--', '.') or None
+    # A BRO clone is <org>/<repo> under bxRepos (which is the auth or the anon tree); a BPO is the last part.
+    places = [('bro', bxoRoots['bro'].resolve()), ('bro', pathlib.Path('/bisos/git/auth/bxRepos')),
+              ('bro', pathlib.Path('/bisos/git/anon/bxRepos')), ('bpo', bxoRoots['bpo'].resolve())]
+    for kind, under in places:
+        try:
+            rel = top.relative_to(under)
+        except ValueError:
+            continue
+        found.update(bxoKind=kind, bxo=str(rel) if kind == 'bro' else rel.parts[-1])
+        return found
+    return found
+
+
+def specOf(
+        items: typing.Dict[str, typing.Any],
+        docDir: pathlib.Path,
+        specDir: pathlib.Path,
+) -> typing.Tuple[typing.Dict[str, typing.Any], typing.List[str]]:
+    """ The release's spec, for a site's lcntSpecs/: (spec, notes). Notes say what a rebuild elsewhere would miss. """
+    releaseDir = items['releaseDir']
+    notes = []
+    canonical = canonicalOf(releaseDir)
+    if canonical is None:
+        notes.append(f"{releaseDir} is not under {deSysLcnt}: the spec points at it by its BXO only")
+    spec: typing.Dict[str, typing.Any] = {
+        'specVersion': specVersion,
+        'lcntClass': items['lcntClass'], 'lcntNu': items['lcntNu'], 'relTag': items['relTag'],
+        'docNumber': items['meta']['docNumber'],
+        'releaseDir': str(canonical) if canonical else None,
+        'lcntInfo': str(canonicalOf(docDir / 'LCNT-INFO') or ''),
+        'exportSpec': specDir.name,
+        'exportedAt': datetime.datetime.now(datetime.timezone.utc).isoformat(timespec='seconds'),
+        'release': {
+            'pdfs': [{'name': p.name, 'build': items.get('pdfBuilds', {}).get(p.name)} for p in items['pdfs']],
+            'html': items['html'].name if items['html'] is not None else None,
+            'htmlEntry': items['htmlEntry'],
+            'bibs': [bib.name for bib in items.get('bibs', [])],
+        },
+        'meta': {key: value for key, value in items['meta'].items() if not unset(value)},
+    }
+    spec.update(bxoOf(releaseDir))
+    if not spec['bxo']:
+        notes.append(f"{releaseDir} is not in a BXO's git repository: another host cannot find it")
+    elif git(releaseDir, 'status', '--porcelain', '--', '.'):
+        notes.append(f"{releaseDir} has uncommitted changes: commit and push them, or another host gets the older release")
+    elif not spec['bxoCommit']:
+        notes.append(f"{releaseDir} is not committed: another host cannot find it")
+    return spec, notes
+
+
+def specName(items: typing.Dict[str, typing.Any]) -> str:
+    """ <pubcategory>-<lcntNu>-<relTag>.pyl, from LCNT-INFO's pubCategory (else the class): plpc-580003-0.1.pyl. """
+    prefix = (items['meta'].get('pubCategory') or items['lcntClass']).lower()
+    return f"{prefix}-{items['lcntNu']}-{items['relTag']}.pyl"
+
+
+def specWrite(spec: typing.Dict[str, typing.Any], name: str, base: pathlib.Path) -> pathlib.Path:
+    """ Write the spec as base/lcntSpecs/name (replacing an older one of the same release). Returns the file. """
+    specs = base / specsDirName
+    specs.mkdir(exist_ok=True)
+    path = specs / name
+    tmp = specs / f".{name}.new"
+    tmp.write_text(metaText(spec))
+    os.chmod(tmp, 0o644)
+    os.replace(tmp, path)
+    return path
 
 
 def releaseItems(
@@ -257,77 +371,6 @@ def metaText(meta: typing.Dict[str, typing.Any]) -> str:
         return pprint.pformat(dict(sorted(meta.items()))) + "\n"
 
 
-def landOne(
-        items: typing.Dict[str, typing.Any],
-        base: pathlib.Path,
-        fqdn: str,
-) -> pathlib.Path:
-    """ Land the items under <base>/var/lcnt/<class>/<lcntNu>/<relTag>/, replacing that release only. Returns the directory. """
-    nu = items['lcntNu']
-    rel = str(items['relTag'])
-    if '/' in rel or rel.startswith('.'):
-        raise OSError(f"release tag {rel!r} cannot be a directory name")
-    parent = base / 'var' / 'lcnt' / items['lcntClass'] / nu   # one directory per release below it, older ones kept
-    parent.mkdir(parents=True, exist_ok=True)
-    new = parent / f".{rel}.new"
-    old = parent / f".{rel}.old"
-    final = parent / rel
-    for leftover in (new, old):
-        if leftover.exists():
-            shutil.rmtree(leftover)
-    new.mkdir()
-    files: typing.List[str] = []
-    for pdf in items['pdfs']:
-        shutil.copyfile(pdf, new / pdf.name)
-        files.append(pdf.name)
-    htmlEntry = None
-    if items['html'] is not None:
-        htmlOut = new / 'html'
-        htmlOut.mkdir()
-        for each in sorted(items['html'].iterdir()):
-            if each.is_symlink() or not each.is_file() or each.suffix not in htmlSuffixes:
-                continue
-            shutil.copyfile(each, htmlOut / each.name)
-            files.append(f"html/{each.name}")
-        entry = items['htmlEntry']
-        if entry and (htmlOut / entry).is_file():
-            if entry != 'index.html':
-                shutil.copyfile(htmlOut / entry, htmlOut / 'index.html')
-                files.append("html/index.html")
-            htmlEntry = 'html/index.html'
-    for bib in items.get('bibs', []):
-        shutil.copyfile(bib, new / bib.name)
-        files.append(bib.name)
-    # The access page's "available formats": what was landed, each with its size in bytes.
-    formats: typing.List[typing.Dict[str, typing.Any]] = []
-    for pdf in items['pdfs']:
-        formats.append({'kind': 'pdf', 'path': pdf.name, 'bytes': (new / pdf.name).stat().st_size,
-                        'build': items.get('pdfBuilds', {}).get(pdf.name)})
-    if htmlEntry:
-        formats.append({'kind': 'html', 'path': htmlEntry,
-                        'bytes': sum(f.stat().st_size for f in (new / 'html').iterdir()
-                                     # the index.html made as a copy of the entry file is not counted twice
-                                     if f.is_file() and (f.name != 'index.html' or items['htmlEntry'] == 'index.html'))})
-    for bib in items.get('bibs', []):
-        formats.append({'kind': 'bib', 'path': bib.name, 'bytes': (new / bib.name).stat().st_size})
-    meta = {key: value for key, value in items['meta'].items() if not unset(value)}
-    meta.update(lcntNu=nu, relTag=items['relTag'], html=htmlEntry, pdfs=[p.name for p in items['pdfs']],
-                formats=formats, files=sorted(files),
-                landedAt=datetime.datetime.now(datetime.timezone.utc).isoformat(timespec='seconds'),
-                landedFor=fqdn)
-    (new / 'meta.pyl').write_text(metaText(meta))
-    for root, dirs, names in os.walk(new):
-        os.chmod(root, 0o755)
-        for name in names:
-            os.chmod(os.path.join(root, name), 0o644)
-    if final.exists():
-        os.rename(final, old)
-    os.rename(new, final)
-    if old.exists():
-        shutil.rmtree(old)
-    return final
-
-
 ####+BEGIN: blee:bxPanel:foldingSection :outLevel 0 :sep nil :title "Direct Command Services" :anchor ""  :extraInfo "Examples and CSs"
 """ #+begin_org
 *  _[[elisp:(blee:menu-sel:outline:popupMenu)][±]]_ _[[elisp:(blee:menu-sel:navigation:popupMenu)][Ξ]]_ [[elisp:(outline-show-branches+toggle)][|=]] [[elisp:(bx:orgm:indirectBufOther)][|>]] *[[elisp:(blee:ppmm:org-mode-toggle)][|N]]*     [[elisp:(outline-show-subtree+toggle)][| _Direct Command Services_: |]]  Examples and CSs  [[elisp:(org-shifttab)][<)]] E|
@@ -360,7 +403,7 @@ class examples_csu(cs.Cmnd):
         #+end_org """)
 
         cmnd = cs.examples.cmndEnter
-        cs.examples.menuChapter('=localWebExport= -- land a document\'s release on the web sites of its export spec')
+        cs.examples.menuChapter('=localWebExport= -- point the web sites of its export spec at a document\'s release, and rebuild them')
         cmnd('localWebExport', args=". ./LCNT-INFO/Exports/localWeb", comment=" # run in the document's directory, after a release")
         return(cmndOutcome)
 
@@ -388,7 +431,7 @@ class localWebExport(cs.Cmnd):
         cmndArgsSpecDict = self.cmndArgsSpec()
 ####+END:
         self.cmndDocStr(f""" #+begin_org
-** [[elisp:(org-cycle)][| *CmndDesc:* | ]]  Land the release of the LCNT document in docDir on each web site named in the export spec's destinations. Prints "landed <lcntNu> <fqdn> <directory>" per success and a problem per failure.
+** [[elisp:(org-cycle)][| *CmndDesc:* | ]]  Write a spec of the release of the LCNT document in docDir into the lcntSpecs/ of each web site named in the export spec's destinations, then rebuild that site. Prints "specified <lcntNu> <fqdn> <file>" and "rebuilt <fqdn> <base>" per success, a problem per failure, and notes on what a rebuild on another host would miss.
         #+end_org """)
 
         docArg = self.cmndArgsGet("0", cmndArgsSpecDict, argsList)
@@ -415,6 +458,9 @@ class localWebExport(cs.Cmnd):
         if 'releaseDir' not in items or (items['html'] is None and not items['pdfs']):
             return failed(cmndOutcome)
 
+        spec, notes = specOf(items, docDir, specDir)
+        for note in notes:
+            print(f"note: {note}")
         resolver = fv(specDir / 'siteResolver') or defaultResolver
         allLanded = not problems
         for fqdn in fqdns:
@@ -424,16 +470,18 @@ class localWebExport(cs.Cmnd):
                 allLanded = False
                 continue
             try:
-                landed = landOne(items, base, fqdn)
+                written = specWrite(spec, specName(items), base)
             except OSError as err:
-                b_io.eh.problem_usageError(f"{fqdn}: cannot land under {base}/var: {err}")
+                b_io.eh.problem_usageError(f"{fqdn}: cannot write the spec under {base}/{specsDirName}: {err}")
                 allLanded = False
                 continue
-            print(f"landed {items['lcntNu']} {fqdn} {landed}")
-            reason = generateFor(base, fv(specDir / 'siteGenerator') or defaultGenerator)
+            print(f"specified {items['lcntNu']} {fqdn} {written}")
+            reason = generateFor(base, fv(specDir / 'siteGenerator'))
             if reason:
-                b_io.eh.problem_usageError(f"{fqdn}: landed, but its pages were not made: {reason}")
+                b_io.eh.problem_usageError(f"{fqdn}: specified, but the site was not rebuilt: {reason}")
                 allLanded = False
+            else:
+                print(f"rebuilt {fqdn} {base}")
 
         if not allLanded:
             return failed(cmndOutcome)

@@ -33,6 +33,7 @@ More complete documentation is available at: https://github.com/bisos-pip/lcnt-c
 - [[#capability-bundles-cbm-lcntcore-lcntbases-lcntmultimedia][Capability Bundles (CBM): lcntCore, lcntBases, lcntMultiMedia]]
   - [[#lcntbases][lcntBases]]
   - [[#lcntmultimedia][lcntMultiMedia]]
+- [[#publishing-on-an-astro-site-the-localweb-export][Publishing on an Astro Site: the localWeb Export]]
 - [[#part-of-bisos-and-bystar-----bystar-internet-services-operating-system][Part of BISOS and ByStar --- ByStar Internet Services Operating System]]
 - [[#bisoslcnt-as-a-standalone-piece-of-bisos][bisos.lcnt as a Standalone Piece of BISOS]]
 - [[#documentation-and-blee-panels][Documentation and Blee-Panels]]
@@ -100,9 +101,14 @@ The legacy scripts and the CBM walker exit 0 even when a step failed, so only =t
 ** lcntBases
 
 The bases BXO on rawBisos is the clone =bxlcnt/bro_lcntBases-rawBisos= (override for tests:
-=LCNT_BASES_BXO=). The assemble step makes =/de/sys= and =/lcnt= with sudo, and links =bxdpt=, =BIB=,
-=CENTRAL=, =REGISTRY= and =lgpc= (to =lcnt/lgpc=) inside =/de/sys/lcnt=; it never links inside the clone.
-=lcntBases-assemble.cs -i fullUpdate= repairs a broken link and refuses to replace a real directory.
+=LCNT_BASES_BXO=). The assemble step makes =/de/sys= and =/lcnt= with sudo. Inside =/de/sys/lcnt= it
+links =bxdpt=, =BIB=, =CENTRAL= and =REGISTRY= into the clone, and makes three real directories:
+- =lgpc= (Libre Generated Public Content), holding the link =rawBisos= to the clone's
+  =lcnt/lgpc/rawBisos=; other hierarchies (such as =bystar=) are added beside it by the user, never inside the clone.
+- =lgcc= (Libre Generated Confidential Content), empty: a placeholder for the user's own hierarchy.
+- =outputs/all/lists=, where every build keeps =/lcnt/outputs/all/lists/nuBaseDir=.
+=lcntBases-assemble.cs -i fullUpdate= repairs a broken link, turns the old =lgpc= link into the real
+directory, and refuses to replace a real file or directory. It never links inside the clone.
 On the sited BISOS the bases come from a BPO instead and this leaf stays =available=.
 
 ** lcntMultiMedia
@@ -112,6 +118,34 @@ VM (adds audio), Box (adds video recording and editing). It is detected with =sy
 override it with =LCNT_MM_ENV=Container|VM|Box=. =lcntMultiMedia-assemble.cs -i environment= reports it
 and =-i toolchainCheck= verifies it (and that lcntCore is complete, which it never installs).
 The OBS profile and websocket, aeneas, whisper and subed are not done.
+
+* Publishing on an Astro Site: the localWeb Export
+
+An export spec (=LCNT-INFO/Exports/<spec>/=) whose =exportMethod= is =localWeb= publishes a released
+document on astro sites of the same system, so that it can be read and cited there: a Library tab lists
+the documents, and each release has an access page (vitals, formats, and for an article the document
+itself). The spec's file-vars:
+
+| =exportMethod= | =localWeb=                                                                 |
+| =buildSpecs=   | the build specs whose released pdf (and html) are exported                 |
+|                | (e.g. =./LCNT-INFO/Builds/art-8.5x11=)                                     |
+| =destinations= | FQDNs of the sites on this system, whitespace separated                    |
+
+#+begin_src bash
+lcntProc.sh -p extent="build+release" -i lcntBuild all
+lcntProc.sh -i lcntExport ./LCNT-INFO/Exports/localWeb
+#+end_src
+
+The release is landed under each site's =var/lcnt/<class>/<number>/<release>/=, and the site's page
+generator (=bisos.webCap=) then writes the pages into its content tree; rebuild the site to see them. An
+article may export its html (embedded in its access page) and its pdf; a presentation, for now, exports
+its pdf only. Reveal.js and the other multimedia presentations are to be added later. The command is
+=lcntExportLocalWeb.cs= (module =exportLocalWeb_csu.py=); the export spec is described in the =lcntProc=
+Blee-Panel.
+
+The landing layout, the =meta.pyl= contract, what a site needs and the generator are documented with the
+shared astro facilities, in =/bisos/asc/web/astro/lcntLibrary/README.org= (start at
+=/bisos/asc/web/astro/README.org=).
 
 * Part of BISOS and ByStar --- ByStar Internet Services Operating System
 

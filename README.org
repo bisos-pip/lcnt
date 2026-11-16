@@ -139,14 +139,18 @@ lcntProc.sh -p extent="build+release" -i lcntBuild all
 lcntProc.sh -i lcntExport ./LCNT-INFO/Exports/localWeb
 #+end_src
 
-The release is landed under each site's =var/lcnt/<class>/<number>/<release>/=, and the site's page
-generator (=bisos.webCap=) then writes the pages into its content tree; rebuild the site to see them. An
+The export copies nothing into a site. It writes a spec of the release (a pointer: its canonical
+=/de/sys/lcnt= path, its BXO and the path in it, the last commit, the files and the metadata from
+LCNT-INFO) into each site's =lcntSpecs/=, as =<pubcategory>-<number>-<release>.pyl=, then rebuilds the
+site (=<siteBase>/astroProc.spcs -i siteBuild=). The site (=bisos.webCap=) lands the release in its
+=var/lcnt/= and writes the pages; commit the spec in the site's repository, so that the site rebuilds
+the same way on another host. The export notes a release with uncommitted changes. An
 article may export its html (embedded in its access page) and its pdf; a presentation, for now, exports
 its pdf only. Reveal.js and the other multimedia presentations are to be added later. The command is
 =lcntExportLocalWeb.cs= (module =exportLocalWeb_csu.py=); the export spec is described in the =lcntProc=
 Blee-Panel.
 
-The landing layout, the =meta.pyl= contract, what a site needs and the generator are documented with the
+The spec and landing contracts, what a site needs and the generator are documented with the
 shared astro facilities, in =/bisos/asc/web/astro/lcntLibrary/README.org= (start at
 =/bisos/asc/web/astro/README.org=).
 
