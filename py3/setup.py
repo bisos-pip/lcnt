@@ -86,6 +86,7 @@ scripts = [
 'bin/lcntMultiMedia-assemble.cs',
 'bin/lcntMultiMedia-cbs.pcs',
 'bin/lcntMultiMedia-sbom.pcs',
+'bin/revealJs-sbom.pcs',
 'bin/screenstudioWebClientIcm.py',
 'bin/seedLcntProc.cs',
 ]

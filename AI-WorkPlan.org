@@ -855,6 +855,83 @@ Doom/Blee config does not start in this container (=vi-tilde-fringe-mode= void);
 pursued.
 ----- Results: ------
 
+** TODO [#B] <<4.14>> Text-to-speech for narration: Piper, =piperTts-sbom.pcs=
+:PROPERTIES:
+:ORIGIN: Mohsen
+:IMPORTANCE: Medium
+:REPO: this
+:FOUND: <2026-11-17 Tue>
+:END:
+A frame's narration (its =\pnote=) becomes =audio/<label>.mp3=, which Reveal plays (=\frameaudio=):
+synthetic narration while a talk is developed, replaced by recorded voice when it is final. First user:
+the EmacsConf26 talk (=bro_lcntBases-rawBisos/.../examples/aiActivity_EmacsConf26=, its TODO 3.2).
+Decided with the user, 2026-11-17:
+- Piper (=OHF-Voice/piper1-gpl=, GPL-3.0-or-later), not Kokoro. The driver is long-term maintenance,
+  not speed: the Open Home Foundation maintains Piper and Home Assistant depends on it; a voice is a
+  fixed =.onnx= run by onnxruntime; Piper ships its training code. Kokoro-82M is one pseudonymous
+  maintainer, needs PyTorch, and its training data includes synthetic audio from closed TTS models.
+- Only voices trained from scratch on public-domain recordings. A voice fine-tuned from lessac carries
+  the Blizzard 2013 terms; =en_US-libritts_r= (CC BY 4.0 data) is excluded because it is fine-tuned
+  from lessac.
+----- Results: ------
+2026-11-17 The sbom is written, installed and tested in this container; nothing else uses it yet.
+- =py3/bisos/lcnt/lcntTtsInfo.py= (new): the facts --- piper-tts 1.8.0, the isolated venv
+  =/bisos/venv/py3/isolated/piperTts= with its 7-package set hash-pinned (each sha256 checked against
+  PyPI's digest; amd64 + Python 3.13 only), and the voices ljspeech-high (default), cori-high,
+  norman-medium and kristin-medium in =/bisos/var/lcnt/piperVoices=, fetched at one pinned revision of
+  =rhasspy/piper-voices= and checked by sha256, each with its =MODEL_CARD= beside it.
+- =py3/bin/piperTts-sbom.pcs= (new): =curl=, =ffmpeg=, the venv and one fetch step per voice, all
+  idempotent; =-i readme= reports the engine and each voice as present or missing.
+- Tested: =sbom_fullUpdate= installed all (venv 208 MB, voices 340 MB); a second run left all 12 voice
+  files in place; the installed =piper= spoke a narration sentence with ljspeech-high and norman, and
+  ffmpeg made the mp3 (7.6 s).
+- No sound device in this container (=/dev/snd= has only =seq= and =timer=, no PulseAudio/PipeWire,
+  TigerVNC/noVNC carries no audio): Piper writes files and needs none; listening is on another machine.
+- Not done: =lcntMultiMedia-sbom.pcs= does not nest it (that file had uncommitted reveal.js work);
+  =setup.py= lists it at the next =pypiProc.sh= run; the narration-to-audio generator (per frame, with a
+  pronunciation lexicon and =.length= files) is not written.
+- 2026-11-17 That generator is now =audioProc.spcs=: TODO 4.15.
+
+** TODO [#B] <<4.15>> The audio of a document: =audio/audioProc.spcs=, tts and recordings by links
+:PROPERTIES:
+:ORIGIN: Mohsen
+:IMPORTANCE: Medium
+:REPO: this
+:FOUND: <2026-11-17 Tue>
+:END:
+For each frame of an LCNT presentation, its narration (=\pnote=) to =audio/tts-<label>.mp3= with Piper
+(4.14), the author's recording as =audio/rec-<label>.*=, and what Reveal plays (=audio/<label>.mp3=, from
+=\frameaudio=) as a relative symlink to one of them. Decided with the user (EmacsConf26 TODO 3.2):
+the player stays as it is and the choice is made by links; the tool is a spread-planted =.spcs= in
+=audio/=, in bisos.lcnt, not the Bash ICM =mmUniteAudio.sh= (seed
+=/bisos/core/lcnt/bin/seedAudioProc.sh=), which is left for older documents.
+----- Results: ------
+2026-11-17 Written and in use for the EmacsConf26 talk.
+- =py3/bisos/lcnt/lcntAudio_seedInfo.py= (new): the library. =framesOf()= reads the document source
+  (=docSrc= of =../curBuild=, or =setup(docSrc=)=) with its =\input= files, and takes each labelled frame
+  once, in order, with the =\pnote= text after it as plain text. tts and recording steps, selection,
+  staleness, the planting templates.
+- =py3/bisos/lcnt/lcntAudio_csu.py= (new): =narrationList=, =narrationText=, =ttsGenerate=,
+  =audioSelect=, =audioReport=, =recordCmnds=, =recFinalize=, =audioPlant=.
+- =py3/bisos/lcnt/lcntAudio_seed.py= (new, the atexit registrar) and =py3/bin/lcntAudio-seed.cs= (new).
+- Files per frame: =<source>-<label>.textHash= begins with the hash of the narration the audio was made
+  from (stale when it differs); the tts line adds voice, engine and the spoken text, and =ttsGenerate=
+  redoes a frame when that line changes. =.length= is milliseconds with no newline, as =mmUniteAudio.sh=
+  writes it. Links are relative and replaced in one step; a real =<label>.mp3= is never overwritten.
+- =ttsGenerate= links a frame that plays nothing (recording first, else tts); =audioSelect rec|tts= with
+  no labels takes that source where it exists, else the other; with labels, exactly that source.
+- Tested on a scratch copy of the EmacsConf26 document (two frames, a fake recording, an edited
+  =\pnote=, a real-file conflict), then on the document itself: 31 frames, 9:03, 2 min 17 s.
+- On this host: =/bisos/venv/py3/devbin/lcntAudio-seed.cs= links to =py3/bin/=, as its siblings do.
+- Added at the user's request: =ttsClean [labels]= deletes what =ttsGenerate= makes again ---
+  =tts-<label>.*=, links to them, dangling links, leftovers of an interrupted run, =__pycache__=; with
+  labels, those frames' tts and links only. Kept: =rec-*= (a recording's =.textHash= cannot be
+  remade), links to recordings, =audioProc.spcs=, =.gitignore=, =ttsLexicon=. Tested on the scratch
+  copy (one frame, then all, with a recording selected and a dangling link); not run on EmacsConf26.
+- Known: a failing command exits 0 (=g_csMain=). Not done: =setup.py= lists the seed at the next
+  =pypiProc.sh= run; a panel; the release step copies =revealJsBase/audio= as a link (=cp -r= in
+  =seedLcntProc.sh=), so a release carries no audio; nobody has listened yet (no sound device here).
+
 ** -
 
 * Stage 5: Adjustments based on usage

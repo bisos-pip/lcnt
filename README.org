@@ -122,6 +122,13 @@ override it with =LCNT_MM_ENV=Container|VM|Box=. =lcntMultiMedia-assemble.cs -i 
 and =-i toolchainCheck= verifies it (and that lcntCore is complete, which it never installs).
 The OBS profile and websocket, aeneas, whisper and subed are not done.
 
+reveal.js comes from the nested =revealJs-sbom.pcs= (it replaced =lcaJsRevealBinsPrep.sh=): reveal.js,
+reveal.js-plugins and reveal.js-menu at the versions pinned in =lcntMultiMediaInfo.py=, global under
+=/usr/local/lib/node_modules= by the system's =/usr/bin/npm= under sudo, and the link
+=reveal.js-plugins/menu= -> =../reveal.js-menu=. reveal.js is a library the HTML loads by path, not a
+command, so it does not go into the user's nvm as command-line npm packages do. =toolchainCheck= checks
+each version and the link.
+
 * Publishing on an Astro Site: the localWeb Export
 
 An export spec (=LCNT-INFO/Exports/<spec>/=) whose =exportMethod= is =localWeb= publishes a released
@@ -153,6 +160,31 @@ Blee-Panel.
 The spec and landing contracts, what a site needs and the generator are documented with the
 shared astro facilities, in =/bisos/asc/web/astro/lcntLibrary/README.org= (start at
 =/bisos/asc/web/astro/README.org=).
+
+* Narration Audio: Text-to-Speech and Recordings
+
+Each frame of a presentation names its audio, =\frameaudio{"audio/<label>.mp3"}=, and Reveal plays it.
+The narration is the frame's =\pnote=. In the document's =audio/=, two sources are kept side by side,
+and a relative link selects what plays:
+
+| =tts-<label>.*=             | text-to-speech of the narration (Piper), redone when it changes |
+| =rec-<label>.*=             | your recording                                                  |
+| =<label>.mp3=, =.length=    | links to one of them                                            |
+
+#+begin_src bash
+lcntAudio-seed.cs -i audioPlant .      # in the document: audio/audioProc.spcs, .gitignore, ttsLexicon
+cd audio
+./audioProc.spcs -i ttsGenerate        # tts for changed frames; links frames that play nothing
+./audioProc.spcs -i recordCmnds        # the audacity commands to record rec-<label>.wav
+./audioProc.spcs -i recFinalize        # rec-<label>.wav -> .mp3, .length, .textHash
+./audioProc.spcs -i audioSelect rec    # recordings where there are some, tts elsewhere
+./audioProc.spcs -i audioReport        # per frame: what plays, stale recordings, total time
+./audioProc.spcs -i ttsClean           # delete all that ttsGenerate makes again; recordings are kept
+#+end_src
+
+A recording older than its =\pnote= is reported stale. =ttsLexicon= holds how to say names (=term =
+spoken=). Piper and its voices (public-domain recordings only) are installed by =piperTts-sbom.pcs=;
+the facts are in =lcntTtsInfo.py=. The audio stays out of git; copy the link targets when publishing.
 
 * Part of BISOS and ByStar --- ByStar Internet Services Operating System
 

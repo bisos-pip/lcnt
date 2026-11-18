@@ -4,6 +4,7 @@
 VM or Box) and what each environment gets. Pure: no side effects at import.
 #+end_org """
 
+import json
 import os
 import shutil
 import subprocess
@@ -109,17 +110,42 @@ def programsSkippedFor(env: str) -> typing.List[str]:
     return [prog for prog in programsFor(envBox) if prog not in programsFor(env)]
 
 
-# reveal.js: every environment (a container builds the HTML for reveal). The source is the old
-# /bisos/core/bsip/bin/lcaJsRevealBinsPrep.sh (npm, global, prefix /usr/local).
-revealScript = "lcaJsRevealBinsPrep.sh"
+# reveal.js: every environment (a container builds the HTML for reveal). Installed by revealJs-sbom.pcs,
+# which replaced /bisos/core/bsip/bin/lcaJsRevealBinsPrep.sh (2026-11-16, with the user). reveal.js is a
+# library the HTML loads by path, not a command: it stays global under /usr/local (stable across Node
+# versions, readable by nginx), installed by the system's npm under sudo, never by nvm's npm.
+revealSbom = "revealJs-sbom.pcs"
+revealNpm = "/usr/bin/npm"
+revealPrefix = "/usr/local"
 revealNodeModules = "/usr/local/lib/node_modules"
-revealNpmPkgs = ["reveal.js", "reveal.js-plugins"]
+# (npm package, pinned version), in install order
+revealNpmPkgs: typing.List[typing.Tuple[str, str]] = [
+    ("reveal.js", "6.0.2"),
+    ("reveal.js-plugins", "4.6.0"),
+    ("reveal.js-menu", "2.1.0"),
+]
+# The HTML loads the menu as reveal.js-plugins/menu/: (the link, its relative target)
+revealMenuLink = (os.path.join(revealNodeModules, "reveal.js-plugins", "menu"), "../reveal.js-menu")
 revealCommands = ["node", "npm"]
 
 
-def revealPresent() -> typing.List[typing.Tuple[str, bool]]:
-    """(npm package, is it in the global node_modules) for each reveal npm package."""
-    return [(each, os.path.isdir(os.path.join(revealNodeModules, each))) for each in revealNpmPkgs]
+def revealInstalledVersion(pkg: str) -> typing.Optional[str]:
+    """The version in the global node_modules' package.json, or None when it is not installed."""
+    try:
+        with open(os.path.join(revealNodeModules, pkg, "package.json"), encoding="utf-8") as f:
+            return json.load(f).get("version")
+    except (OSError, ValueError):
+        return None
+
+
+def revealPresent() -> typing.List[typing.Tuple[str, str, typing.Optional[str]]]:
+    """(npm package, pinned version, installed version or None) for each reveal npm package."""
+    return [(pkg, ver, revealInstalledVersion(pkg)) for pkg, ver in revealNpmPkgs]
+
+
+def revealMenuLinkOk() -> bool:
+    link, target = revealMenuLink
+    return os.path.islink(link) and os.readlink(link) == target and os.path.isdir(link)
 
 
 def commandPresent(command: str) -> bool:

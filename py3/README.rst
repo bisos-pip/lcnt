@@ -171,6 +171,15 @@ with ``LCNT_MM_ENV=Container|VM|Box``.
 it never installs). The OBS profile and websocket, aeneas, whisper and
 subed are not done.
 
+reveal.js comes from the nested ``revealJs-sbom.pcs`` (it replaced
+``lcaJsRevealBinsPrep.sh``): reveal.js, reveal.js-plugins and
+reveal.js-menu at the versions pinned in ``lcntMultiMediaInfo.py``,
+global under ``/usr/local/lib/node_modules`` by the system's
+``/usr/bin/npm`` under sudo, and the link ``reveal.js-plugins/menu`` ->
+``../reveal.js-menu``. reveal.js is a library the HTML loads by path,
+not a command, so it does not go into the user's nvm as command-line npm
+packages do. ``toolchainCheck`` checks each version and the link.
+
 Publishing on an Astro Site: the localWeb Export
 ================================================
 
@@ -197,18 +206,23 @@ an article the document itself). The spec's file-vars:
    lcntProc.sh -p extent="build+release" -i lcntBuild all
    lcntProc.sh -i lcntExport ./LCNT-INFO/Exports/localWeb
 
-The release is landed under each site's
-``var/lcnt/<class>/<number>/<release>/``, and the site's page generator
-(``bisos.webCap``) then writes the pages into its content tree; rebuild
-the site to see them. An article may export its html (embedded in its
-access page) and its pdf; a presentation, for now, exports its pdf only.
-Reveal.js and the other multimedia presentations are to be added later.
-The command is ``lcntExportLocalWeb.cs`` (module
+The export copies nothing into a site. It writes a spec of the release
+(a pointer: its canonical ``/de/sys/lcnt`` path, its BXO and the path in
+it, the last commit, the files and the metadata from LCNT-INFO) into
+each site's ``lcntSpecs/``, as ``<pubcategory>-<number>-<release>.pyl``,
+then rebuilds the site (``<siteBase>/astroProc.spcs -i siteBuild``). The
+site (``bisos.webCap``) lands the release in its ``var/lcnt/`` and
+writes the pages; commit the spec in the site's repository, so that the
+site rebuilds the same way on another host. The export notes a release
+with uncommitted changes. An article may export its html (embedded in
+its access page) and its pdf; a presentation, for now, exports its pdf
+only. Reveal.js and the other multimedia presentations are to be added
+later. The command is ``lcntExportLocalWeb.cs`` (module
 ``exportLocalWeb_csu.py``); the export spec is described in the
 ``lcntProc`` Blee-Panel.
 
-The landing layout, the ``meta.pyl`` contract, what a site needs and the
-generator are documented with the shared astro facilities, in
+The spec and landing contracts, what a site needs and the generator are
+documented with the shared astro facilities, in
 ``/bisos/asc/web/astro/lcntLibrary/README.org`` (start at
 ``/bisos/asc/web/astro/README.org``).
 

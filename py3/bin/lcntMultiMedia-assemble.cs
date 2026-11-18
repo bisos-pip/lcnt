@@ -301,10 +301,18 @@ class toolchainCheck(cs.Cmnd):
             if found is None:
                 missing.append(each)
 
-        for each, present in info.revealPresent():
-            print(f"{each:14} {info.revealNodeModules + '/' + each if present else 'MISSING'}")
-            if not present:
-                missing.append(each)
+        for each, wanted, installed in info.revealPresent():
+            if installed == wanted:
+                print(f"{each:18} {wanted}  {info.revealNodeModules}/{each}")
+            else:
+                print(f"{each:18} {'MISSING' if installed is None else installed}, wanted {wanted}")
+                missing.append(f"{each}@{wanted}")
+
+        menuLink, menuTarget = info.revealMenuLink
+        menuOk = info.revealMenuLinkOk()
+        print(f"{'reveal menu':18} {menuLink + ' -> ' + menuTarget if menuOk else 'MISSING: ' + menuLink}")
+        if not menuOk:
+            missing.append("reveal.js-plugins/menu")
 
         if env == info.envBox:
             module = b.subProc.Op(log=0).bash("""modinfo v4l2loopback | head -1""").stdout or ""

@@ -52,6 +52,26 @@ Fill in the sections below when asked to update, following the structure provide
   =siteGenerator=). =landOne= moved to bisos.webCap. Planned and recorded in bisos.webCap's AI-WorkPlan.org 4.2,
   which owns it; tested there with the three examples (580002, 580003, 580004) on =astroStarter.here=.
 
+  *reveal.js by an sbom (2026-11-16, uncommitted).* =py3/bin/revealJs-sbom.pcs= (new) replaces
+  =lcaJsRevealBinsPrep.sh=, nested by =lcntMultiMedia-sbom.pcs=: reveal.js 6.0.2, reveal.js-plugins
+  4.6.0, reveal.js-menu 2.1.0 (pinned in =lcntMultiMediaInfo.py=), global under =/usr/local= by =/usr/bin/npm=
+  under sudo (a library loaded by path, not a CLI: not in nvm; the user's decision), and the link
+  =reveal.js-plugins/menu=; =toolchainCheck= checks versions and link. Run, re-run (no change) and checked
+  on this container. Planned and recorded in the LCNT document AI-Activity
+  =bxlcnt/bro_lcntBases-rawBisos/lcnt/lgpc/rawBisos/permanent/examples/blee-lcnt_EmacsConf25=, AI-WorkPlan
+  2.1; its 2.2 adapts the HTML generator to reveal.js 6's =dist/plugin/= paths. Not on PATH from the venv
+  until =pypiProc.sh= regenerates =setup.py= and the devbin link is made.
+
+  *Narration audio: Piper and =audio/audioProc.spcs= (2026-11-17, uncommitted).* WorkPlan 4.14, 4.15.
+  =piperTts-sbom.pcs= with =lcntTtsInfo.py=: piper-tts 1.8.0 in the isolated venv
+  =/bisos/venv/py3/isolated/piperTts= (hash-pinned set) and four public-domain voices in
+  =/bisos/var/lcnt/piperVoices=; installed and run here. Not nested in =lcntMultiMedia-sbom.pcs= yet.
+  =lcntAudio-seed.cs= (=lcntAudio_seed.py=, =lcntAudio_seedInfo.py=, =lcntAudio_csu.py=) is planted as
+  =<docDir>/audio/audioProc.spcs= by =-i audioPlant=: =\pnote= to =tts-<label>.*=, recordings as
+  =rec-<label>.*=, and the links =<label>.mp3 .length= that Reveal plays; =ttsClean= removes what is
+  regenerable. In use for the EmacsConf26 talk (its TODO 3.2): 31 frames, 9:03. The devbin link is made
+  by hand; =setup.py= lists the seed at the next =pypiProc.sh= run.
+
 * Architecture
   Each CBM is a leaf =sys/cbm/collective/induct/<name>/cbmProc.spcs= (a pointer to the CBS) in the
   =bro_rawBisosPlatform= tree. Files in =py3/bin/=: =lcntCore-{sbom.pcs,assemble.cs,cbs.pcs}=,
@@ -85,6 +105,9 @@ Fill in the sections below when asked to update, following the structure provide
   not run them. The article builds hit a stuck Emacs server (to be looked into) and a =/mode= problem
   of =art-ltr-basic= (the user has a fix). Deferred by the user: aeneas,
   whisper, subed, wdiff, the subtitle work. OBS profile and websocket, =mmUniteVideo.cs=: not written.
+  Narration audio: nobody has listened (no sound device in the container); the Reveal deck has not been
+  played with it; a release copies =revealJsBase/audio= as a link (=cp -r= in =seedLcntProc.sh=), so it
+  carries no audio; =recordCmnds= / =recFinalize= tested with a fake recording only.
 
 * Key Design Decisions
   - Everything is core; the environment decides what is installed: Container = PDF and reveal HTML only
@@ -102,6 +125,10 @@ Fill in the sections below when asked to update, following the structure provide
     other hierarchies (the user's =bystar=) sit beside it outside the clone; =lgcc= (Libre Generated
     Confidential Content) is an empty placeholder for the user's own hierarchy; =outputs/all/lists=
     is created, because every build keeps =nuBaseDir= there.
+  - Narration (User, 2026-11-17): Piper over Kokoro, for long-term maintenance; only voices trained
+    from scratch on public-domain recordings. A frame's TTS and a recording coexist, and a relative link
+    chooses what plays: the Reveal player and the HTML are not changed. The tool is a spread-planted
+    =.spcs= in =audio/=, not the Bash ICM =mmUniteAudio.sh= (left for older documents).
   - Out-of-chain: the clone =bro_lcntBases-rawBisos= and =rePublication/fonts= are not in
     =bxRepos-gitist.pcs=; recorded in the AI-Outputs ledger (=blee-binders/evolution=, committed).
   - Out-of-chain: the font "XB Zar" comes from the clone =/bisos/git/auth/bxRepos/rePublication/fonts=

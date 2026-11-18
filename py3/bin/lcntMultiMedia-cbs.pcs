@@ -10,7 +10,7 @@ n:  No Data    -- Materialization is purely based on Realm-BPO
 p:  Platform    -- Materialization is based on Platform-BPO (Site-BPO is not used)
 
 The bundle: lcntMultiMedia-sbom.pcs (apt packages of the detected environment, Container, VM or Box, and
-reveal.js through lcaJsRevealBinsPrep.sh) and lcntMultiMedia-assemble.cs (toolchainCheck: lcntCore is
+reveal.js through the nested revealJs-sbom.pcs) and lcntMultiMedia-assemble.cs (toolchainCheck: lcntCore is
 checked, never installed; then every program of the environment, failing loudly).
 Materialize lcntCore first. Container: no audio, no video recording. Deferred: aeneas, whisper, subed.
 #+end_org """

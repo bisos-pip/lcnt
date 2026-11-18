@@ -1,0 +1,128 @@
+#!/usr/bin/env python
+
+""" #+begin_org
+* Panel::  [[file:./py3/panels/bisos.lcnt/_nodeBase_/fullUsagePanel-en.org]]
+* Overview and Relevant Pointers
+revealJs-sbom.pcs
+The software bill of materials of reveal.js for LCNT presentations: reveal.js, reveal.js-plugins and
+reveal.js-menu at pinned versions (lcntMultiMediaInfo.py), and the link reveal.js-plugins/menu that the
+generated HTML loads the menu by. Replaces /bisos/core/bsip/bin/lcaJsRevealBinsPrep.sh (2026-11-16).
+reveal.js is a library the HTML loads by path, not a command, so unlike reactPlus-sbom.pcs's CLIs it does
+not go into the user's nvm: it is global under /usr/local, installed by the system's /usr/bin/npm under
+sudo. Nested by lcntMultiMedia-sbom.pcs; verified by lcntMultiMedia-assemble.cs -i toolchainCheck.
+#+end_org """
+
+import os
+
+from bisos import b
+from bisos.b import cs
+from bisos.b import b_io
+
+from bisos.sbom import pkgsSeed  # pkgsSeed.plantWithWhich("seedSbom.cs")
+
+from bisos.lcnt import lcntMultiMediaInfo as info
+
+ap = pkgsSeed.aptPkg
+npm = pkgsSeed.npmPkg
+
+
+def revealNpmInstallFunc(pkg: str, ver: str):
+    """The install of one pinned package: skipped when that version is there (a re-run changes nothing)."""
+    def revealNpmInstall() -> None:
+        installed = info.revealInstalledVersion(pkg)
+        if installed == ver:
+            print(f"{pkg}@{ver} is already in {info.revealNodeModules} -- skipped")
+        elif b.subProc.WOpW(invedBy=None, log=1).bash(
+                f"""sudo {info.revealNpm} install --global --prefix={info.revealPrefix} {pkg}@{ver}""",
+        ).isProblematic():
+            print(f"revealJs-sbom: FAILED: {pkg}@{ver}")
+        if pkg == "reveal.js-menu":
+            revealMenuLink()
+    return revealNpmInstall
+
+
+def revealMenuLink() -> None:
+    """reveal.js-plugins/menu -> ../reveal.js-menu; reinstalling reveal.js-plugins drops it, so always checked."""
+    link, target = info.revealMenuLink
+    if info.revealMenuLinkOk():
+        print(f"{link} -> {target} -- in place")
+        return
+    if os.path.exists(link) and not os.path.islink(link):
+        print(f"revealJs-sbom: FAILED: {link} is a real file or directory; not replaced")
+        return
+    if b.subProc.WOpW(invedBy=None, log=1).bash(
+            f"""sudo ln -sfn {target} {link}""",
+    ).isProblematic():
+        print(f"revealJs-sbom: FAILED: {link} -> {target}")
+
+
+# The system's npm (and nodejs, its dependency) from apt: never nvm's npm.
+aptPkgsList = [ap("npm")]
+
+# The func installs; bisos.sbom's own "is it installed" check asks nvm's npm, where these never are,
+# so the func always runs and checks /usr/local itself.
+npmPkgsList = [npm(pkg, ver=ver, func=revealNpmInstallFunc(pkg, ver)) for pkg, ver in info.revealNpmPkgs]
+
+pkgsSeed.setup(
+    aptPkgsList=aptPkgsList,
+    npmPkgsList=npmPkgsList,
+)
+
+
+####+BEGIN: b:py3:cs:cmnd/classHead :cmndName "readme" :extent "verify" :comment "Describe" :parsMand "" :parsOpt "" :argsMin 0 :argsMax 0 :pyInv ""
+""" #+begin_org
+*  _[[elisp:(blee:menu-sel:outline:popupMenu)][±]]_ _[[elisp:(blee:menu-sel:navigation:popupMenu)][Ξ]]_ [[elisp:(outline-show-branches+toggle)][|=]] [[elisp:(bx:orgm:indirectBufOther)][|>]] *[[elisp:(blee:ppmm:org-mode-toggle)][|N]]*  CmndSvc-   [[elisp:(outline-show-subtree+toggle)][||]] <<readme>>  *Describe*  =verify= ro=cli   [[elisp:(org-cycle)][| ]]
+#+end_org """
+class readme(cs.Cmnd):
+    cmndParamsMandatory = [ ]
+    cmndParamsOptional = [ ]
+    cmndArgsLen = {'Min': 0, 'Max': 0,}
+
+    @cs.track(fnLoc=True, fnEntry=True, fnExit=True)
+    def cmnd(self,
+             rtInv: cs.RtInvoker,
+             cmndOutcome: b.op.Outcome,
+    ) -> b.op.Outcome:
+        """Describe"""
+        failed = b_io.eh.badOutcome
+        callParamsDict = {}
+        if self.invocationValidate(rtInv, cmndOutcome, callParamsDict, None).isProblematic():
+            return failed(cmndOutcome)
+####+END:
+        pinned = "\n".join(f"  {pkg}@{ver}" for pkg, ver in info.revealNpmPkgs)
+        descriptionStr = f"""\
+reveal.js for LCNT presentations, global in {info.revealNodeModules}, by {info.revealNpm} under sudo:
+{pinned}
+  {info.revealMenuLink[0]} -> {info.revealMenuLink[1]}
+A library the HTML loads by path, not a command: not in the user's nvm. Change versions in
+lcntMultiMediaInfo.py. Verify with lcntMultiMedia-assemble.cs -i toolchainCheck.\
+"""
+        print(descriptionStr)
+
+        return cmndOutcome.set(
+            opError=b.op.OpError.Success,
+            opResults=None,
+        )
+
+
+def examples_csu() -> b.op.Outcome:
+    """Common Usage Examples for this Command-Service Unit"""
+
+    cmnd = cs.examples.cmndEnter
+    literal = cs.examples.execInsert
+
+    cmndOutcome = b.op.Outcome()
+
+    cs.examples.menuChapter('*Description*')
+    cmnd('readme', comment=" # An overview short description")
+
+    cs.examples.menuChapter('*Plan (read-only)*')
+    literal("revealJs-sbom.pcs -i aptPkgs_list")
+    literal("revealJs-sbom.pcs -i npmPkgs_list")
+    literal(f"ls -l {info.revealNodeModules}/reveal.js-plugins/menu")
+
+    cs.examples.menuChapter('*Update (uses sudo)*')
+    literal("revealJs-sbom.pcs -i sbom_fullUpdate")
+
+    cs.examples.menuChapter('*End-Of Examples*')
+    return cmndOutcome

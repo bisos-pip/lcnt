@@ -10,6 +10,8 @@ lcntCore is checked by lcntMultiMedia-assemble.cs, it is not nested here (decide
 Deferred in every environment: aeneas, whisper, subed, wdiff.
 #+end_org """
 
+import pathlib
+
 from bisos import b
 from bisos.b import cs
 from bisos.b import b_io
@@ -31,14 +33,6 @@ def lcntMmAptUpdate() -> None:
         print("lcntMultiMedia-sbom: FAILED: apt-get update")
 
 
-def lcntMmRevealJs() -> None:
-    """reveal.js and reveal.js-plugins, global npm packages: the old lcaJsRevealBinsPrep.sh does it."""
-    if b.subProc.WOpW(invedBy=None, log=1).bash(
-            f"""{info.revealScript} -h -v -n showRun -i fullUpdate""",
-    ).isProblematic():
-        print(f"lcntMultiMedia-sbom: FAILED: {info.revealScript} -i fullUpdate")
-
-
 def lcntMmKernelHeaders() -> None:
     """Box only: v4l2loopback-dkms builds a kernel module and needs the headers of the running kernel."""
     if b.subProc.WOpW(invedBy=None, log=1).bash(
@@ -51,10 +45,13 @@ aptPkgsList = [ap("lcntMmAptUpdate", func=lcntMmAptUpdate)]
 if lcntMmEnv == info.envBox:
     aptPkgsList.append(ap("lcntMmKernelHeaders", func=lcntMmKernelHeaders))   # before v4l2loopback-dkms
 aptPkgsList += [ap(each) for each in info.aptNamesFor(lcntMmEnv)]
-aptPkgsList.append(ap("lcntMmRevealJs", func=lcntMmRevealJs))
+
+# reveal.js, every environment: its own sbom, beside this file (replaced lcaJsRevealBinsPrep.sh, 2026-11-16)
+sbomsList = [pkgsSeed.sbomSpec(str(pathlib.Path(__file__).resolve().parent / info.revealSbom))]
 
 pkgsSeed.setup(
     aptPkgsList=aptPkgsList,
+    sbomsList=sbomsList,
 )
 
 
@@ -87,7 +84,7 @@ Override: {info.environmentOverrideName}=Container|VM|Box. Uses sudo.
 |           | mp3info, gifsicle, scrot, impressive (audio record, play, edit; no video rec.) |
 | Box       | VM + obs-studio, v4l2loopback-dkms (+ linux headers), kdenlive (video)         |
 |-----------+--------------------------------------------------------------------------------|
-Every environment also gets reveal.js and reveal.js-plugins ({info.revealScript}).
+Every environment also gets reveal.js, reveal.js-plugins and reveal.js-menu ({info.revealSbom}, nested).
 Deferred everywhere: aeneas, whisper, subed, wdiff. lcntCore is checked, not installed, here.
 Verification is lcntMultiMedia-assemble.cs -i toolchainCheck: this sbom reports but does not stop on a
 failed step, and neither pypiProc nor the CBM walker report a failed install as one.\

@@ -1,0 +1,122 @@
+#!/usr/bin/env python
+
+""" #+begin_org
+* Panel::  [[file:./py3/panels/bisos.lcnt/_nodeBase_/fullUsagePanel-en.org]]
+* Overview and Relevant Pointers
+piperTts-sbom.pcs
+The software bill of materials of LCNT's text-to-speech: the Piper engine (piper-tts, GPL-3.0-or-later)
+in an isolated venv with its whole set hash-pinned, and the allowed voices (public-domain recordings,
+trained from scratch) fetched at a pinned revision and checked by sha256. The facts are in lcntTtsInfo.py.
+Its use: a frame's narration (its pnote) becomes audio/<label>.mp3, which Reveal plays (frameaudio).
+Not near real time; no sound device is needed: Piper writes files.
+#+end_org """
+
+from bisos import b
+from bisos.b import cs
+from bisos.b import b_io
+
+from bisos.sbom import pkgsSeed  # pkgsSeed.plantWithWhich("seedSbom.cs")
+
+from bisos.lcnt import lcntTtsInfo as info
+
+ap = pkgsSeed.aptPkg
+
+# The func-bearing pseudo-packages below are in aptPkgsList, so bisos.sbom calls each instead of
+# apt-get install. They run on every sbom_fullUpdate and are idempotent. Piper is not in pipPkgsList:
+# bisos.sbom ignores versions there.
+
+
+def piperVenvSetup() -> None:
+    """piper-tts and its resolved set, hash-pinned, into the isolated venv. Not an apt package."""
+    if b.subProc.WOpW(invedBy=None, log=1).bash(info.venvSetupScript()).isProblematic():
+        print(f"piperTts-sbom: FAILED: the venv {info.venv}")
+
+
+def piperVoiceFetchFunc(voice: info.Voice):
+    def piperVoiceFetch() -> None:
+        """One voice's .onnx, .onnx.json and MODEL_CARD into the voices directory. Not an apt package."""
+        if b.subProc.WOpW(invedBy=None, log=1).bash(info.voiceFetchScript(voice)).isProblematic():
+            print(f"piperTts-sbom: FAILED: the voice {voice.name}")
+    return piperVoiceFetch
+
+
+aptPkgsList = [
+    ap("curl"),
+    ap("ffmpeg"),                       # wav -> mp3, and the duration of each mp3
+    ap("piperVenvSetup", func=piperVenvSetup),
+]
+aptPkgsList += [ap(f"piperVoice-{each.name}", func=piperVoiceFetchFunc(each)) for each in info.voices]
+
+pkgsSeed.setup(
+    aptPkgsList=aptPkgsList,
+)
+
+
+####+BEGIN: b:py3:cs:cmnd/classHead :cmndName "readme" :extent "verify" :comment "Describe" :parsMand "" :parsOpt "" :argsMin 0 :argsMax 0 :pyInv ""
+""" #+begin_org
+*  _[[elisp:(blee:menu-sel:outline:popupMenu)][±]]_ _[[elisp:(blee:menu-sel:navigation:popupMenu)][Ξ]]_ [[elisp:(outline-show-branches+toggle)][|=]] [[elisp:(bx:orgm:indirectBufOther)][|>]] *[[elisp:(blee:ppmm:org-mode-toggle)][|N]]*  CmndSvc-   [[elisp:(outline-show-subtree+toggle)][||]] <<readme>>  *Describe*  =verify= ro=cli   [[elisp:(org-cycle)][| ]]
+#+end_org """
+class readme(cs.Cmnd):
+    cmndParamsMandatory = [ ]
+    cmndParamsOptional = [ ]
+    cmndArgsLen = {'Min': 0, 'Max': 0,}
+
+    @cs.track(fnLoc=True, fnEntry=True, fnExit=True)
+    def cmnd(self,
+             rtInv: cs.RtInvoker,
+             cmndOutcome: b.op.Outcome,
+    ) -> b.op.Outcome:
+        """Describe"""
+        failed = b_io.eh.badOutcome
+        callParamsDict = {}
+        if self.invocationValidate(rtInv, cmndOutcome, callParamsDict, None).isProblematic():
+            return failed(cmndOutcome)
+####+END:
+        engine = "installed" if info.piperPresent() else "missing"
+        voiceLines = "\n".join(
+            f"  {each.name:22} {'present' if info.voicePresent(each) else 'missing':8} {each.data}"
+            for each in info.voices)
+        descriptionStr = f"""\
+Piper text-to-speech for LCNT narration: piper-tts {info.piperVersion} in {info.venv} ({engine}).
+Voices in {info.voicesDir}, at {info.voicesRevision[:12]} of {info.voicesRepo}
+(default {info.defaultVoice}):
+{voiceLines}
+Only voices trained from scratch on public-domain recordings; each MODEL_CARD is kept beside its voice.
+Change versions, hashes or voices in lcntTtsInfo.py. amd64 + Python 3.13 only (the hashed set).\
+"""
+        print(descriptionStr)
+
+        return cmndOutcome.set(
+            opError=b.op.OpError.Success,
+            opResults=None,
+        )
+
+
+def examples_csu() -> b.op.Outcome:
+    """Common Usage Examples for this Command-Service Unit"""
+
+    cmnd = cs.examples.cmndEnter
+    literal = cs.examples.execInsert
+
+    cmndOutcome = b.op.Outcome()
+
+    cs.examples.menuChapter('*Description*')
+    cmnd('readme', comment=" # The engine, the voices and whether they are present")
+
+    cs.examples.menuChapter('*Plan (read-only)*')
+    literal("piperTts-sbom.pcs -i aptPkgs_list")
+    literal(f"ls -l {info.voicesDir}")
+
+    cs.examples.menuChapter('*Update*')
+    literal("piperTts-sbom.pcs -i sbom_fullUpdate")
+
+    cs.examples.menuChapter('*Use*')
+    voice = info.voiceNamed(info.defaultVoice)
+    literal(f"""echo "Greetings. This is a test." | {info.piperBin} -m {voice.onnxPath} -f /tmp/piperTest.wav""")
+    literal("ffmpeg -loglevel error -y -i /tmp/piperTest.wav -codec:a libmp3lame -qscale:a 4 /tmp/piperTest.mp3")
+
+    cs.examples.menuChapter('*Uninstall*')
+    literal(f"rm -r {info.venv} {info.voicesDir}")
+
+    cs.examples.menuChapter('*End-Of Examples*')
+    return cmndOutcome
