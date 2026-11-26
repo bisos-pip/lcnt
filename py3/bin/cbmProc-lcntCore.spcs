@@ -26,4 +26,5 @@ from bisos.capability import cbmProc_seedInfo
 cbmProc_seedInfo.setup(
     capabilityName="lcntCore",
     cbsSpec="/bisos/git/bxRepos/bisos-pip/lcnt/py3/bin/lcntCore-cbs.pcs",
+    verifySpec="lcntCore-assemble.cs -i toolchainCheck",
 )

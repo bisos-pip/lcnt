@@ -326,9 +326,11 @@ class toolchainCheck(cs.Cmnd):
 
         if missing:
             b_io.eh.problem_usageError(f"lcntMultiMedia is NOT complete for {env}, missing: {missing}")
+            print(f"lcntMultiMedia verify: fail for {env}, missing {', '.join(missing)}")   # read by cbm_verify
             return failed(cmndOutcome)
 
         print(f"lcntMultiMedia: complete for {env}")
+        print(f"lcntMultiMedia verify: ok for {env}" + (f", skipped by design: {' '.join(skipped)}" if skipped else ""))
         return cmndOutcome
 
     ####+BEGIN: blee:bxPanel:foldingSection :outLevel 0 :sep nil :title "Main" :anchor ""  :extraInfo "Framework DBlock"

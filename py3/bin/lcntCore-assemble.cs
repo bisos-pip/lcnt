@@ -266,9 +266,11 @@ class toolchainCheck(cs.Cmnd):
 
         if missing:
             b_io.eh.problem_usageError(f"lcntCore is NOT complete, missing: {missing}")
+            print(f"lcntCore verify: fail missing {', '.join(missing)}")   # read by bisos.capability cbm_verify
             return failed(cmndOutcome)
 
         print("lcntCore: the LCNT toolchain is complete")
+        print("lcntCore verify: ok")   # read by bisos.capability cbm_verify
         return cmndOutcome
 
 

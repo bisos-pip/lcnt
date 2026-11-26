@@ -26,4 +26,5 @@ from bisos.capability import cbmProc_seedInfo
 cbmProc_seedInfo.setup(
     capabilityName="lcntMultiMedia",
     cbsSpec="/bisos/git/bxRepos/bisos-pip/lcnt/py3/bin/lcntMultiMedia-cbs.pcs",
+    verifySpec="lcntMultiMedia-assemble.cs -i toolchainCheck",
 )

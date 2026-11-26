@@ -26,6 +26,11 @@ Note to a fresh Claude: this file is intentionally sparse at project start.
 Fill in the sections below when asked to update, following the structure provided.
 
 * Current State
+- 2026-11-26 (from a bisos-pip/b session; uncommitted, not released): lcntCore, lcntBases and
+  lcntMultiMedia =toolchainCheck= end with =<name> verify: ok|fail ...= (lcntMultiMedia's ok line
+  names its Container skips), read by bisos.capability's =cbm_verify= (bisos-pip/capability
+  AI-WorkPlan.org Stage 5); their =cbmProc-<name>.spcs= declare it as =verifySpec=. Run here: all
+  three ok.
 - 2026-11-26 (from a bisos-pip/b session): every =<name>.here= in this repo is now =<name>.internal=
   (=.here= is an https-only gTLD in Chrome; bisos-pip/banna AI-WorkPlan.org Stage 4, banna's
   =tcpPorts.hereFqdn=). Text renamed, not tested here; AI-WorkPlan.org keeps =.here= as history.

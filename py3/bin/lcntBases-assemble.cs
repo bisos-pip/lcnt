@@ -338,9 +338,11 @@ class toolchainCheck(cs.Cmnd):
 
         if missing:
             b_io.eh.problem_usageError(f"lcntBases is NOT complete, missing: {missing}")
+            print(f"lcntBases verify: fail missing {', '.join(missing)}")   # read by bisos.capability cbm_verify
             return failed(cmndOutcome)
 
         print("lcntBases: complete")
+        print("lcntBases verify: ok")   # read by bisos.capability cbm_verify
         return cmndOutcome
 
     ####+BEGIN: blee:bxPanel:foldingSection :outLevel 0 :sep nil :title "Main" :anchor ""  :extraInfo "Framework DBlock"
