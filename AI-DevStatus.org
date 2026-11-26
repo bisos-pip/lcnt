@@ -26,6 +26,9 @@ Note to a fresh Claude: this file is intentionally sparse at project start.
 Fill in the sections below when asked to update, following the structure provided.
 
 * Current State
+- 2026-11-26 (from a bisos-pip/b session): every =<name>.here= in this repo is now =<name>.internal=
+  (=.here= is an https-only gTLD in Chrome; bisos-pip/banna AI-WorkPlan.org Stage 4, banna's
+  =tcpPorts.hereFqdn=). Text renamed, not tested here; AI-WorkPlan.org keeps =.here= as history.
   As of 2026-11-12 three CBMs of the =induct= capabilityType, realm =collective=, are implemented
   here and
   materialized on the dev host (a privileged docker container on an AWS VM): =lcntCore= (Stage 2),
@@ -39,7 +42,7 @@ Fill in the sections below when asked to update, following the structure provide
   it lands a document's release (pdf, html of an article, =meta.pyl=, a black-formatted Python literal) in
   =<siteBase>/var/lcnt/<class>/<nu>/<rel>/= of each astro site named in the spec's =destinations=, then runs the site's
   generator (=astroSite.cs -i libraryGenerate=, =bisos.webCap=) for the Library and access pages. Built, run and looked at
-  with the three examples (580002, 580003, 580004) on =astroStarter.here=; the contract is in
+  with the three examples (580002, 580003, 580004) on =astroStarter.internal=; the contract is in
   =/bisos/asc/web/astro/lcntLibrary/README.org=. The export-spec generator (=vis_lcntExportInfoGens=) writes a =localWeb=
   spec without =destinations= (the author lists the sites; not in =enabledList=). Presentations: pdf only for now; reveal.js
   later. No tests yet; the =.cs= and the =_csu.py= dblocks were refreshed with =bx-dblock= (a new =_csu.py= needs the
@@ -50,7 +53,7 @@ Fill in the sections below when asked to update, following the structure provide
   =<siteBase>/lcntSpecs/<pubcategory>-<nu>-<rel>.pyl= (canonical =/de/sys/lcnt= path, BXO and path in it, last
   commit, files, metadata from LCNT-INFO), then runs =<siteBase>/astroProc.spcs -i siteBuild= (or the spec's
   =siteGenerator=). =landOne= moved to bisos.webCap. Planned and recorded in bisos.webCap's AI-WorkPlan.org 4.2,
-  which owns it; tested there with the three examples (580002, 580003, 580004) on =astroStarter.here=.
+  which owns it; tested there with the three examples (580002, 580003, 580004) on =astroStarter.internal=.
 
   *reveal.js by an sbom (2026-11-16, uncommitted).* =py3/bin/revealJs-sbom.pcs= (new) replaces
   =lcaJsRevealBinsPrep.sh=, nested by =lcntMultiMedia-sbom.pcs=: reveal.js 6.0.2, reveal.js-plugins
